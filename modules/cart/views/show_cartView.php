@@ -1,7 +1,5 @@
 <?php
 get_header();
-$username = $_SESSION['user_login'];
-echo $username;
 ?>
 <main>
 
@@ -22,7 +20,6 @@ echo $username;
         </div>
     </section>
     <!-- breadcrumb area end -->
-
     <!-- cart area start -->
     <section class="tp-cart-area pb-120">
         <div class="container">
@@ -35,26 +32,23 @@ echo $username;
                                     <th colspan="2" class="tp-cart-header-product">Sản phẩm</th>
                                     <th class="tp-cart-header-price">Giá</th>
                                     <th class="tp-cart-header-quantity">Số lượng</th>
+                                    <th class="tp-cart-header-quantity">Thành tiền</th>
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="list_cart">
                                 <?php if (!empty($_SESSION['cart']['buy'])) : ?>
                                     <?php foreach ($_SESSION['cart']['buy'] as $item) : ?>
                                         <tr>
-                                            <!-- img -->
                                             <td class="tp-cart-img"><a href="product-details.html"> <img src="admin/img/<?php echo $item['product_thumb'] ?>" alt=""></a></td>
-                                            <!-- title -->
                                             <td class="tp-cart-title"><a href="<?php echo "san-pham/chi-tiet/" . create_slug($item['product_name']) . "/" . $item['product_id'] . ".html"; ?>"><?php echo $item['product_name'] ?></a></td>
-                                            <!-- price -->
                                             <td class="tp-cart-price"><span><?php echo currency_format($item['price']) ?></span></td>
-                                            <!-- quantity -->
                                             <td class="tp-cart-quantity">
                                                 <div class="tp-product-quantity mt-10 mb-10">
-                                                    <input type="number" name="qty[<?php echo $item['product_id'] ?>]" min="1" max="" value="<?php echo $item['qty'] ?>">
+                                                    <input onchange="update_cart(event)" type="number" class="num_order" color_id="<?php echo $item['color_id'] ?>" name="qty[<?php echo $item['color_id'] ?>]" min="1" max="<?php echo get_quantity_max($item['color_id']) + $item['qty'] ?>" value="<?php echo $item['qty'] ?>">
                                                 </div>
                                             </td>
-                                            <!-- action -->
+                                            <td class="tp-cart-price"><span><?php echo currency_format($item['sub_total']) ?></span></td>
                                             <td class="tp-cart-action">
                                                 <a href="<?php echo $item['url_delete'] ?>" class="tp-cart-action-btn">
                                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,11 +81,6 @@ echo $username;
                                     </form>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-md-4">
-                                <div class="tp-cart-update text-md-end">
-                                    <button type="button" class="tp-cart-update-btn">Cập nhật giỏ hàng</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -99,29 +88,7 @@ echo $username;
                     <div class="tp-cart-checkout-wrapper">
                         <div class="tp-cart-checkout-top d-flex align-items-center justify-content-between">
                             <span class="tp-cart-checkout-top-title">Tổng tiền</span>
-                            <span class="tp-cart-checkout-top-price"><?php echo currency_format(cart_info()['total']) ?></span>
-                        </div>
-                        <div class="tp-cart-checkout-shipping">
-                            <h4 class="tp-cart-checkout-shipping-title">Vận chuyển hàng</h4>
-
-                            <div class="tp-cart-checkout-shipping-option-wrapper">
-                                <div class="tp-cart-checkout-shipping-option">
-                                    <input id="flat_rate" type="radio" name="shipping">
-                                    <label for="flat_rate">Giao hàng siêu tốc: <span>$20.00</span></label>
-                                </div>
-                                <div class="tp-cart-checkout-shipping-option">
-                                    <input id="local_pickup" type="radio" name="shipping">
-                                    <label for="local_pickup">Giao hàng nhanh: <span> $25.00</span></label>
-                                </div>
-                                <div class="tp-cart-checkout-shipping-option">
-                                    <input id="free_shipping" type="radio" name="shipping">
-                                    <label for="free_shipping">Giao hàng tích kiệm: <span> $25.00</span></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tp-cart-checkout-total d-flex align-items-center justify-content-between">
-                            <span>Thanh toán</span>
-                            <span>$724</span>
+                            <span class="tp-cart-checkout-top-price" id="total_price"><?php echo currency_format($_SESSION['cart']['info']['total']) ?></span>
                         </div>
                         <div class="tp-cart-checkout-proceed">
                             <a href="thanh-toan.html" class="tp-cart-checkout-btn w-100">Tiến hành đặt hàng</a>

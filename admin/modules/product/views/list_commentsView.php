@@ -25,7 +25,7 @@ get_sidebar();
                         <tr>
                             <th><input type="checkbox" name="checkAll" id="checkAll"></th>
                             <th>STT</th>
-                            <th>Người bình luận</th>
+                            <th style="width: 15%;">Người bình luận</th>
                             <th style="width: 45%;">Nội dung bình luận</th>
                             <th style="width: 15%;">Đánh giá sản phẩm</th>
                             <th>Thời gian</th>
@@ -41,7 +41,7 @@ get_sidebar();
                                 <tr>
                                     <td><input type="checkbox" name="checkitem[<?php echo $item['id_comment'] ?>]" id="checkbox" value="<?php echo $item['id_comment'] ?>" class="checkItem"></td>
                                     <td><?php echo $count ?></td>
-                                    <td><?php echo $item['creator'] ?></td>
+                                    <td><?php echo $item['fullname'] ?></td>
                                     <td class="w-50"><?php echo $item['comment_content'] ?></td>
                                     <td><?php echo str_repeat("<img src='public/img/sao.png' alt=''>", $item['star']); ?></td>
                                     <td><?php echo $item['time'] ?></td>

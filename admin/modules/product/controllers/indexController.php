@@ -73,16 +73,6 @@ function add_productAction() //Thêm sản phẩm
         } else {
             $product_code = $_POST['product_code'];
         }
-        ////Kiểm tra price
-        if (empty($_POST['price'])) {
-            $error['price'] = "Không được để trống";
-        } else {
-            if (filter_var($_POST['price'], FILTER_VALIDATE_INT)) {
-                $price = $_POST['price'];
-            } else {
-                $error['price'] = "Không đúng định dạng";
-            }
-        }
         ////Kiểm tra product_desc
         if (empty($_POST['product_desc'])) {
             $error['product_desc'] = "Không được để trống";
@@ -159,7 +149,6 @@ function add_productAction() //Thêm sản phẩm
             $data_product = [
                 'product_name' => $product_name,
                 'product_code' => $product_code,
-                'price' => $price,
                 'product_desc' => $product_desc,
                 'product_thumb' => $file,
                 'product_content' => $product_content,
@@ -236,12 +225,6 @@ function update_productAction() //Sửa sản phẩm
         } else {
             $product_code = $_POST['product_code'];
         }
-        ////Kiểm tra price
-        if (empty($_POST['price'])) {
-            $error['price'] = "Không được để trống";
-        } else {
-            $price = $_POST['price'];
-        }
         ////Kiểm tra product_desc
         if (empty($_POST['product_desc'])) {
             $error['product_desc'] = "Không được để trống";
@@ -288,6 +271,8 @@ function update_productAction() //Sửa sản phẩm
                     }
                 }
             }
+        }else{
+            delete_detail_img_all($id);//Xóa tất cả các ảnh chi tiết
         }
         //Kiểm tra ảnh chi tiết khi được thêm
         if (isset($_FILES['images']['name'])) {
@@ -382,7 +367,6 @@ function update_productAction() //Sửa sản phẩm
             $data_product = [
                 'product_name' => $product_name,
                 'product_code' => $product_code,
-                'price' => $price,
                 'product_desc' => $product_desc,
                 'product_thumb' => $file,
                 'product_content' => $product_content,

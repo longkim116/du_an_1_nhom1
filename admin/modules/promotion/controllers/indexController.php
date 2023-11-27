@@ -71,6 +71,7 @@ function add_promotionAction() //Thêm khuyễn mãi
     }
     $data['list_products'] = get_list_products();
     load_view("add_promotion", $data);
+    
 }
 
 

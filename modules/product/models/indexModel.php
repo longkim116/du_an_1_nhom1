@@ -30,35 +30,35 @@ function list_products($select, $price, $category)
     $where = "WHERE";
     if (!empty($select)) {
         if ($select == 1) {
-            $select = "ORDER BY `product_name` ASC";
+            $select = "ORDER BY tb_products.product_name ASC";
         } else if ($select == 2) {
-            $select = "ORDER BY `product_name` DESC";
+            $select = "ORDER BY tb_products.product_name DESC";
         } else if ($select == 3) {
-            $select = "ORDER BY `price` ASC";
+            $select = "ORDER BY tb_color_variants.color_price ASC";
         } else if ($select == 4) {
-            $select = "ORDER BY `price` DESC";
+            $select = "ORDER BY tb_color_variants.color_price DESC";
         }
     }
     if (!empty($price)) {
         if ($price == 1) {
-            $price = "`price` BETWEEN 0 AND 1000000";
+            $price = "tb_color_variants.color_price BETWEEN 0 AND 1000000";
         } else if ($price == 2) {
-            $price = "`price` BETWEEN 1000000 AND 5000000";
+            $price = "tb_color_variants.color_price BETWEEN 1000000 AND 5000000";
         } else if ($price == 3) {
-            $price = "`price` BETWEEN 5000000 AND 15000000";
+            $price = "tb_color_variants.color_price BETWEEN 5000000 AND 15000000";
         } else if ($price == 4) {
-            $price = "`price` BETWEEN 15000000 AND 25000000";
+            $price = "tb_color_variants.color_price BETWEEN 15000000 AND 25000000";
         } else if ($price == 5) {
-            $price = "`price` > 25000000";
+            $price = "tb_color_variants.color_price > 25000000";
         }
     }
     if (!empty($category)) {
         if ($category == 1) {
-            $category = "`cat_id` = 1";
+            $category = "tb_products.cat_id = 1";
         } else if ($category == 2) {
-            $category = "`cat_id` = 2";
+            $category = "tb_products.cat_id = 2";
         } else if ($category == 3) {
-            $category = "`cat_id` = 3";
+            $category = "tb_products.cat_id = 3";
         }
     }
     if (!empty($category) && !empty($price)) {
@@ -66,9 +66,12 @@ function list_products($select, $price, $category)
     } else if (!empty($category) || !empty($price)) {
         $where = "WHERE {$price}{$category} AND";
     }
-    $sql = db_fetch_array("SELECT * FROM `tb_products` {$where} `status` = 'Đã đăng' {$select}");
+    $sql = db_fetch_array("SELECT DISTINCT tb_products.*, tb_category.* FROM tb_products
+    INNER JOIN tb_category ON tb_products.cat_id = tb_category.id
+    LEFT JOIN tb_color_variants ON tb_products.product_id = tb_color_variants.product_id {$where} `status` = 'Đã đăng' {$select}");
     return $sql;
 }
+
 
 function add_cart($id, $num_order)
 {
@@ -177,4 +180,33 @@ function get_product_promotion_by_id($id) //Lấy giá khuyễn mãi theo id s�
         return false;
     }
     return $sql['discount_rate'];
+}
+
+function max_price($id) //Lấy giá lớn nhất của sản phẩm
+{
+    $sql = db_fetch_row("SELECT MAX(`color_price`) AS max_price FROM `tb_color_variants` WHERE `product_id` = {$id} ");
+    return $sql['max_price'];
+}
+
+function min_price($id) //Lấy giá nhỏ nhất của sản phẩm
+{
+    $sql = db_fetch_row("SELECT MIN(`color_price`) AS min_price FROM `tb_color_variants` WHERE `product_id` = {$id} ");
+    return $sql['min_price'];
+}
+
+function get_discount_rate($id) //Lấy phần trăm khuyễn mãi cảu sản phẩm khuyễn mãi
+{
+    $sql = db_fetch_row("SELECT * FROM `tb_promotions`
+    INNER JOIN `product_promotion` ON tb_promotions.id = product_promotion.promotion_id
+    WHERE product_promotion.product_id = {$id} ");
+    if ($sql) {
+        return $sql['discount_rate'];
+    }
+    return false;
+}
+
+function product_reviews($id) //Lấy chi tiêt danh giá sản phẩm
+{
+    $sql = db_fetch_row("SELECT AVG(`star`) AS `star`, COUNT(`id_product`) AS `count` FROM `tb_comments` WHERE `id_product` = {$id}");
+    return $sql;
 }

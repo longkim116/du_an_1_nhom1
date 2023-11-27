@@ -174,6 +174,29 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Quản lý vận chuyển
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="?mod=transport&action=list_transport" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách đối tác vận chuyển</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?mod=transport&action=add_transport" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm mới đối tác vận chuyển</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-header">Hàng hóa</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">

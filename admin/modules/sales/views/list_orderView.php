@@ -9,10 +9,12 @@ get_sidebar();
         </div>
         <div class="breadcrumb">
             <li class="breadcrumb-item"><a href="?mod=sales&action=list_order" class="text-decoration-none">Tất cả (<?php echo $num_orders ?>)</a></li>
-            <li class="breadcrumb-item"><a href="?mod=sales&action=list_order&status=Chờ xét duyệt" class="text-decoration-none">Chờ xét duyệt(<?php echo $num_posts_pending ?>)</a></li>
-            <li class="breadcrumb-item"><a href="?mod=sales&action=list_order&status=Đang vận chuyển" class="text-decoration-none">Đang vận chuyển(<?php echo $num_orders_delivery ?>)</a>
+            <li class="breadcrumb-item"><a href="?mod=sales&action=list_order&status=Chờ xác nhận" class="text-decoration-none">Chờ xác nhận(<?php echo $num_posts_pending ?>)</a></li>
+            <li class="breadcrumb-item"><a href="?mod=sales&action=list_order&status=Chuẩn bị đơn hàng" class="text-decoration-none">Chuẩn bị đơn hàng(<?php echo $num_prepare_orders ?>)</a></li>
+            <li class="breadcrumb-item"><a href="?mod=sales&action=list_order&status=Đang giao hàng" class="text-decoration-none">Đang giao hàng(<?php echo $num_orders_delivery ?>)</a>
             </li>
             <li class="breadcrumb-item"><a href="?mod=sales&action=list_order&status=Thành công" class="text-decoration-none">Thành công(<?php echo $num_orders_success ?>)</a></li>
+            <li class="breadcrumb-item"><a href="?mod=sales&action=list_order&status=Đã hủy" class="text-decoration-none">Đã hủy(<?php echo $num_orders_cancelled ?>)</a></li>
             <li class="breadcrumb-item">Số sản phẩm đã bán: <?php echo $total_order['total'] ?> sản phẩm</li>
         </div>
         <!-- /.card-header -->
@@ -21,9 +23,10 @@ get_sidebar();
                 <select name="action" id="action" class="form-control-sm form-check-inline">
                     <option value="">Tác vụ</option>
                     <option value="1">Xóa</option>
-                    <option value="2">Thành công</option>
-                    <option value="3">Chờ xét duyệt</option>
-                    <option value="4">Đang vận chuyển</option>
+                    <option value="2">Chờ xác nhận</option>
+                    <option value="3">Chuẩn bị đơn hàng</option>
+                    <option value="4">Đang giao hàng</option>
+                    <option value="5">Thành công</option>
                 </select>
                 <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button>
                 <table class="table table-striped">

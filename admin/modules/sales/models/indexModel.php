@@ -54,31 +54,37 @@ function detail_order($id)
     return $sql;
 }
 
-function num_orders()
+function num_orders() //Tổng đơn hàng
 {
     return db_num_rows("SELECT * FROM `tb_orders`");
 }
-function num_posts_pending()
+function num_posts_pending() //Chờ xác nhận
 {
-    return db_num_rows("SELECT * FROM `tb_orders` WHERE `status`= 'Chờ xét duyệt'");
+    return db_num_rows("SELECT * FROM `tb_orders` WHERE `status`= 'Chờ xác nhận'");
+}
+function num_prepare_orders() //Chuẩn bị đơn hàng
+{
+    return db_num_rows("SELECT * FROM `tb_orders` WHERE `status`= 'Chuẩn bị đơn hàng'");
+}
+function num_orders_delivery() //Đang giao hàng
+{
+    return db_num_rows("SELECT * FROM `tb_orders` WHERE `status`= 'Đang giao hàng'");
 }
 
-function num_orders_delivery()
-{
-    return db_num_rows("SELECT * FROM `tb_orders` WHERE `status`= 'Đang vận chuyển'");
-}
-
-function num_orders_success()
+function num_orders_success() //Thành công
 {
     return db_num_rows("SELECT * FROM `tb_orders` WHERE `status`= 'Thành công'");
 }
-
+function num_orders_cancelled() //Đã hủy
+{
+    return db_num_rows("SELECT * FROM `tb_orders` WHERE `status`= 'Đã hủy'");
+}
 function delete_order($id)
 {
     db_delete("tb_orders", "`id` = '{$id}'");
 }
 
-function total_order()//Danh sách đơn đặt hàng
+function total_order() //Danh sách đơn đặt hàng
 {
     $sql = db_fetch_row("SELECT SUM(`sales`)as 'total' FROM `tb_products`");
     return $sql;
@@ -90,11 +96,13 @@ function update_action($action, $item) //Cập nhật tác vụ
         db_delete("tb_orders", "`id` = '{$item}'");
         return true;
     } else if ($action == 2) {
-        $status = "Thành công";
+        $status = "Chờ xác nhận";
     } else if ($action == 3) {
-        $status = "Chờ xét duyệt";
+        $status = "CHuẩn bị đơn hàng";
     } else if ($action == 4) {
-        $status = "Đang vận chuyển";
+        $status = "Đang giao hàng";
+    } else if ($action == 5) {
+        $status = "Thành công";
     } else {
         return false;
     }

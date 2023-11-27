@@ -16,9 +16,6 @@ get_sidebar();
                     <label for="product-code">Mã sản phẩm</label>
                     <input type="text" name="product_code" id="product-code" class="form-inline form-control" value="<?php echo $product['product_code'] ?>"><br>
                     <?php echo form_error('product_code') ?>
-                    <label for="price">Giá cơ bản</label>
-                    <input type="text" name="price" id="price" class="form-inline form-control" value="<?php echo $product['price'] ?>"><br>
-                    <?php echo form_error('price') ?>
                     <label for="desc">Mô tả ngắn</label>
                     <textarea name="product_desc" id="desc" class="ckeditor"><?php echo $product['product_desc'] ?></textarea><br>
                     <?php echo form_error('product_desc') ?>

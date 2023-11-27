@@ -9,7 +9,6 @@ function quickView(_this) {//Phần QuickView
         success: function (data) {
             $("#product_img").html("<img src='admin/img/" + data.product_img + "' alt=''>");
             $("#product_name").html(data.product_name);
-            $("#product_price").html(data.product_price);
             $("#product_star").html(data.product_star);
             $("#product_reviews").html(data.product_reviews);
             $("#product_desc").html(data.product_desc);
@@ -31,6 +30,22 @@ function favourite(_this) {
         dataType: 'html',
         success: function (data) {
             console.log(data);
+        }
+    });
+}
+
+function changPrice(_this) {//Thay đỏi giá khi chon nơi vận chuyển
+    var idShip = $(_this).val();
+    var data = {
+        idShip: idShip
+    }
+    $.ajax({
+        url: '?mod=cart&action=chang_price',
+        method: 'POST',
+        data: data,
+        dataType: 'html',
+        success: function (data) {
+            $("#total_pay").html(data);
         }
     });
 }

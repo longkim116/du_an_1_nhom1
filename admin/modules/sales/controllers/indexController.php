@@ -25,10 +25,12 @@ function list_orderAction()
         }
     }
     //
-    $data['num_orders'] = num_orders();
-    $data['num_posts_pending'] = num_posts_pending();
-    $data['num_orders_delivery'] = num_orders_delivery();
-    $data['num_orders_success'] = num_orders_success();
+    $data['num_orders'] = num_orders(); //Tổng đơn hàng
+    $data['num_posts_pending'] = num_posts_pending(); //Chờ xác nhận
+    $data['num_prepare_orders'] = num_prepare_orders(); //Chuẩn bị đơn hàng
+    $data['num_orders_delivery'] = num_orders_delivery(); //Đang giao hàng
+    $data['num_orders_success'] = num_orders_success(); //Thành công
+    $data['num_orders_cancelled'] = num_orders_cancelled(); //Đã hủy
     $status = (!empty($_GET['status'])) ? $_GET['status'] : null;
     $page = (!empty($_GET['page'])) ? $_GET['page'] : 1;
     $num_rows = 10;
@@ -54,6 +56,11 @@ function detail_orderAction()
         //Kết luận
         add_status_by_id($data_status, $id);
     }
+    $data['status_order'] = [
+        1 => 'Chờ xác nhận',
+        2 => 'Chuẩn bị đơn hàng',
+        3 => 'Đang giao hàng',
+    ];
     $data['detail_order'] = detail_order($id);
     $data['list_product'] = json_decode($data['detail_order']['order_buy'], true);
     load_view("detail_order", $data);

@@ -172,7 +172,9 @@ function list_comments($id, $status) //Danh sách bình luận của từng sả
     } else {
         $status = "";
     }
-    $sql = db_fetch_array("SELECT * FROM `tb_comments` WHERE `id_product` = {$id} {$status}");
+    $sql = db_fetch_array("SELECT * FROM `tb_comments` INNER JOIN `tb_customers` 
+    ON tb_comments.id_customer = tb_customers.id
+    WHERE tb_comments.id_product = {$id} {$status}");
     return $sql;
 }
 
@@ -310,4 +312,9 @@ function update_detail_img_by_id($key, $data_detail_img) //Cập nhật ảnh ch
 function remove_interval_detail_img($string_id, $id) //Xóa các id ảnh chi tiết nếu không tồn tại trong danh sách
 {
     db_query("DELETE FROM `tb_image_details` WHERE `id` NOT IN ($string_id) AND `product_id` = {$id}");
+}
+
+function delete_detail_img_all($id) //Xóa tất cả các ảnh chi tiết
+{
+    db_delete("tb_image_details", "`product_id` = {$id}");
 }

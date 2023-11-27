@@ -56,7 +56,7 @@ function detail_color_ajaxAction()
     if (!$promotion) {
         $promotion = 0;
     }
-    $price = ($color['price'] - ($color['price'] * ($promotion / 100))) + $color['color_price'];
+    $price = $color['color_price'] - ($color['color_price'] * ($promotion / 100));
     $result = [
         'product_name' => $color['product_name'] . " {$color['ram_name']} {$color['color_name']}",
         'price' => currency_format($price),
@@ -71,11 +71,10 @@ function mainAction()
     global $select;
     $data['list_ads'] = list_ads("product");
     $price = (!empty($_POST['price'])) ? $_POST['price'] : null;
-    $brand = (!empty($_POST['brand'])) ? $_POST['brand'] : null;
     $category = (!empty($_POST['category'])) ? $_POST['category'] : null;
     $select = (!empty($_POST['select'])) ? $_POST['select'] : null;
     $data['list_products_by_star'] = list_products_by_sales();
-    $data['list_products'] = list_products($select, $price, $category);
+    $data['list_products'] = list_products($select, $price, $category); //Danh sách sản phẩm
     load_view("main", $data);
 }
 
@@ -85,7 +84,6 @@ function productAction()
     $select = (!empty($_POST['select'])) ? $_POST['select'] : null;
     $data['list_ads'] = list_ads("product");
     //
-    global $num_rows;
     $page =  (!empty($_GET['page'])) ? $_GET['page'] : 1;
     $num_rows = 12;
     $start = ($page - 1) * $num_rows;
@@ -95,6 +93,8 @@ function productAction()
     $cat_id = (!empty($_GET['cat_id'])) ? $_GET['cat_id'] : null;
     $name_product = (!empty($_GET['name_product'])) ? $_GET['name_product'] : null;
     $data['list_product'] = list_product($cat_id, $name_product, $start, $num_rows, $select);
+    $data['num_rows'] = $num_rows;//Số bản ghi trong 1 trang
+    $data['start'] = $start;//Điểm bắt đàu lấy bản ghi
     $data['total_product'] = total_product($cat_id, $name_product);
     load_view("product", $data);
 }
@@ -179,7 +179,6 @@ function quickView_ajaxAction() //Phần xem sản phẩm
         'string_variant_ram' => $string_variant_ram,
         'product_img' => $product['product_thumb'],
         'product_name' => $product['product_name'],
-        'product_price' => currency_format($product['price']),
         'product_star' => str_repeat("<span><i class='fa-solid fa-star'></i></span>", round($star['star'])),
         'product_reviews' => "({$count_evaluate} bình luận và đánh giá)",
         'product_desc' => $product['product_desc'],

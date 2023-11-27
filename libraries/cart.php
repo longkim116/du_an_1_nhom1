@@ -57,10 +57,10 @@ function add_product_put_cart($id_color, $qty) //Thêm vào giỏ hàng
             'color_id' => $id_color,
             'product_code' => $item['product_code'],
             'product_name' => $item['product_name'] . " " . $item['ram_name'] . " " . $item['color_name'],
-            'price' => $item['price'] + $item['color_price'] - ($item['price'] * ($promotion / 100)),
+            'price' => $item['color_price'] - ($item['color_price'] * ($promotion / 100)),
             'product_thumb' => $item['product_thumb'],
             'qty' => $qty,
-            'sub_total' => ($item['price'] + $item['color_price'] - ($item['price'] * ($promotion / 100))) * $qty,
+            'sub_total' => ($item['color_price'] - ($item['color_price'] * ($promotion / 100))) * $qty,
         ];
     }
     update_cart();

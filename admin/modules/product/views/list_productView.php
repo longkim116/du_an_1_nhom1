@@ -40,7 +40,6 @@ get_sidebar();
                             <th>Mã sản phẩm</th>
                             <th>Hình ảnh</th>
                             <th colspan="2">Tên sản phẩm</th>
-                            <th>Gía cơ bản</th>
                             <th>Danh mục</th>
                             <th>Trạng thái</th>
                             <th>Bình luận</th>
@@ -66,7 +65,6 @@ get_sidebar();
                                         <a href="?mod=product&action=update_product&id=<?php echo $item['product_id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
                                         <a onclick="return confirm('Bạn chắc muốn xóa sản phẩm không')" href="?mod=product&action=delete_product&id=<?php echo $item['product_id'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
                                     </td>
-                                    <td class="text-danger"><?php echo currency_format($item['price']); ?></td>
                                     <td><?php echo $item['title'] ?></td>
                                     <td><?php echo $item['status'] ?></td>
                                     <td><a href="?mod=product&action=list_comments&id=<?php echo $item['product_id'] ?>" class="text-decoration-none">Chi tiết</a></td>

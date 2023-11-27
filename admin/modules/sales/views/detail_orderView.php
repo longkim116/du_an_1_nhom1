@@ -7,34 +7,58 @@ get_sidebar();
         <div class="container-fluid">
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <h6>THÔNG TIN ĐƠN HÀNG</h6>
-                    <div class="list-group">
+                    <h6 class="mb-3">THÔNG TIN ĐƠN HÀNG</h6>
+                    <div class="list-group mb-4">
                         <div class="list-group-item">
-                            <h6><img src="public/img/bar-code.png" alt=""> Mã đơn hàng</h6>
-                            <p><?php echo $detail_order['order_code'] ?></p>
+                            <h6 class="mb-1"><img src="public/img/bar-code.png" alt=""> Mã đơn hàng</h6>
+                            <p class="mb-0"><?php echo $detail_order['order_code'] ?></p>
                         </div>
                         <div class="list-group-item">
-                            <h6><img src="public/img/gps.png" alt=""> Địa chỉ nhận hàng</h6>
-                            <p><?php echo $detail_order['address'] ?> / <?php echo $detail_order['phone'] ?></p>
+                            <h6 class="mb-1"><img src="public/img/gps.png" alt=""> Địa chỉ nhận hàng</h6>
+                            <p class="mb-0"><?php echo $detail_order['address'] ?> / <?php echo $detail_order['phone'] ?></p>
                         </div>
                         <div class="list-group-item">
-                            <h6><img src="public/img/shopping-cart.png" alt=""> Thông tin vận chuyển</h6>
-                            <p>Thanh toán khi nhận hàng</p>
+                            <h6 class="mb-1"><img src="public/img/credit-card.png" alt=""> Thanh toán</h6>
+                            <p class="mb-0"><?php echo $detail_order['pay'] ?></p>
                         </div>
                         <div class="list-group-item">
-                            <h6><img src="public/img/clipboard.png" alt=""> Tình trạng đơn hàng</h6>
-                            <form method="POST" action="" class="form-inline">
-                                <select name="status" class="form-control">
-                                    <option value='Chờ xét duyệt' <?php if ($detail_order['status'] == "Chờ xét duyệt") echo "selected"; ?>>Chờ xét duyệt</option>
-                                    <option value='Đang vận chuyển' <?php if ($detail_order['status'] == "Đang vận chuyển") echo "selected"; ?>>Đang vận chuyển</option>
-                                    <option value='Thành công' <?php if ($detail_order['status'] == "Thành công") echo "selected"; ?>>Thành công</option>
-                                </select>
-                                <input type="submit" class="btn btn-primary ml-2" name="sm_status" value="Cập nhật đơn hàng">
-                            </form>
+                            <h6 class="mb-1"><img src="public/img/post-it.png" alt=""> Ghi chú</h6>
+                            <p class="mb-0"><?php echo $detail_order['note'] ?></p>
+                        </div>
+                        <div class="list-group-item">
+                            <h6 class="mb-1"><img src="public/img/clipboard.png" alt=""> Tình trạng đơn hàng</h6>
+                            <?php if ($detail_order['status'] == 'Đã hủy') : ?>
+                                <h4 class="text-danger">Đơn hàng đã hủy</h4>
+                            <?php elseif ($detail_order['status'] == 'Thành công') : ?>
+                                <h4 class="text-success">Đơn hàng đã giao thành công</h4>
+                            <?php else : ?>
+                                <form method="POST" action="" class="form-inline">
+                                    <select name="status" class="form-control">
+                                        <?php
+                                        $count  = 1;
+                                        foreach ($status_order as $key => $item) :
+                                            if ($detail_order['status'] == $item) {
+                                                $count = $key;
+                                                $disabled = "";
+                                                $l = 0;
+                                            } else {
+                                                if (isset($l)) {
+                                                    $disabled = "";
+                                                } else {
+                                                    $disabled = "disabled";
+                                                }
+                                            }
+                                        ?>
+                                            <option value='<?php echo $item ?>' <?php echo $disabled ?> <?php echo ($detail_order['status'] == $item) ? "selected" : ""; ?>><?php echo $item ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <input type="submit" class="btn btn-primary ml-2" name="sm_status" value="Cập nhật đơn hàng">
+                                </form>
+                            <?php endif; ?>
                         </div>
                     </div>
-                    <h6>SẢN PHẨM ĐƠN HÀNG</h6>
-                    <table class="table table-striped">
+                    <h6 class="mb-3">SẢN PHẨM ĐƠN HÀNG</h6>
+                    <table class="table table-striped mb-4">
                         <thead>
                             <tr class="thead-dark">
                                 <th>STT</th>
@@ -66,13 +90,16 @@ get_sidebar();
                     </table>
                 </div>
             </div>
-            <h6>GIÁ TRỊ ĐƠN HÀNG</h6>
             <div class="row">
-                <div class="col-md-12">
-                    <p><strong>Tổng số lượng:</strong> <?php echo $detail_order['quantity'] ?> sản phẩm</p>
-                    <p><strong>Tổng thanh toán:</strong> <span class="text-danger h6"><?php echo currency_format($detail_order['total_price']) ?></span></p>
+                <div class="col-md-6">
+                    <p class="font-weight-bold">Tổng số lượng: <?php echo $detail_order['quantity'] ?> sản phẩm</p>
+                    <p class="font-weight-bold">Phí vận chuyển: <?php echo currency_format($detail_order['shipping_cost']) ?></p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <h3 class="text-danger font-weight-bold">Tổng thanh toán: <?php echo currency_format($detail_order['total_price']) ?></h3>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

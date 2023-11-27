@@ -108,9 +108,9 @@ get_header();
                                 <!-- price -->
                                 <div class="tp-product-details-price-wrapper mb-20">
                                     <?php if ($promotion != false) : ?>
-                                        <span class="tp-product-details-price old-price"><?php echo currency_format($product['price']) ?></span>
+                                        <span class="tp-product-details-price old-price"></span>
                                     <?php endif; ?>
-                                    <h3 id="product_price"><?php echo currency_format($product['price'] - ($product['price'] * ($promotion / 100))) ?></h3>
+                                    <h3 id="product_price"></h3>
                                 </div>
                                 <!-- actions -->
                                 <div class="tp-product-details-action-wrapper">
@@ -212,7 +212,7 @@ get_header();
                                                         <h3 class="tp-product-details-review-number-title">Phản hồi khách hàng</h3>
                                                         <div class="tp-product-details-review-summery d-flex align-items-center">
                                                             <div class="tp-product-details-review-summery-value">
-                                                                <span>4.5</span>
+                                                                <span><?php echo round($star['star'], 1) ?></span>
                                                             </div>
                                                             <div class="tp-product-details-review-summery-rating d-flex align-items-center">
                                                                 <span><i class="fa-solid fa-star"></i></span>
@@ -220,7 +220,7 @@ get_header();
                                                                 <span><i class="fa-solid fa-star"></i></span>
                                                                 <span><i class="fa-solid fa-star"></i></span>
                                                                 <span><i class="fa-solid fa-star"></i></span>
-                                                                <p>(36 Đánh giá)</p>
+                                                                <p>(<?php echo $count_evaluate ?> Bình luận và đánh giá)</p>
                                                             </div>
                                                         </div>
                                                         <div class="tp-product-details-review-rating-list">
@@ -231,7 +231,7 @@ get_header();
                                                                     <span class="tp-product-details-review-rating-bar-inner" data-width="82%"></span>
                                                                 </div>
                                                                 <div class="tp-product-details-review-rating-percent">
-                                                                    <span>82%</span>
+                                                                    <span><?php  ?></span>
                                                                 </div>
                                                             </div> <!-- end single item -->
 

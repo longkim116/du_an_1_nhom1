@@ -10,12 +10,7 @@ function indexAction()
     $data['list_products_by_sales'] = list_products_by_sales();
     $data['list_sliders'] = list_sliders();
     $data['list_ads'] = list_ads("home");
-    //Danh sách điện thoại
-    $data['list_products_phone'] = list_products_phone();
-    //Danh sách tablet
-    $data['list_products_tablet'] = list_products_tablet();
-    //Danh sách laptops
-    $data['list_products_laptop'] = list_products_latop();
+    $data['list_products_promotion'] = list_products_promotion();//Danh sách sản phẩm đang khuyễn mãi
     load_view("home", $data);
 }
 
