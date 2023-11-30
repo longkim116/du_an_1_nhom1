@@ -4,7 +4,7 @@ function get_product_by_id($id) //Lấy chi tiết sản phẩm
     $sql = db_fetch_row("SELECT * FROM `tb_products` INNER JOIN `tb_category` ON tb_products.cat_id = tb_category.id WHERE `product_id` = {$id}");
     return $sql;
 }
-function get_padding($num_rows)
+function get_padding($num_rows) //Phân trang
 {
     $num_page = ceil(db_num_rows("SELECT * FROM `tb_products` WHERE `status` = 'Đã đăng'") / $num_rows);
     $padding = "";
@@ -20,12 +20,13 @@ function list_products_by_sales() //Lấy danh sách sản phẩm bán chạy
     $sql = db_fetch_array("SELECT * FROM `tb_products` WHERE `status` = 'Đã đăng' ORDER BY `sales` DESC LIMIT 0, 10 ");
     return $sql;
 }
-function total_product_by_cat_id($cat_id)
+
+function total_product_by_cat_id($cat_id) //Tổng số sản phẩm của danh mục
 {
     $sql = db_num_rows("SELECT * FROM `tb_products` WHERE `cat_id` = '{$cat_id}' AND `status` = 'Đã đăng'");
     return $sql;
 }
-function list_products($select, $price, $category)
+function list_products($select, $price, $category) //Lấy danh sách sản phẩm
 {
     $where = "WHERE";
     if (!empty($select)) {
@@ -53,13 +54,7 @@ function list_products($select, $price, $category)
         }
     }
     if (!empty($category)) {
-        if ($category == 1) {
-            $category = "tb_products.cat_id = 1";
-        } else if ($category == 2) {
-            $category = "tb_products.cat_id = 2";
-        } else if ($category == 3) {
-            $category = "tb_products.cat_id = 3";
-        }
+        $category = "tb_products.cat_id = {$category}";
     }
     if (!empty($category) && !empty($price)) {
         $where = "WHERE ({$price}) AND ({$category}) AND";
@@ -71,14 +66,10 @@ function list_products($select, $price, $category)
     LEFT JOIN tb_color_variants ON tb_products.product_id = tb_color_variants.product_id {$where} `status` = 'Đã đăng' {$select}");
     return $sql;
 }
-
-
-function add_cart($id, $num_order)
-{
-    add_product_put_cart($id, $num_order);
-    get_list_buy_cart();
-    redirect("thanh-toan.html");
-}
+//     add_product_put_cart($id, $num_order);
+//     get_list_buy_cart();
+//     redirect("thanh-toan.html");
+// }
 
 function list_same_category($cat_id)
 {
@@ -97,7 +88,7 @@ function add_comments($data_add_comemnt) //Cập nhật bình luận
     db_insert("tb_comments", $data_add_comemnt);
 }
 
-function get_list_comments($id)
+function get_list_comments($id) //Danh sách bình luận
 {
     $sql = db_fetch_array("SELECT * FROM `tb_comments` INNER JOIN `tb_customers` 
     ON tb_comments.id_customer = tb_customers.id WHERE `id_product` = '$id' ORDER BY `time` DESC");
@@ -106,7 +97,7 @@ function get_list_comments($id)
 
 function product_star_by_id($id) //Lấy trung binh đánh giá khách hàng
 {
-    $sql = db_fetch_row("SELECT AVG(`star`) as 'star' FROM `tb_comments` WHERE `id_product` = {$id} AND `star` > 1");
+    $sql = db_fetch_row("SELECT AVG(`star`) as 'star' FROM `tb_comments` WHERE `id_product` = {$id} AND `star` >= 1");
     return $sql;
 }
 
@@ -115,29 +106,29 @@ function total_comments($id) //Lấy tổng tất cả bình luận và đánh g
     $sql = count(db_fetch_array("SELECT * FROM `tb_comments` WHERE `id_product` = {$id}"));
     return $sql;
 }
-function num_product_star_5($id)
+function num_product_star_5($id) //Lấy tổng đánh giá 5 sao
 {
     $sql = count(db_fetch_array("SELECT * FROM `tb_comments` WHERE `id_product` = {$id} AND `star` = 5"));
     return $sql;
 }
 
-function num_product_star_4($id)
+function num_product_star_4($id) //Lấy tổng đánh giá 4 sao
 {
     $sql = count(db_fetch_array("SELECT * FROM `tb_comments` WHERE `id_product` = {$id} AND `star` = 4"));
     return $sql;
 }
-function num_product_star_3($id)
+function num_product_star_3($id) //Lấy tổng đánh giá 3 sao
 {
     $sql = count(db_fetch_array("SELECT * FROM `tb_comments` WHERE `id_product` = {$id} AND `star` = 3"));
     return $sql;
 }
-function num_product_star_2($id)
+function num_product_star_2($id) //Lấy tổng đánh giá 2 sao
 {
     $sql = count(db_fetch_array("SELECT * FROM `tb_comments` WHERE `id_product` = {$id} AND `star` = 2"));
     return $sql;
 }
 
-function num_product_star_1($id)
+function num_product_star_1($id) //Lấy tổng đánh giá 1 sao
 {
     $sql = count(db_fetch_array("SELECT * FROM `tb_comments` WHERE `id_product` = {$id} AND `star` = 1"));
     return $sql;
@@ -175,7 +166,7 @@ function get_color_variant($color_id) //Lấy ra màu sắc theo id màu sắc
 function get_product_promotion_by_id($id) //Lấy giá khuyễn mãi theo id sản phẩm
 {
     $sql = db_fetch_row("SELECT * FROM `product_promotion` INNER JOIN `tb_promotions` ON product_promotion.promotion_id = tb_promotions.id 
-    INNER JOIN `tb_products` ON product_promotion.product_id = tb_products.product_id WHERE tb_products.product_id = {$id}");
+    INNER JOIN `tb_products` ON product_promotion.product_id = tb_products.product_id WHERE tb_products.product_id = {$id} AND tb_promotions.status = 'Đang diễn ra'");
     if (!$sql) {
         return false;
     }
@@ -198,7 +189,7 @@ function get_discount_rate($id) //Lấy phần trăm khuyễn mãi cảu sản p
 {
     $sql = db_fetch_row("SELECT * FROM `tb_promotions`
     INNER JOIN `product_promotion` ON tb_promotions.id = product_promotion.promotion_id
-    WHERE product_promotion.product_id = {$id} ");
+    WHERE product_promotion.product_id = {$id}  AND tb_promotions.status = 'Đang diễn ra'");
     if ($sql) {
         return $sql['discount_rate'];
     }
@@ -208,5 +199,11 @@ function get_discount_rate($id) //Lấy phần trăm khuyễn mãi cảu sản p
 function product_reviews($id) //Lấy chi tiêt danh giá sản phẩm
 {
     $sql = db_fetch_row("SELECT AVG(`star`) AS `star`, COUNT(`id_product`) AS `count` FROM `tb_comments` WHERE `id_product` = {$id}");
+    return $sql;
+}
+
+function get_list_category() //Lấy danh sách danh mục
+{
+    $sql = db_fetch_array("SELECT * FROM `tb_category`");
     return $sql;
 }

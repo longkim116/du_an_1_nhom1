@@ -25,7 +25,7 @@ get_sidebar();
                             <th>STT</th>
                             <th>Tên loại hàng</th>
                             <th>Thời gian</th>
-                            <th>Thao tác</th>
+                            <th style="width: 20%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,9 +39,13 @@ get_sidebar();
                                     <td><?php echo $count ?></td>
                                     <td class="title"><?php echo $item['title'] ?></td>
                                     <td><?php echo $item['create_date'] ?></td>
-                                    <td class="list-inline">
-                                        <a href="?mod=category&action=update_cat&id=<?php echo $item['id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
-                                        <a onclick="return confirm('Bạn chắc muốn xóa sản phẩm không')" href="?mod=category&action=delete_cat&id=<?php echo $item['id'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
+                                    <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=category&action=update_cat&id=<?php echo $item['id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                            Sửa
+                                        </a>
+                                        <a onclick="return confirm('Bạn chắc muốn xóa danh mục này không?')" class="btn btn-danger btn-sm" href="?mod=category&action=delete_cat&id=<?php echo $item['id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                            Xóa
+                                        </a>
                                     </td>
                                 </tr>
                         <?php endforeach;
@@ -51,7 +55,7 @@ get_sidebar();
             </form>
         </div>
         <div class="card-footer clearfix">
-         
+
         </div>
     </div>
 </div>

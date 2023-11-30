@@ -107,24 +107,34 @@ function addColorVariant(ramVariantId) {//Thêm biến thể màu sắc
                 <input type="number" class="form-control" id="price_color_var" name="ram_variants[` + ramVariantId + `][colors][` + colorVariantsContainer.children().length + `][price]">
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="form-group">
                 <label for="qty_color_var">Số lượng</label>
                 <input type="number" class="form-control" id="qty_color_var" name="ram_variants[` + ramVariantId + `][colors][` + colorVariantsContainer.children().length + `][qty]">
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
             <div class="form-group">
                 <label for="color_var">Màu</label>
                 <input type="color" class="form-control" id="color_var" name="ram_variants[` + ramVariantId + `][colors][` + colorVariantsContainer.children().length + `][color]">
             </div>
         </div>
+        <div class="col-md-2 d-flex">
+            <div class="form-group w-100">
+               <label for="img_color_var">Ảnh</label>
+               <input type="file" class="form-control" onchange="upload_img_color(this)" id="img_color_var" color_id="`+ ramVariantId + `` + colorVariantsContainer.children().length + `" name="ram_variants[` + ramVariantId + `][colors][` + colorVariantsContainer.children().length + `][img]">
+            </div>
+            <div id="img-color-`+ ramVariantId + `` + colorVariantsContainer.children().length + `">
+               <img class="mt-3 ml-5" src="public/img/photo.png" alt="" width="50" height="50">
+            </div>
+        </div>
         <div class="col-md-1">
-        <a href="javascript:void(0)" class="btn btn-sm btn-danger float-right" onclick="delete_(this)">Xóa</a>
+            <a href="javascript:void(0)" class="btn btn-sm btn-danger float-right" onclick="delete_(this)">Xóa</a>
         </div>
     </div>
-    </div>`);
+</div>`);
 }
+
 
 function delete_(_this) {//Xóa biến thể màu sắc
     $(_this).closest('#item-color').remove();

@@ -33,7 +33,7 @@ get_sidebar();
                     </div>
                     <?php echo form_error("file"); ?>
                     
-                    <button type="submit" name="update-ads" id="btn-submit" class="btn btn-primary btn-lg">Sửa</button><br>
+                    <button type="submit" name="update-ads" id="btn-submit" class="btn btn-primary btn-lg">Cập nhật</button><br>
                     <?php echo form_error("account"); ?>
                 </form>
             </div>

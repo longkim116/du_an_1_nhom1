@@ -1,4 +1,7 @@
 <!-- footer area start -->
+<?php
+$settings = db_fetch_row("SELECT * FROM `tb_settings`");
+?>
 <footer>
     <div class="tp-footer-area" data-bg-color="footer-bg-grey">
         <div class="tp-footer-top pt-95 pb-40">
@@ -8,16 +11,13 @@
                         <div class="tp-footer-widget footer-col-1 mb-50">
                             <div class="tp-footer-widget-content">
                                 <div class="tp-footer-logo">
-                                    <a href="index.html">
-                                        <img src="assets/img/logo/logo.svg" alt="logo">
+                                    <a href="trang-chu.html">
+                                        <img width="130px" height="90px" src="admin/img/<?php echo $settings['logo'] ?>" alt="logo">
                                     </a>
                                 </div>
-                                <p class="tp-footer-desc">We are a team of designers and developers that create high quality WordPress</p>
+                                <p class="tp-footer-desc"><?php echo $settings['introduce'] ?></p>
                                 <div class="tp-footer-social">
                                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -54,11 +54,11 @@
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <div class="tp-footer-widget footer-col-4 mb-50">
-                            <h4 class="tp-footer-widget-title">Talk To Us</h4>
+                            <h4 class="tp-footer-widget-title">Thông tin cửa hàng</h4>
                             <div class="tp-footer-widget-content">
                                 <div class="tp-footer-talk mb-20">
-                                    <span>Got Questions? Call us</span>
-                                    <h4><a href="tel:670-413-90-762">+670 413 90 762</a></h4>
+                                    <span>Số điện thoại</span>
+                                    <h4><a href="tel:670-413-90-762"><?php echo $settings['phone'] ?></a></h4>
                                 </div>
                                 <div class="tp-footer-contact">
                                     <div class="tp-footer-contact-item d-flex align-items-start">
@@ -73,7 +73,7 @@
                                             </span>
                                         </div>
                                         <div class="tp-footer-contact-content">
-                                            <p><a href="mailto:shofy@support.com">shofy@support.com</a></p>
+                                            <p><a href="mailto:shofy@support.com"><?php echo $settings['email'] ?></a></p>
                                         </div>
                                     </div>
                                     <div class="tp-footer-contact-item d-flex align-items-start">
@@ -86,7 +86,7 @@
                                             </span>
                                         </div>
                                         <div class="tp-footer-contact-content">
-                                            <p><a href="https://www.google.com/maps/place/Sleepy+Hollow+Rd,+Gouverneur,+NY+13642,+USA/@44.3304966,-75.4552367,17z/data=!3m1!4b1!4m6!3m5!1s0x4cccddac8972c5eb:0x56286024afff537a!8m2!3d44.3304928!4d-75.453048!16s%2Fg%2F1tdsjdj4" target="_blank">79 Sleepy Hollow St. <br> Jamaica, New York 1432</a></p>
+                                            <p><a href="https://www.google.com/maps/place/Sleepy+Hollow+Rd,+Gouverneur,+NY+13642,+USA/@44.3304966,-75.4552367,17z/data=!3m1!4b1!4m6!3m5!1s0x4cccddac8972c5eb:0x56286024afff537a!8m2!3d44.3304928!4d-75.453048!16s%2Fg%2F1tdsjdj4" target="_blank"><?php echo $settings['address'] ?></a></p>
                                         </div>
                                     </div>
                                 </div>

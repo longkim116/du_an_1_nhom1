@@ -123,7 +123,7 @@ function get_discount_rate($id) //Lấy phần trăm khuyễn mãi cảu sản p
 {
     $sql = db_fetch_row("SELECT * FROM `tb_promotions`
     INNER JOIN `product_promotion` ON tb_promotions.id = product_promotion.promotion_id
-    WHERE product_promotion.product_id = {$id} ");
+    WHERE product_promotion.product_id = {$id} AND tb_promotions.status = 'Đang diễn ra'");
     if ($sql) {
         return $sql['discount_rate'];
     }

@@ -18,7 +18,7 @@ get_sidebar();
                     <option value="1">Xóa</option>
                 </select>
                 <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button>
-                <table class="table table-striped">
+                <table class="table table-striped text-center">
                     <thead>
                         <tr>
                             <th><input type="checkbox" name="checkAll" id="checkAll"></th>
@@ -27,8 +27,8 @@ get_sidebar();
                             <th style="width: 10%;">Tên</th>
                             <th style="width: 40%;">Link</th>
                             <th>Người tạo</th>
-                            <th>Thời gian</th>
-                            <th style="width: 10%;">Thao tác</th>
+                            <th style="width: 10%;">Thời gian</th>
+                            <th style="width: 20%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,9 +44,13 @@ get_sidebar();
                                     <td><?php echo $item['link'] ?></td>
                                     <td><?php echo $item['creator'] ?></td>
                                     <td><?php echo $item['date_created'] ?></td>
-                                    <td>
-                                        <a href="?mod=ads&action=update_ads&id=<?php echo $item['ads_id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
-                                        <a onclick="return confirm('Bạn chắc muốn xóa sản phẩm không')" href="?mod=ads&action=delete_ads&id=<?php echo $item['ads_id'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
+                                    <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=ads&action=update_ads&id=<?php echo $item['ads_id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                            Sửa
+                                        </a>
+                                        <a onclick="return confirm('Bạn chắc muốn xóa quảng cáo này không?')" class="btn btn-danger btn-sm" href="?mod=ads&action=delete_ads&id=<?php echo $item['ads_id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                            Xóa
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endforeach;

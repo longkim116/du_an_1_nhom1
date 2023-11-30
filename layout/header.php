@@ -58,7 +58,7 @@
                 <div class="offcanvas__top mb-70 d-flex justify-content-between align-items-center">
                     <div class="offcanvas__logo logo">
                         <a href="trang-chu.html">
-                            <img src="assets/img/logo/logo.svg" alt="logo">
+                            <img width="70px" height="55px" src="img/logo-autosmart.png" alt="logo">
                         </a>
                     </div>
                 </div>
@@ -249,7 +249,9 @@
                 </div>
                 <div class="cartmini__checkout-btn">
                     <a href="gio-hang.html" class="tp-btn mb-10 w-100">Giỏ hàng</a>
-                    <a href="thanh-toan.html" class="tp-btn tp-btn-border w-100">Thanh toán</a>
+                    <?php if (!empty($_SESSION['cart']['buy'])) : ?>
+                        <a href="thanh-toan.html" class="tp-btn tp-btn-border w-100">Thanh toán</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -312,7 +314,7 @@
                         <div class="col-xl-2 col-lg-2 col-md-4 col-6">
                             <div class="logo">
                                 <a href="trang-chu.html">
-                                    <img src="assets/img/logo/logo.svg" alt="logo">
+                                    <img width="110px" height="75px" src="img/logo-autosmart.png" alt="logo">
                                 </a>
                             </div>
                         </div>
@@ -417,7 +419,7 @@
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1C0 0.447715 0.447715 0 1 0H15C15.5523 0 16 0.447715 16 1C16 1.55228 15.5523 2 15 2H1C0.447715 2 0 1.55228 0 1ZM0 7C0 6.44772 0.447715 6 1 6H17C17.5523 6 18 6.44772 18 7C18 7.55228 17.5523 8 17 8H1C0.447715 8 0 7.55228 0 7ZM1 12C0.447715 12 0 12.4477 0 13C0 13.5523 0.447715 14 1 14H11C11.5523 14 12 13.5523 12 13C12 12.4477 11.5523 12 11 12H1Z" fill="currentColor" />
                                             </svg>
                                         </span>
-                                        DANH MỤC SẢN PHẨM
+                                        SẢN PHẨM
                                     </button>
                                     <nav class="tp-category-menu-content">
                                         <?php echo get_sidebar(); ?>
@@ -469,7 +471,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-3 col-6">
                         <div class="logo">
                             <a href="trang-chu.html">
-                                <img src="img/logo-autosmart.jpg" style="width: 100px; height:100px;" alt="logo">
+                                <img width="70px" height="50px" src="img/logo-autosmart.png" alt="logo">
                             </a>
                         </div>
                     </div>

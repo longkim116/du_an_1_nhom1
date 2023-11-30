@@ -14,12 +14,12 @@ get_sidebar();
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
-            <form action="" class="form-group ml-2" method="post">
-                <select name="action" id="action" class="form-control-sm form-check-inline">
+            <!-- <form action="" class="form-group ml-2" method="post"> -->
+                <!-- <select name="action" id="action" class="form-control-sm form-check-inline">
                     <option value="">Tác vụ</option>
                     <option value="1">Xóa</option>
                 </select>
-                <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button>
+                <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button> -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -29,7 +29,7 @@ get_sidebar();
                             <th style="width: 45%;">Nội dung bình luận</th>
                             <th style="width: 15%;">Đánh giá sản phẩm</th>
                             <th>Thời gian</th>
-                            <th>Thao tác</th>
+                            <!-- <th>Thao tác</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -39,15 +39,15 @@ get_sidebar();
                                 $count++;
                         ?>
                                 <tr>
-                                    <td><input type="checkbox" name="checkitem[<?php echo $item['id_comment'] ?>]" id="checkbox" value="<?php echo $item['id_comment'] ?>" class="checkItem"></td>
+                                    <!-- <td><input type="checkbox" name="checkitem[<?php echo $item['id_comment'] ?>]" id="checkbox" value="<?php echo $item['id_comment'] ?>" class="checkItem"></td> -->
                                     <td><?php echo $count ?></td>
                                     <td><?php echo $item['fullname'] ?></td>
                                     <td class="w-50"><?php echo $item['comment_content'] ?></td>
                                     <td><?php echo str_repeat("<img src='public/img/sao.png' alt=''>", $item['star']); ?></td>
                                     <td><?php echo $item['time'] ?></td>
-                                    <td class="list-inline">
+                                    <!-- <td class="list-inline">
                                         <a onclick="return confirm('Bạn chắc muốn xóa sản phẩm không')" href="?mod=product&action=delete_comments&id=<?php echo $item['id_product'] ?>&delete=<?php echo $item['id_comment'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             <?php endforeach;
                         else : ?>
@@ -57,7 +57,7 @@ get_sidebar();
                         <?php endif; ?>
                     </tbody>
                 </table>
-            </form>
+            <!-- </form> -->
         </div>
     </div>
 </div>

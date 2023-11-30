@@ -1,6 +1,6 @@
 <?php
 get_header();
-get_sidebar();
+// get_sidebar();
 ?>
 <div class="content-wrapper">
     <div id="content" class="container-fluid">
@@ -94,16 +94,25 @@ get_sidebar();
                                                             <input type="number" class="form-control" value="<?php echo $value['color_price'] ?>" id="price_color_var" name="update_ram_variants[<?php echo $item['id'] ?>][colors][<?php echo $value['id'] ?>][price]">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="qty_color_var">Số lượng</label>
                                                             <input type="number" class="form-control" value="<?php echo $value['quantity'] ?>" id="qty_color_var" name="update_ram_variants[<?php echo $item['id'] ?>][colors][<?php echo $value['id'] ?>][qty]">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label for="color_var">Màu</label>
                                                             <input type="color" class="form-control" value="<?php echo $value['color'] ?>" id="color_var" name="update_ram_variants[<?php echo $item['id'] ?>][colors][<?php echo $value['id'] ?>][color]">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 d-flex">
+                                                        <div class="form-group w-100">
+                                                            <label for="img_color_var">Ảnh</label>
+                                                            <input type="file" class="form-control" onchange="upload_img_color(this)" color_id="<?php echo $value['id'] ?>" value="<?php echo $value['image'] ?>" id="img_color_var" name="update_ram_variants[<?php echo $item['id'] ?>][colors][<?php echo $value['id'] ?>][img]">
+                                                        </div>
+                                                        <div id="img-color-<?php echo $value['id'] ?>">
+                                                            <img class="mt-3 ml-5" src="img/<?php echo $value['image'] ?>" alt="" width="50" height="50">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
@@ -117,12 +126,12 @@ get_sidebar();
                             </div>
                     <?php endforeach;
                     endif; ?>
+                    <?php echo form_error('variants') ?>
                     <a href="javascript:void(0)" class="btn btn-sm btn-primary" onclick="addRamVariant()">Thêm Biến Thể Ram</a>
                     <div id="ramVariants">
                         <!-- Biến thể được thêm vào đây -->
                     </div><br>
-                    <?php echo form_error('variants') ?>
-
+                    <?php echo form_error('add_variants') ?>
 
 
                     <label>Danh mục sản phẩm</label>
@@ -141,7 +150,7 @@ get_sidebar();
                         <option value="Chờ xét duyệt" <?php if ($product['status'] == "Chờ xét duyệt") echo "selected" ?>>Chờ xét duyệt</option>
                     </select><br>
                     <?php echo form_error('status') ?>
-                    <button type="submit" name="update_product" id="btn-submit" class="btn btn-primary btn-lg mt-4">Sửa</button><br>
+                    <button type="submit" name="update_product" id="btn-submit" class="btn btn-primary btn-lg mt-4">Cập nhật</button><br>
                     <?php echo form_error('account') ?>
                 </form>
             </div>

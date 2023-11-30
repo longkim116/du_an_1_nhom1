@@ -34,7 +34,7 @@ get_sidebar();
                             <th>Trạng thái</th>
                             <th>Người tạo</th>
                             <th>Thời gian</th>
-                            <th>Thao tác</th>
+                            <th style="width: 15%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,9 +53,13 @@ get_sidebar();
                                     <td><?php echo $item['status'] ?></td>
                                     <td><?php echo $item['creator'] ?></td>
                                     <td><?php echo $item['created_date'] ?></td>
-                                    <td>
-                                        <a href="?mod=slider&action=update_slider&id=<?php echo $item['slider_id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
-                                        <a onclick="return confirm('Bạn chắc muốn xóa sản phẩm không')" href="?mod=slider&action=delete_slider&id=<?php echo $item['slider_id'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
+                                    <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=slider&action=update_slider&id=<?php echo $item['slider_id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                            Sửa
+                                        </a>
+                                        <a onclick="return confirm('Bạn chắc muốn xóa slider này không?')" class="btn btn-danger btn-sm" href="?mod=slider&action=delete_slider&id=<?php echo $item['slider_id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                            Xóa
+                                        </a>
                                     </td>
                                 </tr>
                         <?php endforeach;

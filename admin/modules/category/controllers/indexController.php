@@ -10,7 +10,7 @@ function indexAction()
 
 function add_catAction() //Thêm danh mục
 {
-    global $error, $cat_name;
+    global $error, $cat_name, $file;
     if (isset($_POST['add_cat'])) {
         $error = [];
         //Kiểm tra cat_name
@@ -19,10 +19,22 @@ function add_catAction() //Thêm danh mục
         } else {
             $cat_name = $_POST['cat_name'];
         }
+        ////Kiểm tra file
+        if (empty($_FILES['file']['name'])) {
+            $error['file'] = "Không được để trống";
+        } else {
+            if (is_file_img($_FILES['file']['name'])) {
+                move_uploaded_file($_FILES['file']['tmp_name'], "img/" . $_FILES['file']['name']);
+                $file = $_FILES['file']['name'];
+            } else {
+                $error['file'] = 'Không đúng định dạng ảnh';
+            }
+        }
         //Kết luận
         if (empty($error)) {
             $data_cat = [
                 'title' => $cat_name,
+                'image' => $file,
                 'creator' => $_SESSION['admin_login']
             ];
             $error['account'] = "Thêm thành công";
@@ -31,12 +43,11 @@ function add_catAction() //Thêm danh mục
     }
     load_view('add_cat');
 }
-
 function delete_catAction() //Xóa danh mục
 {
     $id = $_GET['id'];
     delete_cat($id);
-    redirect('?mod=product&action=list_cat');
+    redirect('?mod=category&action=list_cat');
 }
 function update_catAction() //Sửa danh mục
 {
@@ -51,10 +62,22 @@ function update_catAction() //Sửa danh mục
         } else {
             $cat_name = $_POST['cat_name'];
         }
+        ////Kiểm tra file
+        if (empty($_FILES['file']['name'])) {
+            $error['file'] = "Không được để trống";
+        } else {
+            if (is_file_img($_FILES['file']['name'])) {
+                move_uploaded_file($_FILES['file']['tmp_name'], "img/" . $_FILES['file']['name']);
+                $file = $_FILES['file']['name'];
+            } else {
+                $error['file'] = 'Không đúng định dạng ảnh';
+            }
+        }
         //Kết luận
         if (empty($error)) {
             $data_update_cat = [
                 'title' => $cat_name,
+                'image' => $file,
             ];
             $error['account'] = "Sửa thành công";
             update_cat($data_update_cat, $id);
@@ -84,4 +107,3 @@ function list_catAction() //Danh sách danh mục
     $data['list_cat'] = get_list_cat();
     load_view("list_cat", $data);
 }
-

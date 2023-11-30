@@ -1,6 +1,6 @@
 <?php
 get_header();
-get_sidebar();
+// get_sidebar();
 ?>
 <div class="content-wrapper">
     <div id="content" class="container-fluid">

@@ -34,12 +34,12 @@
                                 <p>Danh sách trang</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="?mod=page&action=add_page" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thêm trang</p>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li class="nav-item">

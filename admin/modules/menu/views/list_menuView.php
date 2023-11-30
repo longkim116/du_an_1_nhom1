@@ -15,9 +15,9 @@ get_sidebar();
                             <tr>
                                 <th>STT</th>
                                 <th>Tên menu</th>
-                                <th style="width: 70%;">Link url</th>
-                                <th>Thứ tự</th>
-                                <th>Thao tác</th>
+                                <th style="width: 50%;">Link url</th>
+                                <th style="width: 10%;">Thứ tự</th>
+                                <th style="width: 15%;">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,9 +30,13 @@ get_sidebar();
                                         <td><?php echo str_repeat("|---| ", $item['level']) . $item['name']  ?></td>
                                         <td><?php echo $item['url'] ?></td>
                                         <td><?php echo $item['number_order'] ?></td>
-                                        <td class="list-inline">
-                                            <a href="?mod=menu&action=update_menu&id=<?php echo $item['id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
-                                            <a onclick="return confirm('Bạn chắc muốn xóa menu này không?')" href="?mod=menu&action=delete_menu&id=<?php echo $item['id'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
+                                        <td class="justify-content-between">
+                                            <a class="btn btn-info btn-sm" href="?mod=menu&action=update_menu&id=<?php echo $item['id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                                Sửa
+                                            </a>
+                                            <a onclick="return confirm('Bạn chắc muốn xóa menu này không?')" class="btn btn-danger btn-sm" href="?mod=menu&action=delete_menu&id=<?php echo $item['id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                                Xóa
+                                            </a>
                                         </td>
                                     </tr>
                             <?php endforeach;

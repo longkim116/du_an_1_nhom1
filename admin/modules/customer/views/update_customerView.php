@@ -44,7 +44,7 @@ get_sidebar();
                         <option value="1" <?php if ($customer['is_active'] == 1) echo "selected" ?>>Đã xác thực</option>
                     </select><br>
                     <?php echo form_error("is_active") ?>
-                    <button type="submit" name="update_customer" id="btn-submit" class="btn btn-primary mt-3">Thêm mới</button><br>
+                    <button type="submit" name="update_customer" id="btn-submit" class="btn btn-primary mt-3">Cập nhật</button><br>
                     <?php echo form_error("account") ?>
                 </form>
             </div>

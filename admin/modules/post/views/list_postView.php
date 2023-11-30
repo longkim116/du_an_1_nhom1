@@ -27,11 +27,12 @@ get_sidebar();
                         <tr>
                             <th><input type="checkbox" name="checkAll" id="checkAll"></th>
                             <th>STT</th>
-                            <th colspan="2" class="w-50">Tiêu đề</th>
+                            <th>Tiêu đề</th>
                             <th>Danh mục</th>
                             <th>Trạng thái</th>
                             <th>Người tạo</th>
                             <th>Thời gian</th>
+                            <th style="width: 15%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,14 +44,18 @@ get_sidebar();
                                     <td><input type="checkbox" name="checkitem[<?php echo $item['post_id'] ?>]" id="checkbox" value="<?php echo $item['post_id'] ?>" class="checkItem"></td>
                                     <td><?php echo ++$count; ?></td>
                                     <td><?php echo $item['post_title'] ?></td>
-                                    <td class="list-inline">
-                                        <a href="?mod=post&action=update_post&id=<?php echo $item['post_id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
-                                        <a onclick="return confirm('Bạn chắc muốn xóa sản phẩm không')" href="?mod=post&action=delete_post&id=<?php echo $item['post_id'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
-                                    </td>
                                     <td><?php echo $item['categoty'] ?></td>
                                     <td><?php echo $item['status'] ?></td>
                                     <td><?php echo $item['creator'] ?></td>
                                     <td><?php echo $item['created_date'] ?></td>
+                                    <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=post&action=update_post&id=<?php echo $item['post_id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                            Sửa
+                                        </a>
+                                        <a onclick="return confirm('Bạn chắc muốn xóa bài viết này không?')" class="btn btn-danger btn-sm" href="?mod=post&action=delete_post&id=<?php echo $item['post_id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                            Xóa
+                                        </a>
+                                    </td>
                                 </tr>
                         <?php endforeach;
                         else : echo "KHÔNG CÓ SẢN PHẨM";

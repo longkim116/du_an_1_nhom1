@@ -1,15 +1,20 @@
 <?php
 get_header();
-// get_sidebar();
+get_sidebar(); 
 ?>
 <div class="content-wrapper">
     <div id="content" class="container-fluid">
         <div class="col-sm-6">
-            <h1>THÊM MỚI KHUYỄN MÃI</h1>
+            <h1>CẬP NHẬT KHUYỄN MÃI</h1>
+            <?php if ($promotion["status"] == "Đang diễn ra") : ?>
+                <span class="text-danger">Chương trình đang diễn ra. Không thể sửa!</span>
+            <?php elseif ($promotion["status"] == "Đã kết thúc") : ?>
+                <span class="text-danger">Chương trình đang diễn ra. Không thể sửa!</span>
+            <?php endif; ?>
         </div>
         <div class="card">
             <div class="card-body">
-                <form enctype="multipart/form-data" method="POST" class="form-group">
+                <form method="POST" class="form-group">
                     <label for="title">Tên chương trình khuyễn mãi</label>
                     <input class="form-control form-inline" type="text" name="title" id="title" value="<?php echo $promotion["title"] ?>"><br>
                     <?php echo form_error("title") ?>
@@ -34,6 +39,16 @@ get_header();
                         </div>
                     </div><br>
                     <?php echo form_error("discount_rate") ?>
+                    <div class="form-row">
+                        <div>
+                            <label for="status">Trạng thái</label>
+                            <select name="status" id="status" class="form-control form-inline">
+                                <option disabled <?php echo ($promotion["status"] == "Sắp diễn ra") ? "selected" : ""; ?> value="Sắp diễn ra">Sắp diễn ra</option>
+                                <option disabled <?php echo ($promotion["status"] == "Đang diễn ra") ? "selected" : ""; ?> value="Đang diễn ra">Đang diễn ra</option>
+                                <option disabled <?php echo ($promotion["status"] == "Đã kết thúc") ? "selected" : ""; ?> value="Đã kết thúc">Đã kết thúc</option>
+                            </select>
+                        </div>
+                    </div><br>
                     <label for="">Danh sách sản phẩm áp dụng</label>
                     <div class="form-row">
                         <div class="card-body p-0">
@@ -45,7 +60,8 @@ get_header();
                                         <th>Mã sản phẩm</th>
                                         <th>Hình ảnh</th>
                                         <th>Tên sản phẩm</th>
-                                        <th>Gía cơ bản</th>
+                                        <th>Giá thấp nhất</th>
+                                        <th>Giá cao nhất</th>
                                         <th>Danh mục</th>
                                     </tr>
                                 </thead>
@@ -56,28 +72,49 @@ get_header();
                                             $count++;
                                     ?>
                                             <tr>
-                                                <td><input <?php  ?> type="checkbox" name="product_id[<?php echo $item['product_id'] ?>]" id="checkbox" value="<?php echo $item['product_id'] ?>" class="checkItem"></td>
+                                                <td><input checked type="checkbox" name="update_product_id[<?php echo $item['product_id'] ?>]" id="checkbox" value="<?php echo $item['product_id'] ?>" class="checkItem"></td>
                                                 <td><?php echo $count ?></td>
                                                 <td><?php echo $item['product_code'] ?></td>
                                                 <td>
                                                     <img id="img-list-product" class="img-fluid img-thumbnail" src="img/<?php echo $item['product_thumb'] ?>" alt="">
                                                 </td>
                                                 <td><?php echo $item['product_name'] ?></td>
-                                                <td class="text-danger"><?php echo currency_format($item['price']); ?></td>
+                                                <td class="text-danger"><?php echo currency_format(min_price($item['product_id'])) ?></td>
+                                                <td class="text-danger"><?php echo currency_format(max_price($item['product_id'])) ?></td>
                                                 <td><?php echo $item['title'] ?></td>
                                             </tr>
-                                        <?php endforeach;
-                                    else : ?>
-                                        <td colspan="14" class="text-center">Không có sản phẩm nào</td>
-                                    <?php
+                                    <?php endforeach;
+                                    endif; ?>
+                                    <?php if (!empty($add_list_products)) :
+                                        foreach ($add_list_products as $item) :
+                                            $count++;
+                                    ?>
+                                            <tr>
+                                                <td><input type="checkbox" name="product_id[<?php echo $item['product_id'] ?>]" id="checkbox" value="<?php echo $item['product_id'] ?>" class="checkItem"></td>
+                                                <td><?php echo $count ?></td>
+                                                <td><?php echo $item['product_code'] ?></td>
+                                                <td>
+                                                    <img id="img-list-product" class="img-fluid img-thumbnail" src="img/<?php echo $item['product_thumb'] ?>" alt="">
+                                                </td>
+                                                <td><?php echo $item['product_name'] ?></td>
+                                                <td class="text-danger"><?php echo currency_format(min_price($item['product_id'])) ?></td>
+                                                <td class="text-danger"><?php echo currency_format(max_price($item['product_id'])) ?></td>
+                                                <td><?php echo $item['title'] ?></td>
+                                            </tr>
+                                    <?php endforeach;
                                     endif; ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <?php echo form_error("check") ?>
-                    <button class="btn btn-primary btn-lg my-4" type="submit" name="add_promotions" id="btn-submit">Thêm</button><br>
-                    <?php echo form_error("account") ?>
+                    <?php if ($promotion["status"] == "Sắp diễn ra") : ?>
+                        <button class="btn btn-primary btn-lg my-4" type="submit" name="update_promotions" id="btn-submit">Cập nhật</button><br>
+                        <?php echo form_error("account") ?>
+                    <?php else : ?>
+                        <button class="btn btn-danger btn-lg my-4" type="submit" disabled id="btn-submit">Không thể cập nhật</button><br>
+                    <?php endif; ?>
+
                 </form>
             </div>
         </div>

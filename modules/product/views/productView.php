@@ -157,7 +157,7 @@ get_header();
                                                             <?php endif; ?>
                                                             <!-- product action -->
                                                             <div class="tp-product-action-2 tp-product-action-blackStyle">
-                                                                <div class="tp-product-action-item-2 d-flex flex-column">                                                            
+                                                                <div class="tp-product-action-item-2 d-flex flex-column">
                                                                     <button type="button" value="<?php echo $item['product_id'] ?>" onclick="quickView(this)" class="tp-product-action-btn-2 tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
                                                                         <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M8.99948 5.06828C7.80247 5.06828 6.82956 6.04044 6.82956 7.23542C6.82956 8.42951 7.80247 9.40077 8.99948 9.40077C10.1965 9.40077 11.1703 8.42951 11.1703 7.23542C11.1703 6.04044 10.1965 5.06828 8.99948 5.06828ZM8.99942 10.7482C7.0581 10.7482 5.47949 9.17221 5.47949 7.23508C5.47949 5.29705 7.0581 3.72021 8.99942 3.72021C10.9407 3.72021 12.5202 5.29705 12.5202 7.23508C12.5202 9.17221 10.9407 10.7482 8.99942 10.7482Z" fill="currentColor" />
@@ -228,7 +228,7 @@ get_header();
                 <div class="tp-product-modal-content d-lg-flex align-items-start">
                     <button type="button" class="tp-product-modal-close-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal"><i class="fa-regular fa-xmark"></i></button>
                     <div class="tp-product-details-thumb-wrapper tp-tab d-sm-flex">
-                        <div class="tab-content m-img" id="productDetailsNavContent">
+                        <div class="tab-content m-img" id="productDetailsNavContent w-100">
                             <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
                                 <div class="tp-product-details-nav-main-thumb" id="product_img">
                                     <img src="assets/img/product/details/main/product-details-main-1.jpg" alt="">
@@ -236,7 +236,7 @@ get_header();
                             </div>
                         </div>
                         <div class="tp-product-details-wrapper">
-                            <h5 class="tp-product-details-title" id="product_name">Samsung galaxy A8 tablet</h5>
+                            <h6 class="h6 tp-product-details-title" id="product_name">Samsung galaxy A8 tablet</h6>
                             <!-- inventory details -->
                             <div class="tp-product-details-inventory d-flex align-items-center mb-10">
                                 <div class="tp-product-details-stock mb-10" id="quantity_product">
@@ -254,31 +254,34 @@ get_header();
                             <div id="product_desc">
 
                             </div>
-                            <div id="string_variant_ram">
+                            <div id="string_variant_ram" class="form-group">
 
                             </div>
                             <!-- variations -->
                             <div id="string_variant_color">
 
                             </div>
-
-                            <h3 class="tp-product-details-action-title">Số lượng :</h3>
-                            <div id="status">
-
-                            </div>
                             <!-- price -->
                             <div class="tp-product-details-price-wrapper mb-20">
-                                <h3 id="product_price"></h3>
+                                <h3 id="product_price">
+                                    <?php echo currency_format(min_price($item['product_id'])) ?>-
+                                    <?php echo currency_format(max_price($item['product_id'])) ?>
+                                </h3>
                             </div>
                             <!-- actions -->
                             <div class="tp-product-details-action-wrapper">
 
                                 <div class="tp-product-details-action-item-wrapper d-flex align-items-center">
+                                    <div class="tp-product-details-quantity">
+                                        <div class="tp-product-quantity mb-15 mr-15" id="status">
+                                            <input class="tp-cart-input" type="number" id="num-order" value="1" min="1" max="10">
+                                        </div>
+                                    </div>
                                     <div class="tp-product-details-add-to-cart mb-15 w-100">
                                         <button type="submit" onclick="add_cart(event)" class="tp-product-details-add-to-cart-btn w-100">Thêm vào giỏ hàng</button>
                                     </div>
                                 </div>
-                                <button class="tp-product-details-buy-now-btn w-100">Buy Now</button>
+                                <button type="submit" onclick="by_now(this)" class="tp-product-details-buy-now-btn w-100">Mua ngay</button>
                             </div>
                         </div>
                     </div>

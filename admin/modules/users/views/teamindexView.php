@@ -12,7 +12,7 @@ get_sidebar();
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="?mod=home&action=index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="?mod=home&action=index">Home</a></li>
                         <li class="breadcrumb-item active">Hồ sơ</li>
                     </ol>
                 </div>
@@ -81,9 +81,13 @@ get_sidebar();
                                         <td><?php echo $item['email']; ?></td>
                                         <td><?php echo $item['phone_number']; ?></td>
                                         <td><?php echo $item['role_name']; ?></td>
-                                        <td>
-                                            <a href="?mod=users&controller=team&action=update&id=<?php echo $item['user_id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
-                                            <a onclick="return confirm('Bạn chắc muốn xóa sản không')" class="ml-4" href="?mod=users&controller=team&action=delete&id=<?php echo $item['user_id'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
+                                        <td class="justify-content-between">
+                                            <a class="btn btn-info btn-sm" href="?mod=users&controller=team&action=update&id=<?php echo $item['user_id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                                Sửa
+                                            </a>
+                                            <a onclick="return confirm('Bạn chắc muốn xóa quản trị viên này không?')" class="btn btn-danger btn-sm" href="?mod=users&controller=team&action=delete&id=<?php echo $item['user_id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                                Xóa
+                                            </a>
                                         </td>
                                     </tr>
                             <?php endforeach;
@@ -106,4 +110,3 @@ get_sidebar();
 <?php
 get_footer();
 ?>
-

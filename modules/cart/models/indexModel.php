@@ -119,3 +119,11 @@ function get_product_promotion_by_id($id) //Lấy giá khuyễn mãi theo id s�
     }
     return $sql['discount_rate'];
 }
+
+function get_buy_now($id_color) //Lấy sản phẩm mua ngay
+{
+    $sql = db_fetch_row("SELECT * FROM `tb_color_variants` INNER JOIN `tb_products` ON tb_color_variants.product_id = tb_products.product_id
+    INNER JOIN `tb_ram_variants` ON tb_ram_variants.id = tb_color_variants.ram_id
+    WHERE tb_color_variants.id = {$id_color}");
+    return $sql;
+}

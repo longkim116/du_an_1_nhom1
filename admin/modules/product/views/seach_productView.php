@@ -39,13 +39,14 @@ get_sidebar();
                             <th>STT</th>
                             <th>Mã sản phẩm</th>
                             <th>Hình ảnh</th>
-                            <th colspan="2">Tên sản phẩm</th>
+                            <th>Tên sản phẩm</th>
                             <th>Danh mục</th>
                             <th>Trạng thái</th>
                             <th>Số lượt bán</th>
                             <th>Bình luận</th>
                             <th>Người tạo</th>
                             <th>Thời gian</th>
+                            <th style="width: 15%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,16 +63,20 @@ get_sidebar();
                                         <img id="img-list-product" class="img-fluid img-thumbnail" src="img/<?php echo $item['product_thumb'] ?>" alt="">
                                     </td>
                                     <td><?php echo $item['product_name'] ?></td>
-                                    <td class="list-inline">
-                                        <a href="?mod=product&action=update_product&id=<?php echo $item['product_id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
-                                        <a onclick="return confirm('Bạn chắc muốn xóa sản phẩm không')" href="?mod=product&action=delete_product&id=<?php echo $item['product_id'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
-                                    </td>
                                     <td><?php echo $item['title'] ?></td>
                                     <td><?php echo $item['status'] ?></td>
                                     <td><?php echo $item['sales'] ?></td>
                                     <td><a href="?mod=product&action=list_comments&id=<?php echo $item['product_id'] ?>" class="text-decoration-none">Chi tiết</a></td>
                                     <td><?php echo $item['creator'] ?></td>
                                     <td><?php echo $item['created_date'] ?></td>
+                                    <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=product&action=update_product&id=<?php echo $item['product_id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                            Sửa
+                                        </a>
+                                        <a onclick="return confirm('Bạn chắc muốn xóa sản phẩm này không?')" class="btn btn-danger btn-sm" href="?mod=product&action=delete_product&id=<?php echo $item['product_id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                            Xóa
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php endforeach;
                         else : ?>

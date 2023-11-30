@@ -27,7 +27,7 @@ get_sidebar();
                             <th>Giá</th>
                             <th>Người tạo</th>
                             <th>Thời gian</th>
-                            <th style="width: 10%;">Thao tác</th>
+                            <th style="width: 15%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,9 +42,13 @@ get_sidebar();
                                     <td class="text-danger"><?php echo currency_format($item['price']) ?></td>
                                     <td><?php echo $item['creator'] ?></td>
                                     <td><?php echo $item['date_created'] ?></td>
-                                    <td>
-                                        <a href="?mod=transport&action=update_transport&id=<?php echo $item['id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
-                                        <a onclick="return confirm('Bạn chắc muốn xóa không')" href="?mod=transport&action=delete_transport&id=<?php echo $item['id'] ?>" title="Xóa"><img src="public/img/delete1.png" alt=""></a>
+                                    <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=transport&action=update_transport&id=<?php echo $item['id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                            Sửa
+                                        </a>
+                                        <a onclick="return confirm('Bạn chắc muốn xóa đơn vị vận chuyển này không?')" class="btn btn-danger btn-sm" href="?mod=transport&action=delete_transport&id=<?php echo $item['id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                            Xóa
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endforeach;

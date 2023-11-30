@@ -30,7 +30,7 @@ get_sidebar();
                             <th>Đơn hàng</th>
                             <th>Trạng thái</th>
                             <th>Thời gian lập tài khoản</th>
-                            <th>Thao tác</th>
+                            <th style="width: 15%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,12 +47,16 @@ get_sidebar();
                                     <td><?php echo $item['phone_number'] ?></td>
                                     <td><?php echo $item['email'] ?></span></td>
                                     <td><?php echo $item['address'] ?></span></td>
-                                    <td><?php echo quality_order($item['username']) ?></td>
+                                    <td><?php echo quality_order($item['id']) ?></td>
                                     <td><?php echo $is_active[$item['is_active']] ?></td>
                                     <td><?php echo $item['reg_date'] ?></span></td>
-                                    <td>
-                                        <a href="?mod=customer&action=update_customer&id=<?php echo $item['id'] ?>" title="Sửa"><img src="public/img/pen (1).png" alt=""></a>
-                                        <a onclick="return confirm('Bạn chắc muốn xóa khách hàng không')" href="?mod=customer&action=delete_customer&id=<?php echo $item['id'] ?>" title="Xóa" class="delete"><img src="public/img/delete1.png" alt=""></a>
+                                    <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=customer&action=update_customer&id=<?php echo $item['id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                            Sửa
+                                        </a>
+                                        <a onclick="return confirm('Bạn chắc muốn xóa khách hàng này không?')" class="btn btn-danger btn-sm" href="?mod=customer&action=delete_customer&id=<?php echo $item['id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                            Xóa
+                                        </a>
                                     </td>
                                 </tr>
                         <?php endforeach;

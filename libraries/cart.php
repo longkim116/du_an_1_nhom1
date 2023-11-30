@@ -23,7 +23,7 @@ function get_cart_by_id($id_color) //Lấy sản phẩm qua id
 function get_product_promotion($id) //Lấy giá khuyễn mãi theo id sản phẩm
 {
     $sql = db_fetch_row("SELECT * FROM `product_promotion` INNER JOIN `tb_promotions` ON product_promotion.promotion_id = tb_promotions.id 
-    INNER JOIN `tb_products` ON product_promotion.product_id = tb_products.product_id WHERE tb_products.product_id = {$id}");
+    INNER JOIN `tb_products` ON product_promotion.product_id = tb_products.product_id WHERE tb_products.product_id = {$id} AND tb_promotions.status = 'Đang diễn ra'");
     if (!$sql) {
         return false;
     }

@@ -111,3 +111,12 @@ function update_action($action, $item) //Cập nhật tác vụ
     ];
     db_update("tb_orders", $data, "`id` = '{$item}'");
 }
+
+function list_order_seach($search) //Danh sách tìm kiếm
+{
+    if (!empty($search)) {
+        $sql = db_fetch_array("SELECT * FROM `tb_orders` WHERE `order_code` LIKE '%{$search}%'");
+        return $sql;
+    }
+    return false;
+}

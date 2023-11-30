@@ -5,9 +5,9 @@ function list_customer($start, $num_rows) //Danh sách khách hàng
     return $sql;
 }
 
-function quality_order($username) //Số đơn hàng đã mua
+function quality_order($id) //Số đơn hàng đã mua
 {
-    $sql = count(db_fetch_array("SELECT * FROM `tb_orders` WHERE `username` = '{$username}'"));
+    $sql = count(db_fetch_array("SELECT * FROM `tb_orders` WHERE `customer_id` = '{$id}'"));
     return $sql;
 }
 

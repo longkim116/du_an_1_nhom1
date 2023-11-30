@@ -26,7 +26,7 @@ get_sidebar();
                         <textarea name="desc" id="desc" class="ckeditor" class="form-inline form-control"><?Php echo $page['page_content'] ?></textarea><br>
                         <?php echo form_error("desc") ?>
                     </div>
-                    <button type="submit" name="update-page" class="btn btn-primary">Thêm mới</button>
+                    <button type="submit" name="update-page" class="btn btn-primary">Cập nhật</button>
                     <?php echo form_error("account") ?>
                 </form>
             </div>

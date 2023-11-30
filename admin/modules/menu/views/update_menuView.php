@@ -38,7 +38,7 @@ get_sidebar();
                     </div>
                     <?php echo form_error("menu_order") ?>
 
-                    <button type="submit" name="sm_update" class="btn btn-primary">Thêm mới</button>
+                    <button type="submit" name="sm_update" class="btn btn-primary">Cập nhật</button>
                     <?php echo form_error("account") ?>
                 </form>
             </div>

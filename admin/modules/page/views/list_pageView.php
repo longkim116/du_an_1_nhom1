@@ -13,20 +13,20 @@ get_sidebar();
         <!-- /.card-header -->
         <div class="card-body p-0">
             <form action="" class="form-group" method="post">
-                <select name="action" id="action" class="form-control-sm form-check-inline">
+                <!-- <select name="action" id="action" class="form-control-sm form-check-inline">
                     <option value="">Tác vụ</option>
                     <option value="1">Xóa</option>
-                </select>
-                <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button>
+                </select> -->
+                <!-- <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button> -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" name="checkAll" id="checkAll"></th>
+                            <!-- <th><input type="checkbox" name="checkAll" id="checkAll"></th> -->
                             <th style="width: 10px">STT</th>
                             <th style="width: 40%px;">Tên trang</th>
                             <th>Người tạo</th>
                             <th>Thời gian</th>
-                            <th>Thao tác</th>
+                            <th style="width: 20%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,20 +35,20 @@ get_sidebar();
                             foreach ($list_page as $item) :
                         ?>
                                 <tr>
-                                    <td><input type="checkbox" name="checkitem[<?php echo $item['page_id'] ?>]" id="checkbox" value="<?php echo $item['page_id'] ?>" class="checkItem"></td>
+                                    <!-- <td><input type="checkbox" name="checkitem[<?php echo $item['page_id'] ?>]" id="checkbox" value="<?php echo $item['page_id'] ?>" class="checkItem"></td> -->
                                     <td><?php echo ++$count; ?></td>
                                     <td><?php echo $item['page_title'] ?></td>
 
                                     <td><?php echo $item['creator'] ?></td>
                                     <td><?php echo $item['created_date'] ?></td>
-                                    <td>
-                                        <a href="?mod=page&action=update_page&id=<?php echo $item['page_id'] ?>" class="text-decoration-none" title="Sửa">
-                                            <img src="public/img/pen (1).png" alt="">
+                                    <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=page&action=update_page&id=<?php echo $item['page_id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
+                                            Sửa
                                         </a>
-                                        <a onclick="return confirm('Bạn chắc muốn xóa sản phẩm không')" href="?mod=page&action=delete_page&id=<?php echo $item['page_id'] ?>" class="text-decoration-none" title="Xóa">
-                                            <img src="public/img/delete1.png" alt="">
+                                        <!-- <a onclick="return confirm('Bạn chắc muốn xóa bài viết này không?')" class="btn btn-danger btn-sm" href="?mod=page&action=delete_page&id=<?php echo $item['page_id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                            Xóa
                                         </a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                         <?php endforeach;
                         endif; ?>

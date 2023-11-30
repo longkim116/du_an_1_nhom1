@@ -74,18 +74,12 @@ get_header();
                                 <h3 class="tp-shop-widget-title no-border">Bộ lọc danh mục</h3>
                                 <div class="tp-shop-widget-content">
                                     <div class="tp-shop-widget-checkbox">
-                                        <div class="tp-checkout-payment-item">
-                                            <input type="radio" name="category" id="phone" value="1">
-                                            <label for="phone" data-bs-toggle="direct-bank-transfer">Điện thoại</label>
-                                        </div>
-                                        <div class="tp-checkout-payment-item">
-                                            <input type="radio" name="category" id="tablet" value="2">
-                                            <label for="tablet" data-bs-toggle="direct-bank-transfer">Máy tính bảng</label>
-                                        </div>
-                                        <div class="tp-checkout-payment-item">
-                                            <input type="radio" name="category" id="laptop" value="3">
-                                            <label for="laptop" data-bs-toggle="direct-bank-transfer">Laptop</label>
-                                        </div>
+                                        <?php foreach ($list_category as $item) :  ?>
+                                            <div class="tp-checkout-payment-item">
+                                                <input type="radio" name="category" id="<?php echo $item['title'] ?>" value="<?php echo $item['id'] ?>">
+                                                <label for="<?php echo $item['title'] ?>" data-bs-toggle="direct-bank-transfer"><?php echo $item['title'] ?></label>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +250,7 @@ get_header();
                                                 </div>
                                         <?php endforeach;
                                         else :
-                                            echo "<h2>Không timg thấy sản phẩm</h2>";
+                                            echo "<h2>Không tìm thấy sản phẩm</h2>";
                                         endif;
                                         ?>
                                     </div>
@@ -278,7 +272,7 @@ get_header();
                 <div class="tp-product-modal-content d-lg-flex align-items-start">
                     <button type="button" class="tp-product-modal-close-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal"><i class="fa-regular fa-xmark"></i></button>
                     <div class="tp-product-details-thumb-wrapper tp-tab d-sm-flex">
-                        <div class="tab-content m-img" id="productDetailsNavContent">
+                        <div class="tab-content m-img" id="productDetailsNavContent w-100">
                             <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
                                 <div class="tp-product-details-nav-main-thumb" id="product_img">
                                     <img src="assets/img/product/details/main/product-details-main-1.jpg" alt="">
@@ -286,7 +280,7 @@ get_header();
                             </div>
                         </div>
                         <div class="tp-product-details-wrapper">
-                            <h5 class="tp-product-details-title" id="product_name">Samsung galaxy A8 tablet</h5>
+                            <h6 class="h6 tp-product-details-title" id="product_name">Samsung galaxy A8 tablet</h6>
                             <!-- inventory details -->
                             <div class="tp-product-details-inventory d-flex align-items-center mb-10">
                                 <div class="tp-product-details-stock mb-10" id="quantity_product">
@@ -304,31 +298,34 @@ get_header();
                             <div id="product_desc">
 
                             </div>
-                            <div id="string_variant_ram">
+                            <div id="string_variant_ram" class="form-group">
 
                             </div>
                             <!-- variations -->
                             <div id="string_variant_color">
 
                             </div>
-
-                            <h3 class="tp-product-details-action-title">Số lượng :</h3>
-                            <div id="status">
-
-                            </div>
                             <!-- price -->
                             <div class="tp-product-details-price-wrapper mb-20">
-                                <h3 id="product_price"></h3>
+                                <h3 id="product_price">
+                                    <?php echo currency_format(min_price($item['product_id'])) ?>-
+                                    <?php echo currency_format(max_price($item['product_id'])) ?>
+                                </h3>
                             </div>
                             <!-- actions -->
                             <div class="tp-product-details-action-wrapper">
 
                                 <div class="tp-product-details-action-item-wrapper d-flex align-items-center">
+                                    <div class="tp-product-details-quantity">
+                                        <div class="tp-product-quantity mb-15 mr-15" id="status">
+                                            <input class="tp-cart-input" type="number" id="num-order" value="1" min="1" max="10">
+                                        </div>
+                                    </div>
                                     <div class="tp-product-details-add-to-cart mb-15 w-100">
                                         <button type="submit" onclick="add_cart(event)" class="tp-product-details-add-to-cart-btn w-100">Thêm vào giỏ hàng</button>
                                     </div>
                                 </div>
-                                <button class="tp-product-details-buy-now-btn w-100">Buy Now</button>
+                                <button type="submit" onclick="by_now(this)" class="tp-product-details-buy-now-btn w-100">Mua ngay</button>
                             </div>
                         </div>
                     </div>

@@ -72,3 +72,33 @@ function delete_orderAction()
     delete_order($id);
     redirect("?mod=sales&action=list_order");
 }
+
+
+function result_seachAction()
+{
+    $seach = (!empty($_POST['seach'])) ? $_POST['seach'] : null;
+    // //Tác vụ
+    // if (isset($_POST['btn_apply'])) {
+    //     if (!empty($_POST['action'])) {
+    //         $action = $_POST['action'];
+    //     } else {
+    //         $action = 0;
+    //     }
+    //     if (!empty($_POST['checkitem'])) {
+    //         $checkitem = $_POST['checkitem'];
+    //         foreach ($checkitem as $item) {
+    //             update_action($action, $item);
+    //         }
+    //     }
+    // }
+    $data['num_orders'] = num_orders(); //Tổng đơn hàng
+    $data['num_posts_pending'] = num_posts_pending(); //Chờ xác nhận
+    $data['num_prepare_orders'] = num_prepare_orders(); //Chuẩn bị đơn hàng
+    $data['num_orders_delivery'] = num_orders_delivery(); //Đang giao hàng
+    $data['num_orders_success'] = num_orders_success(); //Thành công
+    $data['num_orders_cancelled'] = num_orders_cancelled(); //Đã hủy
+    $data['list_order_seach'] = list_order_seach($seach); //Danh sách tìm kiếm
+    $data['total_order'] = total_order();
+    load_view("seach_order", $data);
+}
+

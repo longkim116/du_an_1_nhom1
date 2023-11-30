@@ -12,6 +12,7 @@ get_header();
                         <h3 class="breadcrumb__title">Thanh toán</h3>
                         <div class="breadcrumb__list">
                             <span><a href="trang-chu.html">Trang chủ</a></span>
+                            <span><a href="gio-hang.html">Giỏ hàng</a></span>
                             <span><a href="thanh-toan.html">Thanh toán</a></span>
                         </div>
                     </div>
@@ -89,8 +90,11 @@ get_header();
                                         <h4>Tổng</h4>
                                     </li>
                                     <?php
-                                    if (!empty(cart_buy())) :
-                                        foreach (cart_buy() as $item) : ?>
+                                    if (!empty($list_order_buy)) :
+                                        $count = 0;
+                                        foreach ($list_order_buy as $item) :
+                                            $count += $item['sub_total'];
+                                    ?>
                                             <li class="tp-order-info-list-desc">
                                                 <p><?php echo $item['product_name'] ?>. <span> x <?php echo $item['qty'] ?></span></p>
                                                 <span><?php echo currency_format($item['sub_total']) ?></span>
@@ -100,7 +104,7 @@ get_header();
                                     <!-- subtotal -->
                                     <li class="tp-order-info-list-subtotal">
                                         <span>Tổng tiền</span>
-                                        <span><?php if (!empty(cart_buy())) echo currency_format(cart_info()['total']) ?></span>
+                                        <span><?php echo currency_format($count); ?></span>
                                     </li>
 
                                     <!-- shipping -->
@@ -123,7 +127,7 @@ get_header();
                                     <!-- total -->
                                     <li class="tp-order-info-list-total">
                                         <span>Thanh toán</span>
-                                        <span id="total_pay"><?php echo currency_format($_SESSION['cart']['info']['total']) ?></span>
+                                        <span id="total_pay" total_pay="<?php echo $count ?>"><?php echo currency_format($count); ?></span>
                                     </li>
                                 </ul>
                             </div>
@@ -151,14 +155,6 @@ get_header();
                                 </div>
                                 <?php echo form_error("payment") ?>
                             </div>
-
-                            <!-- <div class="tp-checkout-agree">
-                            <div class="tp-checkout-option">
-                                <input id="read_all" type="checkbox">
-                                <label for="read_all">Tôi đã đọc và đồng ý với trang web.</label>
-                            </div>
-                        </div> -->
-
                             <div class="tp-checkout-btn-wrapper" id="order_buy1">
                             </div>
                         </div>

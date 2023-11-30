@@ -34,7 +34,7 @@ get_sidebar();
                         </div>
                     </div><br>
                     <?php echo form_error("discount_rate") ?>
-                    <label for="">Danh sách sản phẩm áp dụng</label>
+                    <label for="">Danh sách sản phẩm chưa áp dụng</label>
                     <div class="form-row">
                         <div class="card-body p-0">
                             <table class="table table-striped">
@@ -45,7 +45,8 @@ get_sidebar();
                                         <th>Mã sản phẩm</th>
                                         <th>Hình ảnh</th>
                                         <th>Tên sản phẩm</th>
-                                        <th>Gía cơ bản</th>
+                                        <th>Giá thấp nhất</th>
+                                        <th>Giá cao nhất</th>
                                         <th>Danh mục</th>
                                     </tr>
                                 </thead>
@@ -63,7 +64,8 @@ get_sidebar();
                                                     <img id="img-list-product" class="img-fluid img-thumbnail" src="img/<?php echo $item['product_thumb'] ?>" alt="">
                                                 </td>
                                                 <td><?php echo $item['product_name'] ?></td>
-                                                <td class="text-danger"><?php echo currency_format($item['price']); ?></td>
+                                                <td class="text-danger"><?php echo currency_format(min_price($item['product_id'])) ?></td>
+                                                <td class="text-danger"><?php echo currency_format(max_price($item['product_id'])) ?></td>
                                                 <td><?php echo $item['title'] ?></td>
                                             </tr>
                                         <?php endforeach;

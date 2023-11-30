@@ -75,6 +75,7 @@ function mainAction()
     $select = (!empty($_POST['select'])) ? $_POST['select'] : null;
     $data['list_products_by_star'] = list_products_by_sales();
     $data['list_products'] = list_products($select, $price, $category); //Danh sách sản phẩm
+    $data['list_category'] = get_list_category(); //Lấy danh sách danh mục
     load_view("main", $data);
 }
 
@@ -93,8 +94,8 @@ function productAction()
     $cat_id = (!empty($_GET['cat_id'])) ? $_GET['cat_id'] : null;
     $name_product = (!empty($_GET['name_product'])) ? $_GET['name_product'] : null;
     $data['list_product'] = list_product($cat_id, $name_product, $start, $num_rows, $select);
-    $data['num_rows'] = $num_rows;//Số bản ghi trong 1 trang
-    $data['start'] = $start;//Điểm bắt đàu lấy bản ghi
+    $data['num_rows'] = $num_rows; //Số bản ghi trong 1 trang
+    $data['start'] = $start; //Điểm bắt đàu lấy bản ghi
     $data['total_product'] = total_product($cat_id, $name_product);
     load_view("product", $data);
 }
@@ -127,17 +128,16 @@ function detailAction()
     ];
     load_view('detail', $data);
 }
-function add_cartAction()
-{
-    load_module("index");
-    $id = $_GET['id'];
-    $num_order =  !empty($_POST['num-order']) ? $_GET['num_order'] : 1;
-    add_cart($id, $num_order);
-}
+// function add_cartAction()
+// {
+//     load_module("index");
+//     $id = $_GET['id'];
+//     $num_order =  !empty($_POST['num-order']) ? $_GET['num_order'] : 1;
+//     add_cart($id, $num_order);
+// }
 
 function seach_productAction()
 {
-
     load_module("seach_product");
     $data['list_ads'] = list_ads("product");
     $select = (!empty($_POST['select'])) ? $_POST['select'] : null;
@@ -165,12 +165,12 @@ function quickView_ajaxAction() //Phần xem sản phẩm
     load_module("index");
     $id = $_POST['product_id'];
     //Lấy biến thể
-    $variant_ram = get_variant_ram($id);
+    $variant_ram = get_variant_ram($id); //Lấy biến thể ram
     $product = get_product_by_id($id); //Lấy chi tiết sản phẩm
     $star = product_star_by_id($id); //Lấy tb đánh giá sao
     $count_evaluate = total_comments($id); //Lấy tông số bình luận và đánh giá sp
-    $string_variant_ram = "<span class='ram'>Dung lượng: </span>" .
-        "<select name='ram' id='ram' onchange='selectVar()' product_id='" . $id . "'>";
+    $string_variant_ram = "<label for='ram' class='ram'>Dung lượng:</label>" .
+        "<select class='form-control' name='ram' id='ram' onchange='selectVar()' product_id='" . $id . "'>";
     foreach ($variant_ram as $item) {
         $string_variant_ram .= "<option  value='" . $item['id'] . "'>" . $item['ram_name'] . "</option>";
     }
@@ -182,6 +182,7 @@ function quickView_ajaxAction() //Phần xem sản phẩm
         'product_star' => str_repeat("<span><i class='fa-solid fa-star'></i></span>", round($star['star'])),
         'product_reviews' => "({$count_evaluate} bình luận và đánh giá)",
         'product_desc' => $product['product_desc'],
+        'product_price' => currency_format(min_price($id)) . "-" . currency_format(max_price($id)),
     ];
     echo json_encode($data);
 }
