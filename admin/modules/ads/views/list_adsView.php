@@ -39,7 +39,7 @@ get_sidebar();
                                 <tr>
                                     <td><input type="checkbox" name="checkitem[<?php echo $item['ads_id'] ?>]" id="checkbox" value="<?php echo $item['ads_id'] ?>" class="checkItem"></td>
                                     <td><?php echo ++$count; ?></td>
-                                    <td><img class="img-fluid img-thumbnail w-25" src="img/<?php echo $item['ads_img'] ?>" alt=""></td>
+                                    <td><img class="img-fluid img-thumbnail" src="img/<?php echo $item['ads_img'] ?>" alt=""></td>
                                     <td><?php echo $item['ads_name'] ?></td>
                                     <td><?php echo $item['link'] ?></td>
                                     <td><?php echo $item['creator'] ?></td>

@@ -169,7 +169,6 @@ get_header();
     <!-- blog grid area end -->
 
 </main>
-
 <?php
 get_footer();
 ?>

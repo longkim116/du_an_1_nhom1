@@ -103,10 +103,12 @@ function detail_order_ajaxAction() //Phần chi tiết đơn hàng
             "</li>";
         $total += $item['sub_total'];
     }
-    if ($order_detail['status'] == "Chờ xác nhận" || $order_detail['status'] == "Chuẩn bị đơn hàng") {
+    if ($order_detail['status'] == "Chờ xác nhận") {
         $cancel_order = " <button type='button' order_id='" . $order_id . "' onclick='cancel_order(this)' class='btn btn-danger w-100'>Hủy đơn hàng</button>";
+    } else if ($order_detail['status'] == "Chuẩn bị đơn hàng") {
+        $cancel_order = "";
     } else if ($order_detail['status'] == "Đang giao hàng") {
-        $cancel_order = " <button onclick='order_success(this)' order_id='" . $order_id . "' type='button' class='btn btn-primary w-100'>Đã nhận hàng</button>";
+        $cancel_order = "<button onclick='order_success(this)' order_id='" . $order_id . "' type='button' class='btn btn-primary w-100'>Đã nhận hàng</button>";
     } else if ($order_detail['status'] == "Thành công") {
         if (!empty($order_detail['star'])) {
             $cancel_order =  "<p>Đánh giá của bạn :   " . str_repeat("<img src='img/sao.png' alt=''>", $order_detail['star']) . "</p>" .
@@ -116,7 +118,8 @@ function detail_order_ajaxAction() //Phần chi tiết đơn hàng
                 "</div>" .
                 "</div>";
         } else {
-            $cancel_order = "<div class='tp-product-details-review-form-rating d-flex align-items-center'>" .
+            $cancel_order =  "<p>Ngày nhận hàng: <strong id='order_status'>" . $order_detail['received_date'] . "</strong></p>" .
+                "<div class='tp-product-details-review-form-rating d-flex align-items-center'>" .
                 "<p>Đánh giá của bạn :</p>" .
                 "<div class='tp-product-details-review-form-rating-icon d-flex align-items-center'>" .
                 "<div class='star-widget'>" .
@@ -147,10 +150,12 @@ function detail_order_ajaxAction() //Phần chi tiết đơn hàng
         'order_pay' => $order_detail['pay'],
         'order_status' => $order_detail['status'],
         'cancel_order' => $cancel_order,
+        'payment_methods' => $order_detail['payment_methods'],
         //Danh sách sản phẩm
         'list_order_detail' => $string, //Danh sách sản phẩm
         'total_price' => currency_format($order_detail['total_price']), //Tổng tiền thanh toán
         'shipping_cost' => currency_format($order_detail['shipping_cost']), //Tiền vận chuyển
+        'discount' => currency_format($order_detail['discount']),
         'total' => currency_format($total), //Tiền vận chuyển
     ];
     echo json_encode($data);

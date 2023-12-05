@@ -81,3 +81,9 @@ function mun_product($id) //Lấy tổng sản phẩm theo danh mục
     $sql = db_fetch_row("SELECT COUNT(`product_id`) AS `count` FROM `tb_products` WHERE `cat_id` = {$id}");
     return $sql['count'];
 }
+
+function list_posts() //Danh sách tin tức
+{
+    $sql = db_fetch_array("SELECT * FROM `tb_posts` ");
+    return $sql;
+}

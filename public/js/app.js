@@ -280,9 +280,11 @@ function detail_order(_this) {//Hiển thi chi tiết đơn hàng
             $("#order_pay").html(data.order_pay);
             $("#order_status").html(data.order_status);
             $("#cancel_order").html(data.cancel_order);
+            $("#payment_methods").html(data.payment_methods);
             //Danh sách sản phẩm
             $("#list_order_detail").html(data.list_order_detail);
             $("#total_price").html(data.total_price);
+            $("#discount").html(data.discount);
             $("#shipping_cost").html(data.shipping_cost);
             $("#total").html(data.total);
         }
@@ -371,3 +373,16 @@ function change_customer_image(event) { //Thay đổi hình đại diện
         }
     })
 }
+
+var input = document.getElementById('num-order');
+input.addEventListener('input', function () {
+    var value = parseInt(input.value);
+    var min = parseInt(input.min);
+    var max = parseInt(input.max);
+
+    if (isNaN(value) || value < min) {
+        input.value = min;
+    } else if (value > max) {
+        input.value = max;
+    }
+});

@@ -22,6 +22,12 @@ get_sidebar();
                     </div>
                     <?php echo form_error("slider_order") ?>
 
+                    <div class="form-group">
+                        <label for="slider_content">Mô tả</label>
+                        <textarea name="slider_content" id="slider_content" class="ckeditor" class="form-inline form-control"><?Php echo set_value("slider_content") ?></textarea><br>
+                    </div>
+                    <?php echo form_error("slider_content") ?>
+
                     <label for="file">Hình ảnh</label>
                     <div id="uploadFile">
                         <div class="d-flex">

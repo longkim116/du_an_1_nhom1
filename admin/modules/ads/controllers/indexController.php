@@ -34,7 +34,7 @@ function list_adsAction()
 
 function add_adsAction()
 {
-    global $error, $link, $file, $name;
+    global $error, $link, $file, $name, $ads_content;
     if (isset($_POST['add-ads'])) {
         $error = [];
         //Kiểm tra name
@@ -48,6 +48,12 @@ function add_adsAction()
             $error['link'] = "Không được để trống";
         } else {
             $link = $_POST['link'];
+        }
+        //Kiểm tra ads_content
+        if (empty($_POST['ads_content'])) {
+            $error['ads_content'] = "Không được để trống";
+        } else {
+            $ads_content = $_POST['ads_content'];
         }
         //Kiểm tra file
         if (empty($_FILES['file']['name'])) {
@@ -66,7 +72,8 @@ function add_adsAction()
                 'ads_name' => $name,
                 'ads_img' => $file,
                 'creator' => $_SESSION['admin_login'],
-                'link' => $link
+                'link' => $link,
+                'ads_content' => $ads_content
             ];
             add_ads($data);
             $error['account'] = "Thêm thành công";
@@ -77,7 +84,7 @@ function add_adsAction()
 
 function update_adsAction()
 {
-    global $error, $name, $file, $slug;
+    global $error, $name, $file, $slug, $ads_content;
     $id = $_GET['id'];
     $data['ads'] = get_ads_by_id($id);
     if (isset($_POST['update-ads'])) {
@@ -93,6 +100,12 @@ function update_adsAction()
             $error['slug'] = "Không được để trống";
         } else {
             $slug = $_POST['slug'];
+        }
+        //Kiểm tra ads_content
+        if (empty($_POST['ads_content'])) {
+            $error['ads_content'] = "Không được để trống";
+        } else {
+            $ads_content = $_POST['ads_content'];
         }
         //Kiểm tra file
         if (empty($_FILES['file']['name'])) {
@@ -111,7 +124,8 @@ function update_adsAction()
                 'ads_name' => $name,
                 'ads_img' => $file,
                 'creator' => $_SESSION['admin_login'],
-                'link' => $slug
+                'link' => $slug,
+                'ads_content' => $ads_content,
             ];
             update_ads($data_media, $id);
             $error['account'] = "Sửa thành công";

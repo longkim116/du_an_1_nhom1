@@ -141,8 +141,27 @@ function delete_customerAction()
     redirect("?mod=customer&action=list_customer");
 }
 
+function list_order_ajaxAction() //Lấy danh sách đơn hàng theo trạng thái đơn hàng
+{
+    $status = $_POST['status'];
+    $customer_id = $_POST['customer_id'];
+    $list_order = get_list_order($status, $customer_id); //Lấy danh sách
+    $string = "";
+    foreach ($list_order as $item) {
+        $string .= "<tr>" .
+            "<th scope='row'>" . $item['order_code'] . "</th>" .
+            "<td data-info='title'>" . $item['time'] . "</td>" .
+            "<td data-info='status done'>" . $item['status'] . "</td>" .
+            "<td><button type='button' order_id='" . $item['id'] . "'  class='btn btn-primary' onclick='detail_order(this)' data-bs-toggle='modal' data-bs-target='#producQuickViewModal'>Xem chi tiết</button></td>" .
+            "</tr>";
+    }
+    echo $string;
+}
 
 function detail_customerAction()
 {
-    load_view("detail_customer");
+    $id = $_GET['id'];
+    $data['users'] = get_user_by_id($id);
+    $data['list_order'] = list_order_by_id($id); //Lấy danh sách đơn hàng theo id
+    load_view("detail_customer", $data);
 }

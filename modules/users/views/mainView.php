@@ -306,7 +306,7 @@ get_header();
                                             </div>
                                             <div class="col-sm-12">
                                                 <div>
-                                                    <p>Trạng thái: <strong id="order_pay">Đã thanh toán</strong></p>
+                                                    <p>Phương thức thanh toán: <strong id="payment_methods">Đã thanh toán</strong></p>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -344,11 +344,19 @@ get_header();
                                                 <span>Vận chuyển</span>
                                                 <span id="shipping_cost">$507.00</span>
                                             </li>
+                                            <li class="tp-order-info-list-subtotal">
+                                                <span>Giảm giá</span>
+                                                <span class="text-danger" id="discount">$507.00</span>
+                                            </li>
                                             <li class="tp-order-info-list-total">
                                                 <span>Thanh toán</span>
                                                 <span id="total_price">$1,476.00</span>
                                             </li>
-
+                                            <li class="tp-order-info-list-total">
+                                                <div>
+                                                    <p>Trạng thái: <strong id="order_pay">Đã thanh toán</strong></p>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

@@ -68,3 +68,26 @@ function delete_customer($id) //Xóa khách hàng
 {
     db_delete("tb_customers", "`id` = {$id}");
 }
+
+function list_order_by_id($id) //Lấy danh sách đơn hàng theo id
+{
+    $sql = db_fetch_array("SELECT * FROM `tb_orders` WHERE `customer_id` = {$id}");
+    return $sql;
+}
+
+function get_list_order($status, $customer_id) //Lấy danh sách đơn hàng theo trạng thái
+{
+    if ($status == "Tất cả đơn hàng") {
+        $where = "";
+    } else {
+        $where = "AND `status` = '{$status}'";
+    }
+    $sql = db_fetch_array("SELECT * FROM `tb_orders` WHERE `customer_id` = {$customer_id} {$where}");
+    return $sql;
+}
+
+function get_user_by_id($id) //Lấy thông tin user
+{
+    $sql = db_fetch_row("SELECT * FROM `tb_customers` WHERE `id` = '$id'");
+    return $sql;
+}

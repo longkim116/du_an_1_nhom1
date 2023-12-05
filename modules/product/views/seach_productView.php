@@ -165,7 +165,7 @@ get_header();
                     <div class="tp-product-details-thumb-wrapper tp-tab d-sm-flex">
                         <div class="tab-content m-img" id="productDetailsNavContent w-100">
                             <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
-                                <div class="tp-product-details-nav-main-thumb" id="product_img">
+                                <div class="tp-product-details-nav-main-thumb" style="width: 600px; height: 600px;" id="product_img">
                                     <img src="assets/img/product/details/main/product-details-main-1.jpg" alt="">
                                 </div>
                             </div>

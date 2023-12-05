@@ -67,7 +67,6 @@ function add_cartAction()
             "<span class='cartmini__quantity'>x" . $item['qty'] . "</span>" .
             "</div>" .
             "</div>" .
-            "<a href='#' class='cartmini__del'><i class='fa-regular fa-xmark'></i></a>" .
             "</div>";
     }
     $data = [
@@ -99,53 +98,92 @@ function deleteAction()
 //     delete_cart_all();
 //     redirect("gio-hang.html");
 // }
+
+function apply_voucher_ajaxAction() //Áp dụng voucher
+{
+    $voucher_code = $_POST['voucher'];
+    $idShip = $_POST['shipping'];
+    if (exists_voucher($voucher_code)) { //Kiểm tra xem có tồn tại hay không
+        $voucher = get_voucher($voucher_code); //lẤY VOUCHER
+        $transport = get_transport_by_id($idShip);
+        if ($transport) {
+            $transport_price = $transport['price'];
+        } else {
+            $transport_price = 0;
+        }
+        $total = currency_format($_SESSION['cart']['info']['total'] + $transport_price - $voucher['discount_amount']);
+        $data = [
+            'status' => 'success',
+            'total' => $total,
+            'discount' => currency_format($voucher['discount_amount'])
+        ];
+        echo json_encode($data);
+    } else { //Nếu không tồn tại
+        $data = [
+            'status' => 'error',
+        ];
+        echo json_encode($data);
+    }
+}
 function chang_priceAction()
 {
     $idShip = $_POST['idShip'];
-    $total_pay = $_POST['total_pay'];
+    $voucher_code = $_POST['voucher'];
+    $voucher = get_voucher($voucher_code); //lẤY VOUCHER
     $transport = get_transport_by_id($idShip);
-    $total = currency_format($total_pay + $transport['price']);
+    if ($transport) {
+        $transport_price = $transport['price'];
+    } else {
+        $transport_price = 0;
+    }
+    if ($voucher) {
+        $discount_amount = $voucher['discount_amount'];
+    } else {
+        $discount_amount = 0;
+    }
+    $total = currency_format($_SESSION['cart']['info']['total'] + $transport_price - $discount_amount);
     echo $total;
 }
+function buy_nowAction()
+{
+    $color_id = $_GET['color_id']; //Id màu
+    $qty = $_GET['quantity']; //Số lượng
+    $item = $item = get_cart_by_id($color_id);
+    $promotion = get_product_promotion($item['product_id']);
+    if (!$promotion) {
+        $promotion = 0;
+    }
+    $_SESSION['buy_now'][$color_id] = [
+        'product_id' => $item['product_id'],
+        'ram_id' => $item['ram_id'],
+        'color_id' => $color_id,
+        'product_code' => $item['product_code'],
+        'product_name' => $item['product_name'] . " " . $item['ram_name'] . " " . $item['color_name'],
+        'price' => $item['color_price'] - ($item['color_price'] * ($promotion / 100)),
+        'product_thumb' => $item['image'],
+        'qty' => $qty,
+        'sub_total' => ($item['color_price'] - ($item['color_price'] * ($promotion / 100))) * $qty,
+    ];
+    redirect("thanh-toan.html");
+}
+
 function checkoutAction()
 {
     if (!isset($_SESSION['is_login'])) {
         redirect("dang-nhap.html");
     }
-    //Phần mua ngay
-    if (isset($_GET['buy_now']) && isset($_GET['quantity'])) {
-        $color = get_buy_now($_GET['buy_now']); //Lấy sản phẩm mua ngay
-        $promotion = get_product_promotion($color['product_id']);
-        if (!$promotion) {
-            $promotion = 0;
-        }
-        $list_order[] = [
-            'product_id' => $color['product_id'],
-            'ram_id' => $color['ram_id'],
-            'color_id' => $_GET['buy_now'],
-            'product_code' => $color['product_code'],
-            'product_name' => $color['product_name'] . " " . $color['ram_name'] . " " . $color['color_name'],
-            'price' => $color['color_price'] - ($color['color_price'] * ($promotion / 100)),
-            'product_thumb' => $color['product_thumb'],
-            'qty' => $_GET['quantity'],
-            'sub_total' => ($color['color_price'] - ($color['color_price'] * ($promotion / 100))) * $_GET['quantity'],
-        ];
-        $data['list_order_buy'] = $list_order; //Danh sách đơn hàng
-        $quantity = $_GET['quantity']; //Số lượng sản phẩm trong đơn hàng
-        $cart_total = ($color['color_price'] - ($color['color_price'] * ($promotion / 100))) * $_GET['quantity']; //Số tiền của đơn hàng;
-        $data['cart_total'] = $cart_total;
-    } else {
-        $data['list_order_buy'] = $_SESSION['cart']['buy']; //Danh sách đơn hàng
-        $quantity = $_SESSION['cart']['info']['count']; //Số lượng sản phẩm trong đơn hàng
-        $cart_total = $_SESSION['cart']['info']['total']; //Số tiền của đơn hàng;
-    }
-
-
-    //
-    global $error, $fullname, $email, $address, $phone, $note;
+    global $error, $fullname, $email, $address, $phone, $note, $transport_price;
     $data['customer_info'] = get_customer_innfo();
     $data['list_transport'] = get_list_transport(); //Lấy danh sách các nhà vận chuyển
-    if (isset($_POST['order_buy'])) {
+    if (isset($_SESSION['buy_now'])) {
+        $list_order = $_SESSION['buy_now'];
+    } else {
+        $list_order = $_SESSION['cart']['buy'];
+        $cart_total = $_SESSION['cart']['info']['total'];
+    }
+
+    $data['list_order'] = $list_order;
+    if (isset($_POST['order_buy'])) { //Thanh toán khi nhận hàng
         $error = [];
         //Kiểm tra fullname
         if (empty($_POST['fullname'])) {
@@ -192,22 +230,42 @@ function checkoutAction()
             $transport_price = get_transport_by_id($_POST['shipping']);
         }
         //Kiểm tra payment
+        if (empty($_POST['voucher'])) {
+        } else {
+            if (exists_voucher($_POST['voucher'])) { //Kiểm tra xem có tồn tại hay không
+            }
+        }
+        //Kiểm tra payment
         if (empty($_POST['payment'])) {
             $error['payment'] = "Vui lòng chọn hình thức thanh toán";
         } else {
             $payment = $_POST['payment'];
         }
+        //Kiểm tra voucher
+        if (isset($_POST['voucher'])) {
+            if (empty($_POST['voucher'])) {
+            } else {
+                $voucher_code = $_POST['voucher'];
+            }
+        }
+
         //Kết luận
         if (empty($error)) {
-            $cart = $data['list_order_buy']; //Danh sách đơn hàng
-            $total_price = $cart_total + $transport_price['price']; //Tổng tất cả thanh toán
+            if (isset($voucher_code)) {
+                update_voucher($voucher_code); //Cập nhật lại số lượng
+                $voucher_item =  get_voucher($voucher_code); //lẤY VOUCHER
+                $voucher = $voucher_item['discount_amount'];
+            } else {
+                $voucher = 0;
+            }
+            $total_price = $cart_total + $transport_price['price'] - $voucher; //Tổng tất cả thanh toán
             //Thêm vào db số lượng sản phẩm đá bán
             $reuslt = [];
-            foreach ($cart as $item) {
-                $reuslt[$item['product_id']]['product_id'] = $item['product_id'];
-                $reuslt[$item['product_id']]['sales'] = $item['qty'];
+            foreach ($list_order as $item) {
+                $reuslt[$item['color_id']]['product_id'] = $item['product_id']; //Lấy ra id sản phẩm
+                $reuslt[$item['color_id']]['sales'] = $item['qty']; //Lấy ra số lượng
             }
-            update_sales_product($reuslt);
+            update_sales_product($reuslt); //Cập nhật số lượng sản phẩm bán ra
             ///
             //Phần đặt hàng
             $order_code = "VHL#" . substr(md5(date("h:i:s")), 23);
@@ -216,19 +274,22 @@ function checkoutAction()
                 'customer_id' => $customer_id,
                 'order_code' => $order_code,
                 'fullname' => $fullname,
-                'quantity' => $quantity,
+                'quantity' => $cart_total, //Tổng tiền
                 'total_price' => $total_price,
                 'note' => $note,
                 'address' => $address,
                 'phone' => $phone,
-                'order_buy' => json_encode($cart),
+                'order_buy' => json_encode($list_order), //Danh sách chi tiết
                 'shipping_cost' => $transport_price['price'],
-                'pay' => "Chưa thanh toán"
+                'pay' => "Chưa thanh toán",
+                'discount' => $voucher,
+                'payment_methods' => "Thanh toán COD"
             ];
             //Thêm vào dánh sách khách hàng đã mua
-            add_order_buy($data_order);
+            $order_id = add_order_buy($data_order);
+            //Phần gửi hóa đơn
             $mid_content = "";
-            foreach ($cart as $item) {
+            foreach ($list_order as $item) {
                 $mid_content .= "<tr>
                  <td>" . $item['product_name'] . "</td>
                 <td>" . "X " . $item['qty'] . "</td>
@@ -238,9 +299,11 @@ function checkoutAction()
             $content = "<h1 style='color: red;'>Xin chào {$fullname}</h1>
             <p><strong>Bạn đã đặt hàng thành công!</strong></p>
             <p><strong>Mã đơn hàng:</strong> {$order_code}</p>
+            <p><strong>Trạng thái:</strong> Chưa thanh toán</p>
             <p><strong>Địa chỉ:</strong> {$address}</p>
             <p><strong>Số điện thoại:</strong> {$phone}</p>
             <p><strong>Ghi chú:</strong> {$note}</p>
+            <p><strong>Phí vận chuyển:</strong> {$transport_price['price']}</p>
             <table style='border: 1px solid greenyellow;'>
                 <thead>
                     <tr>
@@ -252,16 +315,16 @@ function checkoutAction()
                 <tbody>              
                         {$mid_content}
                     <tr>
-                        <td colspan='3'><strong>Tổng tiền: </strong>" . currency_format($_SESSION['cart']['info']['total']) . "</td>
+                        <td colspan='3'><strong>Tổng tiền: </strong>" . currency_format($cart_total) . "</td>
                     </tr>
                 </tbody>
             </table>
-            <p><strong>Đơn hàng sẽ được giao trong vòng 3-5 ngày tới. Bạn vui lòng dữ liên lạc!</strong></p>
-            <p><strong>autosmart cảm ơn bạn đã mua hàng!</strong></p>";
+            <p><strong>Đơn hàng sẽ được giao sớm nhất đến bạn. Bạn vui lòng dữ liên lạc!</strong></p>
+            <p><strong>AUTOSMART cảm ơn bạn đã mua hàng!</strong></p>";
             send_email($email, $fullname, "Thông báo đã đặt hàng thành công", $content);
-            redirect("xac-nhan-don-hang-thanh-cong.html");
+            redirect("?mod=cart&action=success&order_id=$order_id");
         }
-    } else if (isset($_POST['payUrl'])) { //Thanh toán qua Momo
+    } else if (isset($_POST['payUrl'])) { //Thanh toán qua momo
         $error = [];
         //Kiểm tra fullname
         if (empty($_POST['fullname'])) {
@@ -308,75 +371,43 @@ function checkoutAction()
             $transport_price = get_transport_by_id($_POST['shipping']);
         }
         //Kiểm tra payment
+        if (empty($_POST['voucher'])) {
+        } else {
+            if (exists_voucher($_POST['voucher'])) { //Kiểm tra xem có tồn tại hay không
+            }
+        }
+        //Kiểm tra payment
         if (empty($_POST['payment'])) {
             $error['payment'] = "Vui lòng chọn hình thức thanh toán";
         } else {
             $payment = $_POST['payment'];
         }
+        //Kiểm tra voucher
+        if (isset($_POST['voucher'])) {
+            if (empty($_POST['voucher'])) {
+            } else {
+                $voucher_code = $_POST['voucher'];
+            }
+        }
+
         //Kết luận
         if (empty($error)) {
-            $total_price = $_SESSION['cart']['info']['total'] + $transport_price['price'];
-            ///Thanh toán momo
-            $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-            $partnerCode = 'MOMOBKUN20180529';
-            $accessKey = 'klm05TvNBzhg7h7j';
-            $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-
-            $orderInfo = "Thanh toán qua MoMo";
-            $amount = $total_price;
-            $orderId = time() . "";
-            $redirectUrl = "xac-nhan-don-hang-thanh-cong.html";
-            $ipnUrl = "xac-nhan-don-hang-thanh-cong.html";
-            $extraData = "";
-
-
-            $partnerCode = $partnerCode;
-            $accessKey = $accessKey;
-            $serectkey = $secretKey;
-            $orderId = $orderId; // Mã đơn hàng
-            $orderInfo = $orderInfo;
-            $amount = $amount;
-            $ipnUrl = $ipnUrl;
-            $redirectUrl = $redirectUrl;
-            $extraData = $extraData;
-
-            $requestId = time() . "";
-            $requestType = "payWithATM";
-            $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-            //before sign HMAC SHA256 signature
-            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-            $signature = hash_hmac("sha256", $rawHash, $serectkey);
-            $data = array(
-                'partnerCode' => $partnerCode,
-                'partnerName' => "Test",
-                "storeId" => "MomoTestStore",
-                'requestId' => $requestId,
-                'amount' => $amount,
-                'orderId' => $orderId,
-                'orderInfo' => $orderInfo,
-                'redirectUrl' => $redirectUrl,
-                'ipnUrl' => $ipnUrl,
-                'lang' => 'vi',
-                'extraData' => $extraData,
-                'requestType' => $requestType,
-                'signature' => $signature
-            );
-            $result = execPostRequest($endpoint, json_encode($data));
-            $jsonResult = json_decode($result, true);  // decode json
-
-            //Just a example, please check more in there
-
-            header('Location: ' . $jsonResult['payUrl']);
-            ///Sau khi thanh toán xong
-            $cart = $data['list_order_buy']; //Danh sách đơn hàng
-            $total_price = $cart_total + $transport_price['price']; //Tổng tất cả thanh toán
+            if (isset($voucher_code)) {
+                update_voucher($voucher_code); //Cập nhật lại số lượng
+                $voucher_item =  get_voucher($voucher_code); //lẤY VOUCHER
+                $voucher = $voucher_item['discount_amount'];
+            } else {
+                $voucher = 0;
+            }
+            $list_order = $_SESSION['cart']['buy']; //Danh sách đơn hàng
+            $total_price = $_SESSION['cart']['info']['total'] + $transport_price['price'] - $voucher; //Tổng tất cả thanh toán
             //Thêm vào db số lượng sản phẩm đá bán
             $reuslt = [];
-            foreach ($cart as $item) {
-                $reuslt[$item['product_id']]['product_id'] = $item['product_id'];
-                $reuslt[$item['product_id']]['sales'] = $item['qty'];
+            foreach ($list_order as $item) {
+                $reuslt[$item['color_id']]['product_id'] = $item['product_id']; //Lấy ra id sản phẩm
+                $reuslt[$item['color_id']]['sales'] = $item['qty']; //Lấy ra số lượng
             }
-            update_sales_product($reuslt);
+            update_sales_product($reuslt); //Cập nhật số lượng sản phẩm bán ra
             ///
             //Phần đặt hàng
             $order_code = "VHL#" . substr(md5(date("h:i:s")), 23);
@@ -385,19 +416,22 @@ function checkoutAction()
                 'customer_id' => $customer_id,
                 'order_code' => $order_code,
                 'fullname' => $fullname,
-                'quantity' => $quantity,
+                'quantity' => $_SESSION['cart']['info']['count'],
                 'total_price' => $total_price,
                 'note' => $note,
                 'address' => $address,
                 'phone' => $phone,
-                'order_buy' => json_encode($cart),
+                'order_buy' => json_encode($list_order),
                 'shipping_cost' => $transport_price['price'],
-                'pay' => "Đã thanh toán"
+                'pay' => "Đã thanh toán",
+                'discount' => $voucher,
+                'payment_methods' => "Thanh toán qua thẻ"
             ];
             //Thêm vào dánh sách khách hàng đã mua
-            add_order_buy($data_order);
+            $order_id = add_order_buy($data_order);
+            //Phần gửi hóa đơn
             $mid_content = "";
-            foreach ($cart as $item) {
+            foreach ($list_order as $item) {
                 $mid_content .= "<tr>
                  <td>" . $item['product_name'] . "</td>
                 <td>" . "X " . $item['qty'] . "</td>
@@ -407,9 +441,11 @@ function checkoutAction()
             $content = "<h1 style='color: red;'>Xin chào {$fullname}</h1>
             <p><strong>Bạn đã đặt hàng thành công!</strong></p>
             <p><strong>Mã đơn hàng:</strong> {$order_code}</p>
+            <p><strong>Trạng thái:</strong> Chưa thanh toán</p>
             <p><strong>Địa chỉ:</strong> {$address}</p>
             <p><strong>Số điện thoại:</strong> {$phone}</p>
             <p><strong>Ghi chú:</strong> {$note}</p>
+            <p><strong>Phí vận chuyển:</strong> {$transport_price['price']}</p>
             <table style='border: 1px solid greenyellow;'>
                 <thead>
                     <tr>
@@ -425,12 +461,12 @@ function checkoutAction()
                     </tr>
                 </tbody>
             </table>
-            <p><strong>Đơn hàng sẽ được giao trong vòng 3-5 ngày tới. Bạn vui lòng dữ liên lạc!</strong></p>
-            <p><strong>autosmart cảm ơn bạn đã mua hàng!</strong></p>";
+            <p><strong>Đơn hàng sẽ được giao sớm nhất đến bạn. Bạn vui lòng dữ liên lạc!</strong></p>
+            <p><strong>AUTOSMART cảm ơn bạn đã mua hàng!</strong></p>";
+            checkout_momo($order_id, $total_price); //Thanh toán momo
             send_email($email, $fullname, "Thông báo đã đặt hàng thành công", $content);
-            redirect("xac-nhan-don-hang-thanh-cong.html");
         }
-    } else if (isset($_POST['redirect'])) { //Thanh toán qua Vnpay
+    } else if (isset($_POST['sda'])) { //Thanh toán VnPay
         $error = [];
         //Kiểm tra fullname
         if (empty($_POST['fullname'])) {
@@ -477,124 +513,43 @@ function checkoutAction()
             $transport_price = get_transport_by_id($_POST['shipping']);
         }
         //Kiểm tra payment
+        if (empty($_POST['voucher'])) {
+        } else {
+            if (exists_voucher($_POST['voucher'])) { //Kiểm tra xem có tồn tại hay không
+            }
+        }
+        //Kiểm tra payment
         if (empty($_POST['payment'])) {
             $error['payment'] = "Vui lòng chọn hình thức thanh toán";
         } else {
             $payment = $_POST['payment'];
         }
+        //Kiểm tra voucher
+        if (isset($_POST['voucher'])) {
+            if (empty($_POST['voucher'])) {
+            } else {
+                $voucher_code = $_POST['voucher'];
+            }
+        }
+
         //Kết luận
         if (empty($error)) {
-            $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
-            $vnp_TmnCode = "IRCYPLAD"; //Mã website tại VNPAY 
-            $vnp_HashSecret = "VNMLLBIHPEJBGHMHJVGZSJCFXHKKHACC"; //Chuỗi bí mật
-
-            $vnp_TxnRef = rand(00, 999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-            $vnp_OrderInfo = 'Thanh toan VnPay';
-            $vnp_OrderType = 'billpayment';
-            $vnp_Amount = 10000 * 100;
-            $vnp_Locale = 'vn';
-            $vnp_BankCode = 'NCB';
-            $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-            //Add Params of 2.0.1 Version
-            // $vnp_ExpireDate = $_POST['txtexpire'];
-            //Billing
-            // $vnp_Bill_Mobile = $_POST['txt_billing_mobile'];
-            // $vnp_Bill_Email = $_POST['txt_billing_email'];
-            // $fullName = trim($_POST['txt_billing_fullname']);
-            // if (isset($fullName) && trim($fullName) != '') {
-            //     $name = explode(' ', $fullName);
-            //     $vnp_Bill_FirstName = array_shift($name);
-            //     $vnp_Bill_LastName = array_pop($name);
-            // }
-            // $vnp_Bill_Address = $_POST['txt_inv_addr1'];
-            // $vnp_Bill_City = $_POST['txt_bill_city'];
-            // $vnp_Bill_Country = $_POST['txt_bill_country'];
-            // $vnp_Bill_State = $_POST['txt_bill_state'];
-            // // Invoice
-            // $vnp_Inv_Phone = $_POST['txt_inv_mobile'];
-            // $vnp_Inv_Email = $_POST['txt_inv_email'];
-            // $vnp_Inv_Customer = $_POST['txt_inv_customer'];
-            // $vnp_Inv_Address = $_POST['txt_inv_addr1'];
-            // $vnp_Inv_Company = $_POST['txt_inv_company'];
-            // $vnp_Inv_Taxcode = $_POST['txt_inv_taxcode'];
-            // $vnp_Inv_Type = $_POST['cbo_inv_type'];
-            $inputData = array(
-                "vnp_Version" => "2.1.0",
-                "vnp_TmnCode" => $vnp_TmnCode,
-                "vnp_Amount" => $vnp_Amount,
-                "vnp_Command" => "pay",
-                "vnp_CreateDate" => date('YmdHis'),
-                "vnp_CurrCode" => "VND",
-                "vnp_IpAddr" => $vnp_IpAddr,
-                "vnp_Locale" => $vnp_Locale,
-                "vnp_OrderInfo" => $vnp_OrderInfo,
-                "vnp_OrderType" => $vnp_OrderType,
-                "vnp_ReturnUrl" => $vnp_Returnurl,
-                "vnp_TxnRef" => $vnp_TxnRef,
-                // "vnp_ExpireDate" => $vnp_ExpireDate,
-                // "vnp_Bill_Mobile" => $vnp_Bill_Mobile,
-                // "vnp_Bill_Email" => $vnp_Bill_Email,
-                // "vnp_Bill_FirstName" => $vnp_Bill_FirstName,
-                // "vnp_Bill_LastName" => $vnp_Bill_LastName,
-                // "vnp_Bill_Address" => $vnp_Bill_Address,
-                // "vnp_Bill_City" => $vnp_Bill_City,
-                // "vnp_Bill_Country" => $vnp_Bill_Country,
-                // "vnp_Inv_Phone" => $vnp_Inv_Phone,
-                // "vnp_Inv_Email" => $vnp_Inv_Email,
-                // "vnp_Inv_Customer" => $vnp_Inv_Customer,
-                // "vnp_Inv_Address" => $vnp_Inv_Address,
-                // "vnp_Inv_Company" => $vnp_Inv_Company,
-                // "vnp_Inv_Taxcode" => $vnp_Inv_Taxcode,
-                // "vnp_Inv_Type" => $vnp_Inv_Type
-            );
-
-            if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-                $inputData['vnp_BankCode'] = $vnp_BankCode;
-            }
-            // if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
-            //     $inputData['vnp_Bill_State'] = $vnp_Bill_State;
-            // }
-
-            //var_dump($inputData);
-            ksort($inputData);
-            $query = "";
-            $i = 0;
-            $hashdata = "";
-            foreach ($inputData as $key => $value) {
-                if ($i == 1) {
-                    $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
-                } else {
-                    $hashdata .= urlencode($key) . "=" . urlencode($value);
-                    $i = 1;
-                }
-                $query .= urlencode($key) . "=" . urlencode($value) . '&';
-            }
-
-            $vnp_Url = $vnp_Url . "?" . $query;
-            if (isset($vnp_HashSecret)) {
-                $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
-                $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
-            }
-            $returnData = array(
-                'code' => '00', 'message' => 'success', 'data' => $vnp_Url
-            );
-            if (isset($_POST['redirect'])) {
-                header('Location: ' . $vnp_Url);
-                die();
+            if (isset($voucher_code)) {
+                update_voucher($voucher_code); //Cập nhật lại số lượng
+                $voucher_item =  get_voucher($voucher_code); //lẤY VOUCHER
+                $voucher = $voucher_item['discount_amount'];
             } else {
-                echo json_encode($returnData);
+                $voucher = 0;
             }
-            //Sau khi thanh toán xong
-            $cart = $data['list_order_buy']; //Danh sách đơn hàng
-            $total_price = $cart_total + $transport_price['price']; //Tổng tất cả thanh toán
+            $list_order = $_SESSION['cart']['buy']; //Danh sách đơn hàng
+            $total_price = $_SESSION['cart']['info']['total'] + $transport_price['price'] - $voucher; //Tổng tất cả thanh toán
             //Thêm vào db số lượng sản phẩm đá bán
             $reuslt = [];
-            foreach ($cart as $item) {
-                $reuslt[$item['product_id']]['product_id'] = $item['product_id'];
-                $reuslt[$item['product_id']]['sales'] = $item['qty'];
+            foreach ($list_order as $item) {
+                $reuslt[$item['color_id']]['product_id'] = $item['product_id']; //Lấy ra id sản phẩm
+                $reuslt[$item['color_id']]['sales'] = $item['qty']; //Lấy ra số lượng
             }
-            update_sales_product($reuslt);
+            update_sales_product($reuslt); //Cập nhật số lượng sản phẩm bán ra
             ///
             //Phần đặt hàng
             $order_code = "VHL#" . substr(md5(date("h:i:s")), 23);
@@ -603,19 +558,22 @@ function checkoutAction()
                 'customer_id' => $customer_id,
                 'order_code' => $order_code,
                 'fullname' => $fullname,
-                'quantity' => $quantity,
+                'quantity' => $_SESSION['cart']['info']['count'],
                 'total_price' => $total_price,
                 'note' => $note,
                 'address' => $address,
                 'phone' => $phone,
-                'order_buy' => json_encode($cart),
+                'order_buy' => json_encode($list_order),
                 'shipping_cost' => $transport_price['price'],
-                'pay' => "Đã thanh toán"
+                'pay' => "Đã thanh toán",
+                'discount' => $voucher,
+                'payment_methods' => "Thanh toán qua thẻ"
             ];
             //Thêm vào dánh sách khách hàng đã mua
             add_order_buy($data_order);
+            //Phần gửi hóa đơn
             $mid_content = "";
-            foreach ($cart as $item) {
+            foreach ($list_order as $item) {
                 $mid_content .= "<tr>
                  <td>" . $item['product_name'] . "</td>
                 <td>" . "X " . $item['qty'] . "</td>
@@ -625,9 +583,11 @@ function checkoutAction()
             $content = "<h1 style='color: red;'>Xin chào {$fullname}</h1>
             <p><strong>Bạn đã đặt hàng thành công!</strong></p>
             <p><strong>Mã đơn hàng:</strong> {$order_code}</p>
+            <p><strong>Trạng thái:</strong> Chưa thanh toán</p>
             <p><strong>Địa chỉ:</strong> {$address}</p>
             <p><strong>Số điện thoại:</strong> {$phone}</p>
             <p><strong>Ghi chú:</strong> {$note}</p>
+            <p><strong>Phí vận chuyển:</strong> {$transport_price['price']}</p>
             <table style='border: 1px solid greenyellow;'>
                 <thead>
                     <tr>
@@ -643,20 +603,34 @@ function checkoutAction()
                     </tr>
                 </tbody>
             </table>
-            <p><strong>Đơn hàng sẽ được giao trong vòng 3-5 ngày tới. Bạn vui lòng dữ liên lạc!</strong></p>
-            <p><strong>autosmart cảm ơn bạn đã mua hàng!</strong></p>";
+            <p><strong>Đơn hàng sẽ được giao sớm nhất đến bạn. Bạn vui lòng dữ liên lạc!</strong></p>
+            <p><strong>AUTOSMART cảm ơn bạn đã mua hàng!</strong></p>";
+            checkout_momo($order_code, $total_price); //Thanh toán momo
             send_email($email, $fullname, "Thông báo đã đặt hàng thành công", $content);
-            redirect("xac-nhan-don-hang-thanh-cong.html");
         }
     }
     $data['customer_info'] = get_customer_innfo();
     load_view('checkout', $data);
+    unset($_SESSION['buy_now']); //Xóa sản phẩm mua ngay
 }
+
+
 function successAction()
 {
-    // delete_cart_all();
-    $data['list_products'] = $_SESSION['cart']['buy'];
-    $data['total'] = $_SESSION['cart']['info']['total'];
-    load_view("success", $data);
-    delete_cart_all();
+    if ($_GET['resultCode'] == 0) {
+        delete_cart_all();
+        $order_id = trim($_GET['order_id']);
+        $data['order'] = get_order_by_order_id($order_id); //Lấy đơn hàng bằng id đơn hàng
+        $data['list_products'] = json_decode($data['order']['order_buy'], true);
+        load_view("success", $data);
+    } else {
+        echo "Thanh toán không thành công: <a href='thanh-toan.html'>Thanh toán</a>";
+        $order_id = trim($_GET['order_id']);
+        delete_order($order_id); //Xóa đơn hàng khi không thành công
+    }
+}
+
+function process_orderAction() //
+{
+    load_view("process_order");
 }

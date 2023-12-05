@@ -1,6 +1,5 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">autosmart</a>.</strong>
-    All rights reserved.
+    <strong>Sản phẩm của <a href="http://localhost/Du-an-1/autosmart/admin/">autosmart</a>&copy; 2023-2023 .</strong>
 </footer>
 </div>
 <!-- ./wrapper -->

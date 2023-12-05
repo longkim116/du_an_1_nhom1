@@ -2,7 +2,6 @@
 get_header();
 ?>
 <main>
-
     <!-- breadcrumb area start -->
     <section class="breadcrumb__area include-bg pt-95 pb-50">
         <div class="container">
@@ -64,32 +63,6 @@ get_header();
                                 ?>
                             </tbody>
                         </table>
-                        <script>
-                            function checkCart(_this) {
-                                var color_id = $("input[name='checkCart']:checked").map(function() {
-                                    return this.value;
-                                }).get();
-
-                                console.log(color_id);
-                            }
-                        </script>
-                    </div>
-                    <div class="tp-cart-bottom">
-                        <div class="row align-items-end">
-                            <div class="col-xl-6 col-md-8">
-                                <div class="tp-cart-coupon">
-                                    <form action="#">
-                                        <div class="tp-cart-coupon-input-box">
-                                            <label>Mã giảm giá:</label>
-                                            <div class="tp-cart-coupon-input d-flex align-items-center">
-                                                <input type="text" placeholder="Sử dụng mã nếu có">
-                                                <button type="submit">Áp dụng</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6">

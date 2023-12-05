@@ -23,13 +23,13 @@ get_header();
     <!-- breadcrumb area end -->
 
     <!-- checkout area start -->
-    <form action="" method="post">
+    <form action="" method="post" id>
         <section class="tp-checkout-area pb-120" data-bg-color="#EFF1F5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="tp-checkout-bill-area">
-                            <h3 class="tp-checkout-bill-title">Chi tiết thanh toán</h3>
+                            <h3 class="tp-checkout-bill-title">Thông tin đặt hàng</h3>
 
                             <div class="tp-checkout-bill-form">
 
@@ -90,9 +90,9 @@ get_header();
                                         <h4>Tổng</h4>
                                     </li>
                                     <?php
-                                    if (!empty($list_order_buy)) :
+                                    if (!empty($list_order)) :
                                         $count = 0;
-                                        foreach ($list_order_buy as $item) :
+                                        foreach ($list_order as $item) :
                                             $count += $item['sub_total'];
                                     ?>
                                             <li class="tp-order-info-list-desc">
@@ -103,7 +103,7 @@ get_header();
                                     endif; ?>
                                     <!-- subtotal -->
                                     <li class="tp-order-info-list-subtotal">
-                                        <span>Tổng tiền</span>
+                                        <span>Tiền hàng</span>
                                         <span><?php echo currency_format($count); ?></span>
                                     </li>
 
@@ -123,11 +123,23 @@ get_header();
                                         </div>
                                     </li>
                                     <?php echo form_error("shipping") ?>
-
+                                    <div class="tp-cart-bottom">
+                                        <div class="tp-cart-coupon-input-box">
+                                            <label for="voucher">Mã giảm giá:</label>
+                                            <div class="tp-cart-coupon-input d-flex align-items-center w-100">
+                                                <input class="form-control-sm" id="voucher" type="text" placeholder="Sử dụng mã nếu có">
+                                                <div id="apply_voucher">
+                                                    <button onclick="apply_voucher()" type="button" class="form-control-sm">Áp dụng</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <li class="tp-order-info-list-total" id="discount">
+                                    </li>
                                     <!-- total -->
                                     <li class="tp-order-info-list-total">
-                                        <span>Thanh toán</span>
-                                        <span id="total_pay" total_pay="<?php echo $count ?>"><?php echo currency_format($count); ?></span>
+                                        <span>Thành tiền</span>
+                                        <span id="total_pay"><?php echo currency_format($_SESSION['cart']['info']['total']); ?></span>
                                     </li>
                                 </ul>
                             </div>
@@ -165,10 +177,6 @@ get_header();
         </section>
     </form>
     <!-- checkout area end -->
-    <form action="?mod=cart&action=checkoutMomo" method="post">
-        <button type="submit" name="payUrl">Thanh toán Momo</button>
-    </form>
-
 </main>
 <script>
     function payOnline(_this) {

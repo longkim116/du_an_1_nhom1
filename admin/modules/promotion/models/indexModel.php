@@ -1,9 +1,14 @@
 <?php
 function get_list_products() //Danh sách sản phẩm
 {
-    $sql = db_fetch_array("SELECT * FROM tb_products 
-    INNER JOIN tb_category ON tb_products.cat_id = tb_category.id WHERE NOT EXISTS ( SELECT * FROM product_promotion 
-    WHERE tb_products.product_id = product_promotion.product_id ) AND tb_products.status = 'Đã đăng'");
+    $sql = db_fetch_array("SELECT p.*, c.*  FROM tb_products p 
+    INNER JOIN tb_category c ON p.cat_id = c.id 
+    WHERE NOT EXISTS ( SELECT * FROM product_promotion pp WHERE p.product_id = pp.product_id ) AND p.status = 'Đã đăng'
+     UNION SELECT p.* , c.* FROM tb_promotions tp
+     INNER JOIN product_promotion pp ON tp.id = pp.promotion_id 
+     INNER JOIN tb_products p ON p.product_id = pp.product_id 
+     INNER JOIN tb_category c ON p.cat_id = c.id 
+     WHERE tp.status = 'Đã kết thúc';");
     return $sql;
 }
 function add_promotion($data) //Add vào bảng khuyễn mãi

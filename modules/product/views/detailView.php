@@ -36,7 +36,8 @@ get_header();
                             <nav>
                                 <div class="nav nav-tabs flex-sm-column " id="productDetailsNavThumb" role="tablist">
                                     <button class="nav-link active" id="nav-1-tab" data-bs-toggle="tab" data-bs-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">
-                                        <img src="admin/img/<?php echo $product['product_thumb'] ?>" alt="">
+                                        <!-- Ảnh đại diên -->
+                                        <img class="image_product" src="admin/img/<?php echo $product['product_thumb'] ?>" alt="">
                                     </button>
                                     <?php
                                     $count = 1;
@@ -51,7 +52,8 @@ get_header();
                             <div class="tab-content m-img" id="productDetailsNavContent">
                                 <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
                                     <div class="tp-product-details-nav-main-thumb">
-                                        <img src="admin/img/<?php echo $product['product_thumb'] ?>" alt="">
+                                        <!-- Ảnh đại diên -->
+                                        <img class="image_product" src="admin/img/<?php echo $product['product_thumb'] ?>" alt="">
                                     </div>
                                 </div>
                                 <?php
@@ -119,7 +121,7 @@ get_header();
                             <div class="tp-product-details-action-wrapper">
                                 <div class="tp-product-details-action-item-wrapper d-flex align-items-center">
                                     <div class="tp-product-details-quantity">
-                                        <div class="tp-product-quantity mb-15 mr-15">
+                                        <div class="tp-product-quantity mb-15 mr-15" id="status">
                                             <input class="tp-cart-input" type="number" id="num-order" value="1" min="1" max="10">
                                         </div>
                                     </div>
@@ -127,7 +129,7 @@ get_header();
                                         <button type="submit" onclick="add_cart(event)" class="tp-product-details-add-to-cart-btn w-100">Thêm vào giỏ hàng</button>
                                     </div>
                                 </div>
-                                <button class="tp-product-details-buy-now-btn w-100">Mua ngay</button>
+                                <button onclick="by_now(this)" class="tp-product-details-buy-now-btn w-100">Mua ngay</button>
                             </div>
                             <div class="tp-product-details-action-sm">
                                 <button type="button" class="tp-product-details-action-sm-btn">

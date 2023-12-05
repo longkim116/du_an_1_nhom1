@@ -9,7 +9,7 @@ get_sidebar();
             <?php if ($promotion["status"] == "Đang diễn ra") : ?>
                 <span class="text-danger">Chương trình đang diễn ra. Không thể sửa!</span>
             <?php elseif ($promotion["status"] == "Đã kết thúc") : ?>
-                <span class="text-danger">Chương trình đang diễn ra. Không thể sửa!</span>
+                <span class="text-danger">Chương trình đã kết thúc. Không thể sửa!</span>
             <?php endif; ?>
         </div>
         <div class="card">

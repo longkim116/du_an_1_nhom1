@@ -316,14 +316,13 @@ function update_productAction() //Sửa sản phẩm
                         $error['variants'] = "Không được để trống biến thể ram";
                     } else {
                     }
-                    if (isset($item['colors'])) {
+                    if (isset($item['colors'])) { //Kiểm tra biến cũ có thay đổi không
                         if (empty($item['colors'])) {
                             $error['variants'] = "Không được để trống biến thể màu sắc";
                         } else {
                             foreach ($item['colors'] as $colorIndex => $v) {
                                 if (empty($v['name']) || empty($v['price']) || empty($v['qty']) || empty($v['color'])) {
                                     $error['variants'] = "Không được để trống biến thể";
-                                } else {
                                 }
                                 if (filter_var($v['price'], FILTER_VALIDATE_INT) && $v['price'] > 0) {
                                 } else {
@@ -333,68 +332,52 @@ function update_productAction() //Sửa sản phẩm
                                 } else {
                                     $error['variants'] = "Số lượng biến thể không đúng định dạng";
                                 }
-                                if (is_file_img($_FILES['update_ram_variants']['name'][$itemIndex]['colors'][$colorIndex]['img'])) {
-                                } else {
-                                    $error['variants'] = "Ảnh biến thể không đúng định dạng";
+                                if (empty($_FILES['update_ram_variants']['name'][$itemIndex]['colors'][$colorIndex]['img'])) { //Khi không có cập nhật
+                                } else { //Ngược lại khi có ảnh phải chuẩn
+                                    if (is_file_img($_FILES['update_ram_variants']['name'][$itemIndex]['colors'][$colorIndex]['img'])) {
+                                    } else {
+                                        $error['variants'] = "Ảnh biến thể không đúng định dạng";
+                                    }
                                 }
                             }
                         }
                     } else {
                         $error['variants'] = "Không được để trống biến thể màu sắc";
                     }
+                    //Kiểm tra khi biến thể ram thêm mới màu sắc
+                    if (isset($item['update'])) {
+                        if (empty($item['update'])) {
+                            $error['variants'] = "Không được để trống biến thể màu sắc";
+                        } else {
+                            foreach ($item['update'] as $updateIndex => $v) {
+                                if (empty($v['name']) || empty($v['price']) || empty($v['qty']) || empty($v['color'])) {
+                                    $error['variants'] = "Không được để trống biến thể";
+                                }
+                                if (filter_var($v['price'], FILTER_VALIDATE_INT) && $v['price'] > 0) {
+                                } else {
+                                    $error['variants'] = "Giá biến thể không đúng định dạng";
+                                }
+                                if (filter_var($v['qty'], FILTER_VALIDATE_INT) && $v['qty'] > 0) {
+                                } else {
+                                    $error['variants'] = "Số lượng biến thể không đúng định dạng";
+                                }
+                                //Kiểm tra ảnh
+                                if (is_file_img($_FILES['update_ram_variants']['name'][$itemIndex]['update'][$updateIndex]['img'])) {
+                                } else {
+                                    $error['variants'] = "Ảnh biến thể không đúng định dạng";
+                                }
+                            }
+                        }
+                    }
                 }
             }
+        }else{
+            $error['variants'] = "Không được để trống";
         }
-        //TEST
-        //Cập nhật biến thể
-        // $string_id = "";
-        // if (isset($_POST['update_ram_variants'])) {
-        //     foreach ($_POST['update_ram_variants'] as $key => $item) {
-        //         $string_id_color = "";
-        //         $string_id .= "{$key},";
-        //         if (isset($item['colors'])) {
-        //             foreach ($item['colors'] as $k => $v) {
-        //                 $string_id_color .= "$k,";
-        //                 $data_update_color = [
-        //                     'color_name' => $v['name'],
-        //                     'color_price' => $v['price'],
-        //                     'color' => $v['color'],
-        //                     'quantity' => $v['qty'],
-        //                 ];
-        //                 update_variants_color($data_update_color, $k); //Cập nhật biến thể màu sắc theo id
-        //             }
-        //             if (!empty($string_id_color)) {
-        //                 $string_id_color = substr($string_id_color, 0, -1);
-        //                 delete_variant_color_isset_by_id("tb_color_variants", $string_id_color, $key, $id); //Xóa danh sach id ram không tồn tại
-        //             }
-        //         } else {
-        //             delete_all_variant_color($key); //Xóa toàn bộ biến thể màu theo ram_id
-        //         }
-        //         if (isset($item['update'])) {
-        //             foreach ($item['update'] as $k => $vl) {
-        //                 $data_add_color = [
-        //                     'ram_id' => $key,
-        //                     'product_id' => $id,
-        //                     'color_name' => $vl['name'],
-        //                     'color_price' => $vl['price'],
-        //                     'color' => $vl['color'],
-        //                     'quantity' => $vl['qty'],
-        //                 ];
-        //                 add_variants_color($data_add_color); //Thêm biến thể màu sắc theo id ram cũ
-        //             }
-        //         }
-        //     }
-
-        //     if (!empty($string_id)) {
-        //         $string_id = substr($string_id, 0, -1);
-        //         delete_variant_isset_by_id("tb_ram_variants", $string_id,  $id); //Xóa danh sach id ram không tồn tại
-        //     }
-        // } else {
-        //     delete_all_variant_ram($id); //Xóa toàn bộ thuộc tính của sản phẩm theo product_id
-        // }
         //Kiểm tra biến thể mới được thêm
         if (isset($_POST['ram_variants'])) {
             if (empty($_POST['ram_variants'])) {
+                $error['add_variants'] = "Không được để trống biến thể";
             } else {
                 foreach ($_POST['ram_variants'] as $itemIndex => $item) {
                     if (empty($item['name'])) {
@@ -420,6 +403,11 @@ function update_productAction() //Sửa sản phẩm
                                 } else {
                                     $error['add_variants'] = "Số lượng biến thể không đúng định dạng";
                                 }
+                                //Kiểm tra ảnh
+                                if (is_file_img($_FILES['ram_variants']['name'][$itemIndex]['colors'][$colorIndex]['img'])) {
+                                } else {
+                                    $error['add_variants'] = 'Ảnh không đúng định dạng';
+                                }
                             }
                         }
                     } else {
@@ -429,117 +417,139 @@ function update_productAction() //Sửa sản phẩm
             }
         }
 
-
         // Kết luận
-        // if (empty($error)) {
-        //     //Cập nhật sản phẩm
-        //     $data_product = [
-        //         'product_name' => $product_name,
-        //         'product_code' => $product_code,
-        //         'product_desc' => $product_desc,
-        //         'product_thumb' => $file,
-        //         'product_content' => $product_content,
-        //         'status' => $status,
-        //         'cat_id' => $parent_id,
-        //     ];
-        //     update_product($id, $data_product); //Cập nhật sản phẩm
-        //     // Kiểm tra ảnh chi tiết cũ
-        //     if (isset($detail_img)) {
-        //         $string_id = "";
-        //         foreach ($detail_img as $key => $value) {
-        //             $string_id .= $key . " ,"; //Danh sách id ảnh tồn tại khi cập nhật
-        //             if (!empty($value)) { //Những file chữa ảnh được update
-        //                 $data_detail_img = [
-        //                     'image' => $value,
-        //                 ];
-        //                 update_detail_img_by_id($key, $data_detail_img); ////Cập nhật ảnh chi tiết cảu sản phẩm theo id anh chi tiết
-        //             }
-        //         }
-        //         $string_id = substr($string_id, 0, -1);
-        //         remove_interval_detail_img($string_id, $id); //Xóa các id ảnh chi tiết nếu không tồn tại trong danh sách
-        //     }
-        //     if (isset($images)) { //Add ảnh chi tiết của sản phẩm
-        //         foreach ($images as $value) {
-        //             $data_image = [
-        //                 'product_id' => $id,
-        //                 'image' => $value,
-        //             ];
-        //             add_detail_img($data_image);
-        //         }
-        //     }
-        //     //Cập nhật biến thể
-        //     $string_id = "";
-        //     if (isset($_POST['update_ram_variants'])) {
-        //         foreach ($_POST['update_ram_variants'] as $key => $item) {
-        //             $string_id_color = "";
-        //             $string_id .= "{$key},";
-        //             if (isset($item['colors'])) {
-        //                 foreach ($item['colors'] as $k => $v) {
-        //                     $string_id_color .= "$k,";
-        //                     $data_update_color = [
-        //                         'color_name' => $v['name'],
-        //                         'color_price' => $v['price'],
-        //                         'color' => $v['color'],
-        //                         'quantity' => $v['qty'],
-        //                     ];
-        //                     update_variants_color($data_update_color, $k); //Cập nhật biến thể màu sắc theo id
-        //                 }
-        //                 if (!empty($string_id_color)) {
-        //                     $string_id_color = substr($string_id_color, 0, -1);
-        //                     delete_variant_color_isset_by_id("tb_color_variants", $string_id_color, $key, $id); //Xóa danh sach id ram không tồn tại
-        //                 }
-        //             } else {
-        //                 delete_all_variant_color($key); //Xóa toàn bộ biến thể màu theo ram_id
-        //             }
-        //             if (isset($item['update'])) {
-        //                 foreach ($item['update'] as $k => $vl) {
-        //                     $data_add_color = [
-        //                         'ram_id' => $key,
-        //                         'product_id' => $id,
-        //                         'color_name' => $vl['name'],
-        //                         'color_price' => $vl['price'],
-        //                         'color' => $vl['color'],
-        //                         'quantity' => $vl['qty'],
-        //                     ];
-        //                     add_variants_color($data_add_color); //Thêm biến thể màu sắc theo id ram cũ
-        //                 }
-        //             }
-        //         }
+        if (empty($error)) {
+            //Cập nhật sản phẩm
+            $data_product = [
+                'product_name' => $product_name,
+                'product_code' => $product_code,
+                'product_desc' => $product_desc,
+                'product_thumb' => $file,
+                'product_content' => $product_content,
+                'status' => $status,
+                'cat_id' => $parent_id,
+            ];
+            update_product($id, $data_product); //Cập nhật sản phẩm
+            // Kiểm tra ảnh chi tiết cũ
+            if (isset($detail_img)) {
+                $string_id = "";
+                foreach ($detail_img as $key => $value) {
+                    $string_id .= $key . " ,"; //Danh sách id ảnh tồn tại khi cập nhật
+                    if (!empty($value)) { //Những file chữa ảnh được update
+                        $data_detail_img = [
+                            'image' => $value,
+                        ];
+                        update_detail_img_by_id($key, $data_detail_img); ////Cập nhật ảnh chi tiết cảu sản phẩm theo id anh chi tiết
+                    }
+                }
+                $string_id = substr($string_id, 0, -1);
+                remove_interval_detail_img($string_id, $id); //Xóa các id ảnh chi tiết nếu không tồn tại trong danh sách
+            }
+            if (isset($images)) { //Add ảnh chi tiết của sản phẩm
+                foreach ($images as $value) {
+                    $data_image = [
+                        'product_id' => $id,
+                        'image' => $value,
+                    ];
+                    add_detail_img($data_image);
+                }
+            }
+            //Cập nhật biến thể
+            $string_id = "";
+            if (isset($_POST['update_ram_variants'])) {
+                foreach ($_POST['update_ram_variants'] as $key => $item) {
+                    $string_id_color = "";
+                    $string_id .= "{$key},";
+                    if (isset($item['colors'])) {
+                        foreach ($item['colors'] as $k => $v) {
+                            $string_id_color .= "$k,";
+                            //Cập nhật khi không có thay đổi về anh
+                            if (empty($_FILES['update_ram_variants']['name'][$key]['colors'][$k]['img'])) { //Khi không có cập nhật
+                                $data_update_color = [
+                                    'color_name' => $v['name'],
+                                    'color_price' => $v['price'],
+                                    'color' => $v['color'],
+                                    'quantity' => $v['qty'],
+                                ];
+                                update_variants_color($data_update_color, $k); //Cập nhật biến thể màu sắc theo id
+                            } else { //Ngược lại khi có ảnh phải chuẩn
+                                $targetFilePath = $_FILES['update_ram_variants']['name'][$key]['colors'][$k]['img'];
+                                move_uploaded_file($_FILES['update_ram_variants']['tmp_name'][$key]['colors'][$k]['img'], "img/" . $targetFilePath);
+                                $data_update_color = [
+                                    'color_name' => $v['name'],
+                                    'color_price' => $v['price'],
+                                    'color' => $v['color'],
+                                    'quantity' => $v['qty'],
+                                    'image' => $targetFilePath,
+                                ];
+                                update_variants_color($data_update_color, $k); //Cập nhnật biến thể màu sắc theo id
+                            }
+                        }
+                        if (!empty($string_id_color)) {
+                            $string_id_color = substr($string_id_color, 0, -1);
+                            delete_variant_color_isset_by_id("tb_color_variants", $string_id_color, $key, $id); //Xóa danh sach id ram không tồn tại
+                        }
+                    } else {
+                        delete_all_variant_color($key); //Xóa toàn bộ biến thể màu theo ram_id
+                    }
+                    ///Phần update ram
+                    if (isset($item['update'])) {
+                        foreach ($item['update'] as $up => $vl) {
+                            $targetFile = $_FILES['update_ram_variants']['name'][$key]['update'][$up]['img'];
+                            move_uploaded_file($_FILES['update_ram_variants']['tmp_name'][$key]['update'][$up]['img'], "img/" . $targetFile);
+                            $data_add_color = [
+                                'ram_id' => $key,
+                                'product_id' => $id,
+                                'color_name' => $vl['name'],
+                                'color_price' => $vl['price'],
+                                'color' => $vl['color'],
+                                'quantity' => $vl['qty'],
+                                'image' => $targetFile
+                            ];
+                            add_variants_color($data_add_color); //Thêm biến thể màu sắc theo id ram cũ
+                        }
+                    }
+                }
 
-        //         if (!empty($string_id)) {
-        //             $string_id = substr($string_id, 0, -1);
-        //             delete_variant_isset_by_id("tb_ram_variants", $string_id,  $id); //Xóa danh sach id ram không tồn tại
-        //         }
-        //     } else {
-        //         delete_all_variant_ram($id); //Xóa toàn bộ thuộc tính của sản phẩm theo product_id
-        //     }
-        //     //ADD biến thể khi được thêm vào
-        //     if (isset($vartians)) {
-        //         foreach ($vartians as $key => $item) { //Thêm biến thể ram
-        //             $data_ram = [
-        //                 'product_id' => $id,
-        //                 'ram_name' => $item['name'],
-        //             ];
-        //             $ram_id = add_ram_vartians($data_ram); //Thêm thuộc tính ram
-        //             if (isset($item['colors'])) {
-        //                 if (is_array($item['colors'])) {
-        //                     foreach ($item['colors'] as $v) {
-        //                         $data_color = [
-        //                             'ram_id' => $ram_id,
-        //                             'product_id' => $id,
-        //                             'color_name' => $v['name'],
-        //                             'color_price' => $v['price'],
-        //                             'color' => $v['color'],
-        //                             'quantity' => $v['qty'],
-        //                         ];
-        //                         add_color_vartians($data_color); //Thêm biến thể màu sắc
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     $error['account'] = "Sửa sản phẩm thành công";
-        // }
+                if (!empty($string_id)) {
+                    $string_id = substr($string_id, 0, -1);
+                    delete_variant_isset_by_id("tb_ram_variants", $string_id,  $id); //Xóa danh sach id ram không tồn tại
+                }
+            } else {
+                delete_all_variant_ram($id); //Xóa toàn bộ thuộc tính của sản phẩm theo product_id
+            }
+            //ADD biến thể khi được thêm vào
+            //Thêm biến thể
+            if (isset($vartians)) {
+                foreach ($vartians as $itemIndex => $item) { //Thêm biến thể ram
+                    $data_ram = [
+                        'product_id' => $id,
+                        'ram_name' => $item['name'],
+                    ];
+                    $ram_id = add_ram_vartians($data_ram); //Thêm thuộc tính ram
+                    if (isset($item['colors'])) {
+                        if (is_array($item['colors'])) {
+                            foreach ($item['colors'] as $colorIndex => $v) {
+                                //Xử lý ảnh
+                                $targetFilePath = $_FILES['ram_variants']['name'][$itemIndex]['colors'][$colorIndex]['img'];
+                                move_uploaded_file($_FILES['ram_variants']['tmp_name'][$itemIndex]['colors'][$colorIndex]['img'], "img/" . $targetFilePath);
+                                $data_color = [
+                                    'ram_id' => $ram_id,
+                                    'product_id' => $id,
+                                    'color_name' => $v['name'],
+                                    'color_price' => $v['price'],
+                                    'color' => $v['color'],
+                                    'quantity' => $v['qty'],
+                                    'image' => $targetFilePath,
+                                ];
+                                add_color_vartians($data_color); //Thêm biến thể màu sắc
+                            }
+                        }
+                    }
+                }
+            }
+            $error['account'] = "Sửa sản phẩm thành công";
+        }
     }
     $data['list_ram_var'] = get_ram_variants($id); //Lấy thuộc tính ram của sản phẩm theo id
     $data['list_color_var'] = get_color_variants($id); //Lấy thuộc tính màu sắc của sản phẩm theo id

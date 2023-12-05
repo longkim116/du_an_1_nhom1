@@ -27,20 +27,20 @@ get_sidebar();
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
-            <!-- <form action="" class="form-group ml-2" method="post">
+            <form action="" class="form-group ml-2" method="post">
                 <select name="action" id="action" class="form-control-sm form-check-inline">
                     <option value="">Tác vụ</option>
                     <option value="1">Xóa</option>
-                    <option value="2">Chờ xác nhận</option>
+                    <!-- <option value="2">Chờ xác nhận</option>
                     <option value="3">Chuẩn bị đơn hàng</option>
                     <option value="4">Đang giao hàng</option>
-                    <option value="5">Thành công</option>
-                </select> -->
-            <!-- <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button> -->
+                    <option value="5">Thành công</option> -->
+                </select>
+            <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <!-- <th><input type="checkbox" name="checkAll" id="checkAll"></th> -->
+                        <th><input type="checkbox" name="checkAll" id="checkAll"></th>
                         <th>STT</th>
                         <th>Mã đơn hàng</th>
                         <th>Họ và tên</th>
@@ -57,7 +57,7 @@ get_sidebar();
                         foreach ($list_order as $item) :
                     ?>
                             <tr>
-                                <!-- <td><input type="checkbox" name="checkitem[<?php echo $item['id'] ?>]" id="checkbox" value="<?php echo $item['id'] ?>" class="checkItem"></td> -->
+                                <td><input type="checkbox" name="checkitem[<?php echo $item['id'] ?>]" id="checkbox" value="<?php echo $item['id'] ?>" class="checkItem"></td>
                                 <td><?php echo ++$count; ?></td>
                                 <td><?php echo $item['order_code'] ?></td>
                                 <td><?php echo $item['fullname'] ?></a></td>

@@ -1,3 +1,6 @@
+<?php
+$settings = db_fetch_row("SELECT * FROM `tb_settings`");
+?>
 <!doctype html>
 <html lang="en">
 
@@ -9,6 +12,7 @@
     <script src="public/js/code.jquery.com_jquery-3.6.4.min.js" text="type/javascript"></script>
     <script src="public/plugins/ckeditor/ckeditor.js" text="type/javascript"></script>
     <script src="public/js/gstatic.com_charts_loader.js" text="type/javascript"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="img/<?php echo $settings['logo'] ?>">
     <title>Autosmart</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -20,12 +24,13 @@
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+            <img class="animation__shake" src="img/<?php echo $settings['logo'] ?>" alt="AdminLTELogo" height="60" width="60">
         </div>
         <!-- Phần Menu -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">

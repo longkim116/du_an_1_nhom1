@@ -58,7 +58,7 @@ function add_product_put_cart($id_color, $qty) //Thêm vào giỏ hàng
             'product_code' => $item['product_code'],
             'product_name' => $item['product_name'] . " " . $item['ram_name'] . " " . $item['color_name'],
             'price' => $item['color_price'] - ($item['color_price'] * ($promotion / 100)),
-            'product_thumb' => $item['product_thumb'],
+            'product_thumb' => $item['image'],
             'qty' => $qty,
             'sub_total' => ($item['color_price'] - ($item['color_price'] * ($promotion / 100))) * $qty,
         ];

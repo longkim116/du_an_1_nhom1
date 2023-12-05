@@ -23,7 +23,7 @@ get_sidebar();
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" name="checkAll" id="checkAll"></th>
+                            <!-- <th><input type="checkbox" name="checkAll" id="checkAll"></th> -->
                             <th>STT</th>
                             <th style="width: 15%;">Người bình luận</th>
                             <th style="width: 45%;">Nội dung bình luận</th>

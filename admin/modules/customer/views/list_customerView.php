@@ -41,9 +41,7 @@ get_sidebar();
                                 <tr>
                                     <td><input type="checkbox" name="checkitem[<?php echo $item['id'] ?>]" id="checkbox" value="<?php echo $item['id'] ?>" class="checkItem"></td>
                                     <td><?php echo ++$count ?></span>
-                                    <td>
-                                        <a href="?mod=customer&action=detail_customer&id=<?php echo $item['id'] ?>"><?php echo $item['fullname'] ?></a>
-                                    </td>
+                                    <td><?php echo $item['fullname'] ?></td>
                                     <td><?php echo $item['phone_number'] ?></td>
                                     <td><?php echo $item['email'] ?></span></td>
                                     <td><?php echo $item['address'] ?></span></td>
@@ -51,6 +49,9 @@ get_sidebar();
                                     <td><?php echo $is_active[$item['is_active']] ?></td>
                                     <td><?php echo $item['reg_date'] ?></span></td>
                                     <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=customer&action=detail_customer&id=<?php echo $item['id'] ?>" title="Sửa"><i class="fas fa-search"></i>
+                                            Xem
+                                        </a>
                                         <a class="btn btn-info btn-sm" href="?mod=customer&action=update_customer&id=<?php echo $item['id'] ?>" title="Sửa"><i class="fas fa-pencil-alt"></i>
                                             Sửa
                                         </a>

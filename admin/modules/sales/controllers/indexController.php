@@ -76,21 +76,21 @@ function delete_orderAction()
 
 function result_seachAction()
 {
-    $seach = (!empty($_POST['seach'])) ? $_POST['seach'] : null;
+    $seach = (!empty($_POST['seach'])) ? trim($_POST['seach']) : null;
     // //Tác vụ
-    // if (isset($_POST['btn_apply'])) {
-    //     if (!empty($_POST['action'])) {
-    //         $action = $_POST['action'];
-    //     } else {
-    //         $action = 0;
-    //     }
-    //     if (!empty($_POST['checkitem'])) {
-    //         $checkitem = $_POST['checkitem'];
-    //         foreach ($checkitem as $item) {
-    //             update_action($action, $item);
-    //         }
-    //     }
-    // }
+    if (isset($_POST['btn_apply'])) {
+        if (!empty($_POST['action'])) {
+            $action = $_POST['action'];
+        } else {
+            $action = 0;
+        }
+        if (!empty($_POST['checkitem'])) {
+            $checkitem = $_POST['checkitem'];
+            foreach ($checkitem as $item) {
+                update_action($action, $item);
+            }
+        }
+    }
     $data['num_orders'] = num_orders(); //Tổng đơn hàng
     $data['num_posts_pending'] = num_posts_pending(); //Chờ xác nhận
     $data['num_prepare_orders'] = num_prepare_orders(); //Chuẩn bị đơn hàng
@@ -101,4 +101,3 @@ function result_seachAction()
     $data['total_order'] = total_order();
     load_view("seach_order", $data);
 }
-

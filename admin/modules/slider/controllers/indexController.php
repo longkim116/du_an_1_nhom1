@@ -41,7 +41,7 @@ function list_sliderAction()
 
 function update_sliderAction()
 {
-    global $error, $slug, $slider_order, $file, $status;
+    global $error, $slug, $slider_order, $file, $status, $slider_content;
     $id = $_GET['id'];
     $data['slider'] = update_slider_by_id($id);
     if (isset($_POST['update-slider'])) {
@@ -61,6 +61,12 @@ function update_sliderAction()
             } else {
                 $error['slider_order'] = "Không đúng định dạng";
             }
+        }
+        //Kiểm tra slider_content
+        if (empty($_POST['slider_content'])) {
+            $error['slider_content'] = "Không được để trống";
+        } else {
+            $slider_content = $_POST['slider_content'];
         }
         //Kiểm tra file
         if (empty($_FILES['file']['name'])) {
@@ -88,6 +94,7 @@ function update_sliderAction()
                 'number_order' => $slider_order,
                 'creator' => $username,
                 'status' => $status,
+                'slider_content' => $slider_content,
             ];
             update_slider($data_slider, $id);
             $error['account'] = "Sửa thành công";
@@ -100,7 +107,7 @@ function update_sliderAction()
 
 function add_sliderAction()
 {
-    global $error, $slug, $slider_order, $file, $status;
+    global $error, $slug, $slider_order, $file, $status, $slider_content;
     if (isset($_POST['add-slider'])) {
         $error = [];
         //Kiểm tra link
@@ -118,6 +125,12 @@ function add_sliderAction()
             } else {
                 $error['slider_order'] = "Không đúng định dạng";
             }
+        }
+        //Kiểm tra slider_content
+        if (empty($_POST['slider_content'])) {
+            $error['slider_content'] = "Không được để trống";
+        } else {
+            $slider_content = $_POST['slider_content'];
         }
         //Kiểm tra file
         if (empty($_FILES['file']['name'])) {
@@ -145,6 +158,7 @@ function add_sliderAction()
                 'number_order' => $slider_order,
                 'creator' => $username,
                 'status' => $status,
+                'slider_content' => $slider_content
             ];
             add_slider($data_slider);
             $error['account'] = "Thêm thành công";

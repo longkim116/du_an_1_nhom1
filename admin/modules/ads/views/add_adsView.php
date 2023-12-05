@@ -15,12 +15,17 @@ get_sidebar();
                         <input class="form-control" type="text" name="name" id="name" value="<?php echo set_value("name") ?>">
                     </div>
                     <?php echo form_error("name") ?>
-
                     <div class="form-group">
                         <label for="link">Link</label>
                         <input class="form-control" type="v" name="link" id="link" value="<?php echo set_value("link") ?>">
                     </div>
                     <?php echo form_error("link") ?>
+
+                    <div class="form-group">
+                        <label for="ads_content">Mô tả</label>
+                        <textarea name="ads_content" id="ads_content" class="ckeditor" class="form-inline form-control"><?Php echo set_value("ads_content") ?></textarea><br>
+                    </div>
+                    <?php echo form_error("ads_content") ?>
 
                     <label for="file">Hình ảnh</label>
                     <div id="uploadFile">

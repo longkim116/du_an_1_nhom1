@@ -12,8 +12,8 @@ get_sidebar();
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="?mod=home&action=index">Home</a></li>
-                        <li class="breadcrumb-item active">Hồ sơ</li>
+                        <li class="breadcrumb-item"><a href="?mod=home&action=index">Trang chủ</a></li>
+                        <li class="breadcrumb-item active"><a href="?mod=users&action=main">Hồ sơ</a></li>
                     </ol>
                 </div>
             </div>

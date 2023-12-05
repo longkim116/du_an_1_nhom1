@@ -6,7 +6,9 @@ function construct()
 
 function indexAction()
 {
-    $data['list_ads'] =  list_ads("home");
+    $data['homepageAds1'] =  list_ads("homepageAds1"); //Quản cáo 
+    $data['homepageAds2'] =  list_ads("homepageAds2"); //Quản cáo 1
+    $data['list_posts'] = list_posts(); //Danh sách tin tức
     $data['list_sliders'] = list_sliders();
     $data['list_ads'] = list_ads("home");
     $data['list_products_by_sales'] = list_products_by_sales(); //Danh sách sản phẩm bán chạy

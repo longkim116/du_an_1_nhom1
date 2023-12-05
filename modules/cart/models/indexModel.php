@@ -52,10 +52,10 @@ function delete_cart_all()
 }
 function add_order_buy($data)
 {
-    db_insert("tb_orders", $data);
+    return db_insert("tb_orders", $data);
 }
 
-function update_sales_product($data)
+function update_sales_product($data) //Cập nhật số lượng sản phẩm đá bán ra
 {
     foreach ($data as $item) {
         $sql = db_fetch_row("SELECT * FROM `tb_products` WHERE `product_id` = '{$item['product_id']}' ");
@@ -120,10 +120,107 @@ function get_product_promotion_by_id($id) //Lấy giá khuyễn mãi theo id s�
     return $sql['discount_rate'];
 }
 
+function update_voucher($voucher) //Cập nhật voucher
+{
+    $sql = db_fetch_row("SELECT * FROM `tb_voucher` WHERE `voucher_code` = '{$voucher}'");
+    $quantity = $sql['quantity'] - 1;
+    db_update("tb_voucher", array("quantity" => $quantity), "`voucher_code` = '{$voucher}'");
+}
+function exists_voucher($voucher) //Kiểm tra xem có tồn tại hay không
+{
+    $sql = db_fetch_row("SELECT * FROM `tb_voucher` WHERE `voucher_code` = '{$voucher}' AND `quantity` > 0 AND `status` = 'Đã áp dụng'");
+    if ($sql > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function get_voucher($voucher) //lẤY VOUCHER
+{
+    $sql = db_fetch_row("SELECT * FROM `tb_voucher` WHERE `voucher_code` = '{$voucher}' AND `quantity` > 0");
+    return $sql;
+}
+
+function get_order_by_order_id($order_code) //Lấy đơn hàng bằng id
+{
+    $sql = db_fetch_row("SELECT * FROM `tb_orders` WHERE `id` = '{$order_code}'");
+    return $sql;
+}
 function get_buy_now($id_color) //Lấy sản phẩm mua ngay
 {
     $sql = db_fetch_row("SELECT * FROM `tb_color_variants` INNER JOIN `tb_products` ON tb_color_variants.product_id = tb_products.product_id
     INNER JOIN `tb_ram_variants` ON tb_ram_variants.id = tb_color_variants.ram_id
     WHERE tb_color_variants.id = {$id_color}");
     return $sql;
+}
+
+
+
+function checkout_momo($order_id, $total_price) //Thanh toán bằng momo
+{
+    $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+    $partnerCode = 'MOMOBKUN20180529';
+    $accessKey = 'klm05TvNBzhg7h7j';
+    $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+
+    $orderInfo = "Thanh toán qua MoMo";
+    $amount = $total_price;
+    $orderId = time() . "";
+    $redirectUrl = "http://localhost/Du-an-1/autosmart/?mod=cart&action=success&order_id={$order_id}";
+    $ipnUrl = "http://localhost/Du-an-1/autosmart/?mod=cart&action=success&order_id={$order_id}";
+    $extraData = "";
+
+
+    $partnerCode = $partnerCode;
+    $accessKey = $accessKey;
+    $secretKey = $secretKey;
+    $orderId = $orderId; // Mã đơn hàng
+    $orderInfo = $orderInfo;
+    $amount = $amount;
+    $ipnUrl = $ipnUrl;
+    $redirectUrl = $redirectUrl;
+    $extraData = $extraData;
+
+    $requestId = time() . "";
+    $requestType = "payWithATM";
+    $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+    //before sign HMAC SHA256 signature
+    $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+    $signature = hash_hmac("sha256", $rawHash, $secretKey);
+    $data = array(
+        'partnerCode' => $partnerCode,
+        'partnerName' => "Test",
+        "storeId" => "MomoTestStore",
+        'requestId' => $requestId,
+        'amount' => $amount,
+        'orderId' => $orderId,
+        'orderInfo' => $orderInfo,
+        'redirectUrl' => $redirectUrl,
+        'ipnUrl' => $ipnUrl,
+        'lang' => 'vi',
+        'extraData' => $extraData,
+        'requestType' => $requestType,
+        'signature' => $signature,
+    );
+    $result = execPostRequest($endpoint, json_encode($data));
+    $jsonResult = json_decode($result, true);  // decode json
+
+    //Just a example, please check more in there
+
+    header('Location: ' . $jsonResult['payUrl']);
+}
+function checkPaymentStatusFromUrl()
+{
+    $resultCode = $_GET['resultCode']; // Lấy giá trị resultCode từ URL
+
+    if ($resultCode === 0) {
+        // Thanh toán thành công, có thể thực hiện các hành động sau thanh toán ở đây
+        echo "Thanh toán thành công!";
+        return true;
+    } else {
+        // Xử lý lỗi thanh toán
+        echo "Thanh toán thất bại!";
+        return false;
+    }
 }

@@ -20,19 +20,9 @@ get_header();
                                 <div class="row align-items-center">
                                     <div class="col-xl-5 col-lg-6 col-md-6">
                                         <div class="tp-slider-content p-relative z-index-1">
-                                            <span>Chỉ còn <b>500.000đ</b></span>
-                                            <h3 class="tp-slider-title">Giảm giá siêu hot 2023</h3>
-                                            <p>Exclusive offer
-                                                <span>-35%
-                                                    <svg width="94" height="20" viewBox="0 0 94 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M74.8576 4.63367L78.6048 5.11367C80.9097 5.35155 82.8309 5.75148 84.4483 5.97993L86.6581 6.31091L88.4262 6.63948C89.4684 6.81761 90.2699 6.9312 90.8805 6.99186C93.3213 7.24888 92.7011 6.63674 92.8183 6.12534C92.9355 5.61394 93.7175 5.37081 91.3267 4.45886C90.73 4.24001 89.9345 3.97481 88.8826 3.65818L87.1034 3.12577L84.8643 2.63282C83.236 2.28025 81.2402 1.82307 78.8684 1.52138L75.0177 0.981633C73.6188 0.823014 72.1417 0.730003 70.5389 0.582533C63.0297 0.0282543 55.4847 0.193022 48.0068 1.07459C39.9065 2.04304 31.9328 3.87384 24.2213 6.53586C18.0824 8.61764 12.1674 11.3089 6.56479 14.5692C4.88189 15.5255 3.25403 16.5756 1.68892 17.7145C0.568976 18.5077 -0.00964231 18.9932 0.0547097 19.0858C0.388606 19.6584 10.6194 13.1924 25.151 8.99361C32.789 6.72748 40.6283 5.20536 48.5593 4.44848C55.8569 3.76455 63.1992 3.69678 70.5082 4.24591L74.8223 4.62335" fill="currentColor" />
-                                                    </svg>
-                                                </span>
-                                                off this week
-                                            </p>
-
+                                            <h3 class="tp-slider-title"><?php echo $item['slider_content'] ?></h3>
                                             <div class="tp-slider-btn">
-                                                <a href="<?php echo $item['link'] ?>" class="tp-btn tp-btn-2 tp-btn-white">Shop Now
+                                                <a href="<?php echo $item['link'] ?>" class="tp-btn tp-btn-2 tp-btn-white">Xem thêm
                                                     <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M16 6.99976L1 6.99976" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         <path d="M9.9502 0.975414L16.0002 6.99941L9.9502 13.0244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -186,11 +176,7 @@ get_header();
             <div class="row align-items-end">
                 <div class="col-xl-5 col-lg-6 col-md-5">
                     <div class="tp-section-title-wrapper mb-40">
-                        <h3 class="tp-section-title">Sản phẩm khuyễn mãi
-
-                            <svg width="114" height="35" viewBox="0 0 114 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M112 23.275C1.84952 -10.6834 -7.36586 1.48086 7.50443 32.9053" stroke="currentColor" stroke-width="4" stroke-miterlimit="3.8637" stroke-linecap="round" />
-                            </svg>
+                        <h3 class="tp-section-title" id="product_title">Sản phẩm khuyễn mãi
                         </h3>
                     </div>
                 </div>
@@ -198,7 +184,7 @@ get_header();
                     <div class="tp-product-tab tp-product-tab-border mb-45 tp-tab d-flex justify-content-md-end">
                         <ul class="nav nav-tabs justify-content-sm-end" id="productTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="new-tab" data-bs-toggle="tab" data-bs-target="#new-tab-pane" type="button" role="tab" aria-controls="new-tab-pane" aria-selected="true">Khuyễn mãi
+                                <button class="nav-link active" id="Sản phẩm khuyễn mãi" onclick="tablist(this)" data-bs-toggle="tab" data-bs-target="#new-tab-pane" type="button" role="tab" aria-controls="new-tab-pane" aria-selected="true">Khuyễn mãi
                                     <span class="tp-product-tab-line">
                                         <svg width="52" height="13" viewBox="0 0 52 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M1 8.97127C11.6061 -5.48521 33 3.99996 51 11.4635" stroke="currentColor" stroke-width="2" stroke-miterlimit="3.8637" stroke-linecap="round" />
@@ -207,7 +193,7 @@ get_header();
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="featured-tab" data-bs-toggle="tab" data-bs-target="#featured-tab-pane" type="button" role="tab" aria-controls="featured-tab-pane" aria-selected="false">Bán chạy
+                                <button class="nav-link" id="Sản phẩm Hot" onclick="tablist(this)" data-bs-toggle="tab" data-bs-target="#featured-tab-pane" type="button" role="tab" aria-controls="featured-tab-pane" aria-selected="false">Hot
                                     <span class="tp-product-tab-line">
                                         <svg width="52" height="13" viewBox="0 0 52 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M1 8.97127C11.6061 -5.48521 33 3.99996 51 11.4635" stroke="currentColor" stroke-width="2" stroke-miterlimit="3.8637" stroke-linecap="round" />
@@ -216,7 +202,7 @@ get_header();
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="topsell-tab" data-bs-toggle="tab" data-bs-target="#topsell-tab-pane" type="button" role="tab" aria-controls="topsell-tab-pane" aria-selected="false">New
+                                <button class="nav-link" id="Sản phẩm New" onclick="tablist(this)" data-bs-toggle="tab" data-bs-target="#topsell-tab-pane" type="button" role="tab" aria-controls="topsell-tab-pane" aria-selected="false">New
                                     <span class="tp-product-tab-line">
                                         <svg width="52" height="13" viewBox="0 0 52 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M1 8.97127C11.6061 -5.48521 33 3.99996 51 11.4635" stroke="currentColor" stroke-width="2" stroke-miterlimit="3.8637" stroke-linecap="round" />
@@ -261,17 +247,48 @@ get_header();
 
                                                                 <span class="tp-product-tooltip">Xem trước</span>
                                                             </button>
-                                                            <button type="button" value="<?php echo $item['product_id'] ?>" onclick="favourite(this)" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
-                                                                <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor" />
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
-                                                                </svg>
+                                                            <?php if (isset($_SESSION['wishlist']) && array_key_exists($item['product_id'], $_SESSION['wishlist'])) : ?>
+                                                                <button style="background-color: palevioletred;" type="button" value="<?php echo $item['product_id'] ?>" onclick="favourite(this)" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
+                                                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor" />
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
+                                                                    </svg>
 
-                                                                <span class="tp-product-tooltip">Yêu thích</span>
-                                                            </button>
+                                                                    <span class="tp-product-tooltip">Yêu thích</span>
+                                                                </button>
+                                                            <?php else : ?>
+                                                                <button type="button" value="<?php echo $item['product_id'] ?>" onclick="favourite(this)" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
+                                                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor" />
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
+                                                                    </svg>
+
+                                                                    <span class="tp-product-tooltip">Yêu thích</span>
+                                                                </button>
+
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <script>
+                                                    function favourite(_this) { //Thêm vào danh sách yêu thích
+                                                        var product_id = $(_this).val();
+                                                        var data = {
+                                                            product_id: product_id
+                                                        }
+                                                        $.ajax({
+                                                            url: '?mod=wishlist&action=add_wishlist_ajax',
+                                                            method: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            success: function(data) {
+                                                                console.log(data);
+                                                                $(_this).css("background-color", "palevioletred");
+
+                                                            }
+                                                        });
+                                                    }
+                                                </script>
                                                 <!-- product content -->
                                                 <div class="tp-product-content">
                                                     <div class="tp-product-category">
@@ -442,50 +459,32 @@ get_header();
 
     <!-- product area end -->
     <!-- banner area start -->
-    <section class="tp-banner-area pb-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-8 col-lg-7">
-                    <div class="tp-banner-item tp-banner-height p-relative mb-30 z-index-1 fix">
-                        <div class="tp-banner-thumb include-bg transition-3" data-background="assets/img/product/banner/product-banner-1.jpg"></div>
-                        <div class="tp-banner-content">
-                            <span>Sale 20% off all store</span>
-                            <h3 class="tp-banner-title">
-                                <a href="product-details.html">Smartphone <br> BLU G91 Pro 2022</a>
-                            </h3>
-                            <div class="tp-banner-btn">
-                                <a href="product-details.html" class="tp-link-btn">Shop Now
-                                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13.9998 6.19656L1 6.19656" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M8.75674 0.975394L14 6.19613L8.75674 11.4177" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-5">
-                    <div class="tp-banner-item tp-banner-item-sm tp-banner-height p-relative mb-30 z-index-1 fix">
-                        <div class="tp-banner-thumb include-bg transition-3" data-background="assets/img/product/banner/product-banner-2.jpg"></div>
-                        <div class="tp-banner-content">
-                            <h3 class="tp-banner-title">
-                                <a href="product-details.html">HyperX Cloud II <br> Wireless</a>
-                            </h3>
-                            <p>Sale 35% off</p>
-                            <div class="tp-banner-btn">
-                                <a href="product-details.html" class="tp-link-btn">Shop Now
-                                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13.9998 6.19656L1 6.19656" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M8.75674 0.975394L14 6.19613L8.75674 11.4177" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </a>
+    <?php if (isset($homepageAds1)) : ?>
+        <section class="tp-banner-area pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-7">
+                        <div class="tp-banner-item tp-banner-height p-relative mb-30 z-index-1 fix">
+                            <div class="tp-banner-thumb include-bg transition-3" data-background="admin/img/<?php echo $homepageAds1['ads_img'] ?>"></div>
+                            <div class="tp-banner-content">
+                                <h3 class="tp-banner-title">
+                                    <?php echo $homepageAds1['ads_content']  ?>
+                                </h3>
+                                <div class="tp-banner-btn">
+                                    <a href="<?php echo $homepageAds1['link'] ?>" class="tp-link-btn">Xem thêm
+                                        <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M13.9998 6.19656L1 6.19656" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M8.75674 0.975394L14 6.19613L8.75674 11.4177" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    <?php endif; ?>
     <!-- banner area end -->
 
     <!-- product offer area start -->
@@ -500,7 +499,7 @@ get_header();
                 <div class="col-xl-8 col-md-7 col-sm-6">
                     <div class="tp-product-offer-more-wrapper d-flex justify-content-sm-end p-relative z-index-1">
                         <div class="tp-product-offer-more mb-40 text-sm-end grey-bg-2">
-                            <a href="shop.html" class="tp-btn tp-btn-2 tp-btn-blue">View All Deals
+                            <a href="san-pham.html" class="tp-btn tp-btn-2 tp-btn-blue">Danh sách sản phẩm
                                 <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M16 6.99976L1 6.99976" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M9.9502 0.975414L16.0002 6.99941L9.9502 13.0244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -522,10 +521,9 @@ get_header();
                                 ?>
                                         <div class="tp-product-offer-item tp-product-item transition-3 swiper-slide">
                                             <div class="tp-product-thumb p-relative fix m-img">
-                                                <a href="product-details.html">
+                                                <a href="<?php echo "san-pham/chi-tiet/" . create_slug($item['product_name']) . "/" . $item['product_id'] . ".html"; ?>">
                                                     <img src="admin/img/<?php echo $item['product_thumb'] ?>" alt="product-electronic">
                                                 </a>
-
                                                 <!-- product action -->
                                                 <div class="tp-product-action">
                                                     <div class="tp-product-action-item d-flex flex-column">
@@ -536,8 +534,7 @@ get_header();
                                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M1.56975 8.05226C3.42975 12.1613 6.56275 14.6043 9.99975 14.6053C13.4368 14.6043 16.5697 12.1613 18.4298 8.05226C16.5697 3.94426 13.4368 1.50126 9.99975 1.50026C6.56375 1.50126 3.42975 3.94426 1.56975 8.05226ZM10.0017 16.1053H9.99775H9.99675C5.86075 16.1023 2.14675 13.2033 0.06075 8.34826C-0.02025 8.15926 -0.02025 7.94526 0.06075 7.75626C2.14675 2.90226 5.86175 0.00326172 9.99675 0.000261719C9.99875 -0.000738281 9.99875 -0.000738281 9.99975 0.000261719C10.0017 -0.000738281 10.0017 -0.000738281 10.0028 0.000261719C14.1388 0.00326172 17.8527 2.90226 19.9387 7.75626C20.0208 7.94526 20.0208 8.15926 19.9387 8.34826C17.8537 13.2033 14.1388 16.1023 10.0028 16.1053H10.0017Z" fill="currentColor" />
                                                                 </g>
                                                             </svg>
-
-                                                            <span class="tp-product-tooltip">Xem sản phẩm</span>
+                                                            <span class="tp-product-tooltip">Xem trước</span>
                                                         </button>
                                                         <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
                                                             <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -545,31 +542,15 @@ get_header();
                                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
                                                             </svg>
 
-                                                            <span class="tp-product-tooltip">Add To Wishlist</span>
+                                                            <span class="tp-product-tooltip">Yêu thích</span>
                                                         </button>
                                                     </div>
-                                                </div>
-
-                                                <div class="tp-product-add-cart-btn-large-wrapper">
-                                                    <button type="button" class="tp-product-add-cart-btn-large">
-                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.93795 5.34749L4.54095 12.5195C4.58495 13.0715 5.03594 13.4855 5.58695 13.4855H5.59095H16.5019H16.5039C17.0249 13.4855 17.4699 13.0975 17.5439 12.5825L18.4939 6.02349C18.5159 5.86749 18.4769 5.71149 18.3819 5.58549C18.2879 5.45849 18.1499 5.37649 17.9939 5.35449C17.7849 5.36249 9.11195 5.35049 3.93795 5.34749ZM5.58495 14.9855C4.26795 14.9855 3.15295 13.9575 3.04595 12.6425L2.12995 1.74849L0.622945 1.48849C0.213945 1.41649 -0.0590549 1.02949 0.0109451 0.620487C0.082945 0.211487 0.477945 -0.054513 0.877945 0.00948704L2.95795 0.369487C3.29295 0.428487 3.54795 0.706487 3.57695 1.04649L3.81194 3.84749C18.0879 3.85349 18.1339 3.86049 18.2029 3.86849C18.7599 3.94949 19.2499 4.24049 19.5839 4.68849C19.9179 5.13549 20.0579 5.68649 19.9779 6.23849L19.0289 12.7965C18.8499 14.0445 17.7659 14.9855 16.5059 14.9855H16.5009H5.59295H5.58495Z" fill="currentColor" />
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8979 9.04382H12.1259C11.7109 9.04382 11.3759 8.70782 11.3759 8.29382C11.3759 7.87982 11.7109 7.54382 12.1259 7.54382H14.8979C15.3119 7.54382 15.6479 7.87982 15.6479 8.29382C15.6479 8.70782 15.3119 9.04382 14.8979 9.04382Z" fill="currentColor" />
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15474 17.702C5.45574 17.702 5.69874 17.945 5.69874 18.246C5.69874 18.547 5.45574 18.791 5.15474 18.791C4.85274 18.791 4.60974 18.547 4.60974 18.246C4.60974 17.945 4.85274 17.702 5.15474 17.702Z" fill="currentColor" />
-
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15374 18.0409C5.04074 18.0409 4.94874 18.1329 4.94874 18.2459C4.94874 18.4729 5.35974 18.4729 5.35974 18.2459C5.35974 18.1329 5.26674 18.0409 5.15374 18.0409ZM5.15374 19.5409C4.43974 19.5409 3.85974 18.9599 3.85974 18.2459C3.85974 17.5319 4.43974 16.9519 5.15374 16.9519C5.86774 16.9519 6.44874 17.5319 6.44874 18.2459C6.44874 18.9599 5.86774 19.5409 5.15374 19.5409Z" fill="currentColor" />
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.435 17.702C16.736 17.702 16.98 17.945 16.98 18.246C16.98 18.547 16.736 18.791 16.435 18.791C16.133 18.791 15.89 18.547 15.89 18.246C15.89 17.945 16.133 17.702 16.435 17.702Z" fill="currentColor" />
-
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.434 18.0409C16.322 18.0409 16.23 18.1329 16.23 18.2459C16.231 18.4749 16.641 18.4729 16.64 18.2459C16.64 18.1329 16.547 18.0409 16.434 18.0409ZM16.434 19.5409C15.72 19.5409 15.14 18.9599 15.14 18.2459C15.14 17.5319 15.72 16.9519 16.434 16.9519C17.149 16.9519 17.73 17.5319 17.73 18.2459C17.73 18.9599 17.149 19.5409 16.434 19.5409Z" fill="currentColor" />
-                                                        </svg>
-                                                        Add To Cart
-                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- product content -->
                                             <div class="tp-product-content">
                                                 <div class="tp-product-category">
-                                                    <a href="shop.html">HD Camera</a>
+                                                    <a href="<?php echo "san-pham/chi-tiet/" . create_slug($item['product_name']) . "/" . $item['product_id'] . ".html"; ?>"><?php echo $item['title'] ?></a>
                                                 </div>
                                                 <h3 class="tp-product-title">
                                                     <a href="<?php echo "san-pham/chi-tiet/" . create_slug($item['product_name']) . "/" . $item['product_id'] . ".html"; ?>">
@@ -578,32 +559,16 @@ get_header();
                                                 </h3>
                                                 <div class="tp-product-rating d-flex align-items-center">
                                                     <div class="tp-product-rating-icon">
-                                                        <span><i class="fa-solid fa-star"></i></span>
-                                                        <span><i class="fa-solid fa-star"></i></span>
-                                                        <span><i class="fa-solid fa-star"></i></span>
-                                                        <span><i class="fa-solid fa-star"></i></span>
-                                                        <span><i class="fa-solid fa-star"></i></span>
+                                                        <?php echo  str_repeat("<span><i class='fa-solid fa-star'></i></span>", product_reviews($item['product_id'])['star'])  ?>
                                                     </div>
                                                     <div class="tp-product-rating-text">
                                                         <span>(<?php echo $item['sales'] ?> Lượt bán)</span>
                                                     </div>
                                                 </div>
                                                 <div class="tp-product-price-wrapper">
-                                                    <span class="tp-product-price old-price">$475.00</span>
-                                                    <span class="tp-product-price new-price">$340.00</span>
+                                                    <span class="tp-product-price new-price"><?php echo currency_format(min_price($item['product_id'])) ?></span> -
+                                                    <span class="tp-product-price new-price"><?php echo currency_format(max_price($item['product_id'])) ?></span>
                                                 </div>
-
-                                                <div class="tp-product-countdown" data-countdown data-date="Sep 30 2024 20:20:22">
-                                                    <div class="tp-product-countdown-inner">
-                                                        <ul>
-                                                            <li><span data-days>0</span> Days</li>
-                                                            <li><span data-hours>0</span> Hrs</li>
-                                                            <li><span data-minutes>0</span> Min</li>
-                                                            <li><span data-seconds>0</span> Sec</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </div>
                                 <?php endforeach;
@@ -617,634 +582,43 @@ get_header();
         </div>
     </section>
     <!-- product deal area end -->
-
-    <section class="tp-product-gadget-area pt-80 pb-75">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-lg-5">
-                    <div class="tp-product-gadget-sidebar mb-40">
-                        <div class="tp-product-gadget-categories p-relative fix mb-10">
-                            <div class="tp-product-gadget-thumb">
-                                <img src="assets/img/product/gadget/gadget-girl.png" alt="">
-                            </div>
-                            <h3 class="tp-product-gadget-categories-title">Electronics <br> Gadgets</h3>
-
-                            <div class="tp-product-gadget-categories-list">
-                                <ul>
-                                    <li><a href="shop-category.html">Micrscope</a></li>
-                                    <li><a href="shop-category.html">Remote Control</a></li>
-                                    <li><a href="shop-category.html">Monitor</a></li>
-                                    <li><a href="shop-category.html">Thermometer</a></li>
-                                    <li><a href="shop-category.html">Backpack</a></li>
-                                    <li><a href="shop-category.html">Headphones</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="tp-product-gadget-btn">
-                                <a href="shop-category.html" class="tp-link-btn">More Products
-                                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13.9998 6.19656L1 6.19656" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M8.75674 0.975394L14 6.19613L8.75674 11.4177" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="tp-product-gadget-banner">
-                            <div class="tp-product-gadget-banner-slider-active swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="tp-product-gadget-banner-item swiper-slide include-bg" data-background="assets/img/product/gadget/gadget-banner-1.jpg">
-                                        <div class="tp-product-gadget-banner-content">
-                                            <span class="tp-product-gadget-banner-price">Only $99.00</span>
-                                            <h3 class="tp-product-gadget-banner-title">
-                                                <a href="product-details.html">Selected novelty <br> Products</a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                    <div class="tp-product-gadget-banner-item swiper-slide include-bg" data-background="assets/img/product/gadget/gadget-banner-2.jpg">
-                                        <div class="tp-product-gadget-banner-content">
-                                            <span class="tp-product-gadget-banner-price">Only $55.00</span>
-                                            <h3 class="tp-product-gadget-banner-title">
-                                                <a href="product-details.html">Top Rated <br> Products</a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tp-product-gadget-banner-slider-dot tp-swiper-dot"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-8 col-lg-7">
-                    <div class="tp-product-gadget-wrapper">
-                        <div class="row">
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="tp-product-item p-relative transition-3 mb-25">
-                                    <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/product-12.jpg" alt="product-electronic">
-                                        </a>
-
-                                        <!-- product badge -->
-                                        <div class="tp-product-badge">
-                                            <span class="product-offer">-25%</span>
-                                        </div>
-
-                                        <!-- product action -->
-                                        <div class="tp-product-action">
-                                            <div class="tp-product-action-item d-flex flex-column">
-                                                <button type="button" class="tp-product-action-btn tp-product-add-cart-btn">
-                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.93795 5.34749L4.54095 12.5195C4.58495 13.0715 5.03594 13.4855 5.58695 13.4855H5.59095H16.5019H16.5039C17.0249 13.4855 17.4699 13.0975 17.5439 12.5825L18.4939 6.02349C18.5159 5.86749 18.4769 5.71149 18.3819 5.58549C18.2879 5.45849 18.1499 5.37649 17.9939 5.35449C17.7849 5.36249 9.11195 5.35049 3.93795 5.34749ZM5.58495 14.9855C4.26795 14.9855 3.15295 13.9575 3.04595 12.6425L2.12995 1.74849L0.622945 1.48849C0.213945 1.41649 -0.0590549 1.02949 0.0109451 0.620487C0.082945 0.211487 0.477945 -0.054513 0.877945 0.00948704L2.95795 0.369487C3.29295 0.428487 3.54795 0.706487 3.57695 1.04649L3.81194 3.84749C18.0879 3.85349 18.1339 3.86049 18.2029 3.86849C18.7599 3.94949 19.2499 4.24049 19.5839 4.68849C19.9179 5.13549 20.0579 5.68649 19.9779 6.23849L19.0289 12.7965C18.8499 14.0445 17.7659 14.9855 16.5059 14.9855H16.5009H5.59295H5.58495Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8979 9.04382H12.1259C11.7109 9.04382 11.3759 8.70782 11.3759 8.29382C11.3759 7.87982 11.7109 7.54382 12.1259 7.54382H14.8979C15.3119 7.54382 15.6479 7.87982 15.6479 8.29382C15.6479 8.70782 15.3119 9.04382 14.8979 9.04382Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15474 17.702C5.45574 17.702 5.69874 17.945 5.69874 18.246C5.69874 18.547 5.45574 18.791 5.15474 18.791C4.85274 18.791 4.60974 18.547 4.60974 18.246C4.60974 17.945 4.85274 17.702 5.15474 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15374 18.0409C5.04074 18.0409 4.94874 18.1329 4.94874 18.2459C4.94874 18.4729 5.35974 18.4729 5.35974 18.2459C5.35974 18.1329 5.26674 18.0409 5.15374 18.0409ZM5.15374 19.5409C4.43974 19.5409 3.85974 18.9599 3.85974 18.2459C3.85974 17.5319 4.43974 16.9519 5.15374 16.9519C5.86774 16.9519 6.44874 17.5319 6.44874 18.2459C6.44874 18.9599 5.86774 19.5409 5.15374 19.5409Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.435 17.702C16.736 17.702 16.98 17.945 16.98 18.246C16.98 18.547 16.736 18.791 16.435 18.791C16.133 18.791 15.89 18.547 15.89 18.246C15.89 17.945 16.133 17.702 16.435 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.434 18.0409C16.322 18.0409 16.23 18.1329 16.23 18.2459C16.231 18.4749 16.641 18.4729 16.64 18.2459C16.64 18.1329 16.547 18.0409 16.434 18.0409ZM16.434 19.5409C15.72 19.5409 15.14 18.9599 15.14 18.2459C15.14 17.5319 15.72 16.9519 16.434 16.9519C17.149 16.9519 17.73 17.5319 17.73 18.2459C17.73 18.9599 17.149 19.5409 16.434 19.5409Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add to Cart</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
-                                                    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99938 5.64111C8.66938 5.64111 7.58838 6.72311 7.58838 8.05311C7.58838 9.38211 8.66938 10.4631 9.99938 10.4631C11.3294 10.4631 12.4114 9.38211 12.4114 8.05311C12.4114 6.72311 11.3294 5.64111 9.99938 5.64111ZM9.99938 11.9631C7.84238 11.9631 6.08838 10.2091 6.08838 8.05311C6.08838 5.89611 7.84238 4.14111 9.99938 4.14111C12.1564 4.14111 13.9114 5.89611 13.9114 8.05311C13.9114 10.2091 12.1564 11.9631 9.99938 11.9631Z" fill="currentColor" />
-                                                        <g mask="url(#mask0_1211_721)">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.56975 8.05226C3.42975 12.1613 6.56275 14.6043 9.99975 14.6053C13.4368 14.6043 16.5697 12.1613 18.4298 8.05226C16.5697 3.94426 13.4368 1.50126 9.99975 1.50026C6.56375 1.50126 3.42975 3.94426 1.56975 8.05226ZM10.0017 16.1053H9.99775H9.99675C5.86075 16.1023 2.14675 13.2033 0.06075 8.34826C-0.02025 8.15926 -0.02025 7.94526 0.06075 7.75626C2.14675 2.90226 5.86175 0.00326172 9.99675 0.000261719C9.99875 -0.000738281 9.99875 -0.000738281 9.99975 0.000261719C10.0017 -0.000738281 10.0017 -0.000738281 10.0028 0.000261719C14.1388 0.00326172 17.8527 2.90226 19.9387 7.75626C20.0208 7.94526 20.0208 8.15926 19.9387 8.34826C17.8537 13.2033 14.1388 16.1023 10.0028 16.1053H10.0017Z" fill="currentColor" />
-                                                        </g>
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Quick View</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
-                                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add To Wishlist</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product content -->
-                                    <div class="tp-product-content">
-                                        <div class="tp-product-category">
-                                            <a href="shop.html">Electric</a>
-                                        </div>
-                                        <h3 class="tp-product-title">
-                                            <a href="product-details.html">
-                                                Yamaha Electric Violin-YEV104BL-Black String
-                                            </a>
-                                        </h3>
-                                        <div class="tp-product-rating d-flex align-items-center">
-                                            <div class="tp-product-rating-icon">
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star-half-stroke"></i></span>
-                                            </div>
-                                            <div class="tp-product-rating-text">
-                                                <span>(6 Review)</span>
-                                            </div>
-                                        </div>
-                                        <div class="tp-product-price-wrapper">
-                                            <span class="tp-product-price">$72.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="tp-product-item p-relative transition-3 mb-25">
-                                    <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/product-13.jpg" alt="product-electronic">
-                                        </a>
-
-                                        <!-- product action -->
-                                        <div class="tp-product-action">
-                                            <div class="tp-product-action-item d-flex flex-column">
-                                                <button type="button" class="tp-product-action-btn tp-product-add-cart-btn">
-                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.93795 5.34749L4.54095 12.5195C4.58495 13.0715 5.03594 13.4855 5.58695 13.4855H5.59095H16.5019H16.5039C17.0249 13.4855 17.4699 13.0975 17.5439 12.5825L18.4939 6.02349C18.5159 5.86749 18.4769 5.71149 18.3819 5.58549C18.2879 5.45849 18.1499 5.37649 17.9939 5.35449C17.7849 5.36249 9.11195 5.35049 3.93795 5.34749ZM5.58495 14.9855C4.26795 14.9855 3.15295 13.9575 3.04595 12.6425L2.12995 1.74849L0.622945 1.48849C0.213945 1.41649 -0.0590549 1.02949 0.0109451 0.620487C0.082945 0.211487 0.477945 -0.054513 0.877945 0.00948704L2.95795 0.369487C3.29295 0.428487 3.54795 0.706487 3.57695 1.04649L3.81194 3.84749C18.0879 3.85349 18.1339 3.86049 18.2029 3.86849C18.7599 3.94949 19.2499 4.24049 19.5839 4.68849C19.9179 5.13549 20.0579 5.68649 19.9779 6.23849L19.0289 12.7965C18.8499 14.0445 17.7659 14.9855 16.5059 14.9855H16.5009H5.59295H5.58495Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8979 9.04382H12.1259C11.7109 9.04382 11.3759 8.70782 11.3759 8.29382C11.3759 7.87982 11.7109 7.54382 12.1259 7.54382H14.8979C15.3119 7.54382 15.6479 7.87982 15.6479 8.29382C15.6479 8.70782 15.3119 9.04382 14.8979 9.04382Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15474 17.702C5.45574 17.702 5.69874 17.945 5.69874 18.246C5.69874 18.547 5.45574 18.791 5.15474 18.791C4.85274 18.791 4.60974 18.547 4.60974 18.246C4.60974 17.945 4.85274 17.702 5.15474 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15374 18.0409C5.04074 18.0409 4.94874 18.1329 4.94874 18.2459C4.94874 18.4729 5.35974 18.4729 5.35974 18.2459C5.35974 18.1329 5.26674 18.0409 5.15374 18.0409ZM5.15374 19.5409C4.43974 19.5409 3.85974 18.9599 3.85974 18.2459C3.85974 17.5319 4.43974 16.9519 5.15374 16.9519C5.86774 16.9519 6.44874 17.5319 6.44874 18.2459C6.44874 18.9599 5.86774 19.5409 5.15374 19.5409Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.435 17.702C16.736 17.702 16.98 17.945 16.98 18.246C16.98 18.547 16.736 18.791 16.435 18.791C16.133 18.791 15.89 18.547 15.89 18.246C15.89 17.945 16.133 17.702 16.435 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.434 18.0409C16.322 18.0409 16.23 18.1329 16.23 18.2459C16.231 18.4749 16.641 18.4729 16.64 18.2459C16.64 18.1329 16.547 18.0409 16.434 18.0409ZM16.434 19.5409C15.72 19.5409 15.14 18.9599 15.14 18.2459C15.14 17.5319 15.72 16.9519 16.434 16.9519C17.149 16.9519 17.73 17.5319 17.73 18.2459C17.73 18.9599 17.149 19.5409 16.434 19.5409Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add to Cart</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
-                                                    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99938 5.64111C8.66938 5.64111 7.58838 6.72311 7.58838 8.05311C7.58838 9.38211 8.66938 10.4631 9.99938 10.4631C11.3294 10.4631 12.4114 9.38211 12.4114 8.05311C12.4114 6.72311 11.3294 5.64111 9.99938 5.64111ZM9.99938 11.9631C7.84238 11.9631 6.08838 10.2091 6.08838 8.05311C6.08838 5.89611 7.84238 4.14111 9.99938 4.14111C12.1564 4.14111 13.9114 5.89611 13.9114 8.05311C13.9114 10.2091 12.1564 11.9631 9.99938 11.9631Z" fill="currentColor" />
-                                                        <g mask="url(#mask0_1211_721)">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.56975 8.05226C3.42975 12.1613 6.56275 14.6043 9.99975 14.6053C13.4368 14.6043 16.5697 12.1613 18.4298 8.05226C16.5697 3.94426 13.4368 1.50126 9.99975 1.50026C6.56375 1.50126 3.42975 3.94426 1.56975 8.05226ZM10.0017 16.1053H9.99775H9.99675C5.86075 16.1023 2.14675 13.2033 0.06075 8.34826C-0.02025 8.15926 -0.02025 7.94526 0.06075 7.75626C2.14675 2.90226 5.86175 0.00326172 9.99675 0.000261719C9.99875 -0.000738281 9.99875 -0.000738281 9.99975 0.000261719C10.0017 -0.000738281 10.0017 -0.000738281 10.0028 0.000261719C14.1388 0.00326172 17.8527 2.90226 19.9387 7.75626C20.0208 7.94526 20.0208 8.15926 19.9387 8.34826C17.8537 13.2033 14.1388 16.1023 10.0028 16.1053H10.0017Z" fill="currentColor" />
-                                                        </g>
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Quick View</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
-                                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add To Wishlist</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product content -->
-                                    <div class="tp-product-content">
-                                        <div class="tp-product-category">
-                                            <a href="shop.html">Tablet Pro 8</a>
-                                        </div>
-                                        <h3 class="tp-product-title">
-                                            <a href="product-details.html">
-                                                Microsoft Surface Pro 8-13" Touchscreen.
-                                            </a>
-                                        </h3>
-                                        <div class="tp-product-rating d-flex align-items-center">
-                                            <div class="tp-product-rating-icon">
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star-half-stroke"></i></span>
-                                            </div>
-                                            <div class="tp-product-rating-text">
-                                                <span>(5 Review)</span>
-                                            </div>
-                                        </div>
-                                        <div class="tp-product-price-wrapper">
-                                            <span class="tp-product-price old-price">$475.00</span>
-                                            <span class="tp-product-price new-price">$340.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="tp-product-item p-relative transition-3 mb-25">
-                                    <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/product-14.jpg" alt="product-electronic">
-                                        </a>
-
-                                        <!-- product badge -->
-                                        <div class="tp-product-badge">
-                                            <span class="product-sale">Sale</span>
-                                        </div>
-
-                                        <!-- product action -->
-                                        <div class="tp-product-action">
-                                            <div class="tp-product-action-item d-flex flex-column">
-                                                <button type="button" class="tp-product-action-btn tp-product-add-cart-btn">
-                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.93795 5.34749L4.54095 12.5195C4.58495 13.0715 5.03594 13.4855 5.58695 13.4855H5.59095H16.5019H16.5039C17.0249 13.4855 17.4699 13.0975 17.5439 12.5825L18.4939 6.02349C18.5159 5.86749 18.4769 5.71149 18.3819 5.58549C18.2879 5.45849 18.1499 5.37649 17.9939 5.35449C17.7849 5.36249 9.11195 5.35049 3.93795 5.34749ZM5.58495 14.9855C4.26795 14.9855 3.15295 13.9575 3.04595 12.6425L2.12995 1.74849L0.622945 1.48849C0.213945 1.41649 -0.0590549 1.02949 0.0109451 0.620487C0.082945 0.211487 0.477945 -0.054513 0.877945 0.00948704L2.95795 0.369487C3.29295 0.428487 3.54795 0.706487 3.57695 1.04649L3.81194 3.84749C18.0879 3.85349 18.1339 3.86049 18.2029 3.86849C18.7599 3.94949 19.2499 4.24049 19.5839 4.68849C19.9179 5.13549 20.0579 5.68649 19.9779 6.23849L19.0289 12.7965C18.8499 14.0445 17.7659 14.9855 16.5059 14.9855H16.5009H5.59295H5.58495Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8979 9.04382H12.1259C11.7109 9.04382 11.3759 8.70782 11.3759 8.29382C11.3759 7.87982 11.7109 7.54382 12.1259 7.54382H14.8979C15.3119 7.54382 15.6479 7.87982 15.6479 8.29382C15.6479 8.70782 15.3119 9.04382 14.8979 9.04382Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15474 17.702C5.45574 17.702 5.69874 17.945 5.69874 18.246C5.69874 18.547 5.45574 18.791 5.15474 18.791C4.85274 18.791 4.60974 18.547 4.60974 18.246C4.60974 17.945 4.85274 17.702 5.15474 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15374 18.0409C5.04074 18.0409 4.94874 18.1329 4.94874 18.2459C4.94874 18.4729 5.35974 18.4729 5.35974 18.2459C5.35974 18.1329 5.26674 18.0409 5.15374 18.0409ZM5.15374 19.5409C4.43974 19.5409 3.85974 18.9599 3.85974 18.2459C3.85974 17.5319 4.43974 16.9519 5.15374 16.9519C5.86774 16.9519 6.44874 17.5319 6.44874 18.2459C6.44874 18.9599 5.86774 19.5409 5.15374 19.5409Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.435 17.702C16.736 17.702 16.98 17.945 16.98 18.246C16.98 18.547 16.736 18.791 16.435 18.791C16.133 18.791 15.89 18.547 15.89 18.246C15.89 17.945 16.133 17.702 16.435 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.434 18.0409C16.322 18.0409 16.23 18.1329 16.23 18.2459C16.231 18.4749 16.641 18.4729 16.64 18.2459C16.64 18.1329 16.547 18.0409 16.434 18.0409ZM16.434 19.5409C15.72 19.5409 15.14 18.9599 15.14 18.2459C15.14 17.5319 15.72 16.9519 16.434 16.9519C17.149 16.9519 17.73 17.5319 17.73 18.2459C17.73 18.9599 17.149 19.5409 16.434 19.5409Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add to Cart</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
-                                                    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99938 5.64111C8.66938 5.64111 7.58838 6.72311 7.58838 8.05311C7.58838 9.38211 8.66938 10.4631 9.99938 10.4631C11.3294 10.4631 12.4114 9.38211 12.4114 8.05311C12.4114 6.72311 11.3294 5.64111 9.99938 5.64111ZM9.99938 11.9631C7.84238 11.9631 6.08838 10.2091 6.08838 8.05311C6.08838 5.89611 7.84238 4.14111 9.99938 4.14111C12.1564 4.14111 13.9114 5.89611 13.9114 8.05311C13.9114 10.2091 12.1564 11.9631 9.99938 11.9631Z" fill="currentColor" />
-                                                        <g mask="url(#mask0_1211_721)">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.56975 8.05226C3.42975 12.1613 6.56275 14.6043 9.99975 14.6053C13.4368 14.6043 16.5697 12.1613 18.4298 8.05226C16.5697 3.94426 13.4368 1.50126 9.99975 1.50026C6.56375 1.50126 3.42975 3.94426 1.56975 8.05226ZM10.0017 16.1053H9.99775H9.99675C5.86075 16.1023 2.14675 13.2033 0.06075 8.34826C-0.02025 8.15926 -0.02025 7.94526 0.06075 7.75626C2.14675 2.90226 5.86175 0.00326172 9.99675 0.000261719C9.99875 -0.000738281 9.99875 -0.000738281 9.99975 0.000261719C10.0017 -0.000738281 10.0017 -0.000738281 10.0028 0.000261719C14.1388 0.00326172 17.8527 2.90226 19.9387 7.75626C20.0208 7.94526 20.0208 8.15926 19.9387 8.34826C17.8537 13.2033 14.1388 16.1023 10.0028 16.1053H10.0017Z" fill="currentColor" />
-                                                        </g>
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Quick View</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
-                                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add To Wishlist</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product content -->
-                                    <div class="tp-product-content">
-                                        <div class="tp-product-category">
-                                            <a href="shop.html">Headphone</a>
-                                        </div>
-                                        <h3 class="tp-product-title">
-                                            <a href="product-details.html">
-                                                Playstation 4 2TB Slim Gaming Console.
-                                            </a>
-                                        </h3>
-                                        <div class="tp-product-rating d-flex align-items-center">
-                                            <div class="tp-product-rating-icon">
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star-half-stroke"></i></span>
-                                            </div>
-                                            <div class="tp-product-rating-text">
-                                                <span>(3 Review)</span>
-                                            </div>
-                                        </div>
-                                        <div class="tp-product-price-wrapper">
-                                            <span class="tp-product-price">$142.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="tp-product-item p-relative transition-3 mb-25">
-                                    <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/product-15.jpg" alt="product-electronic">
-                                        </a>
-
-                                        <!-- product badge -->
-                                        <div class="tp-product-badge">
-                                            <span class="product-trending">Sale</span>
-                                        </div>
-
-                                        <!-- product action -->
-                                        <div class="tp-product-action">
-                                            <div class="tp-product-action-item d-flex flex-column">
-                                                <button type="button" class="tp-product-action-btn tp-product-add-cart-btn">
-                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.93795 5.34749L4.54095 12.5195C4.58495 13.0715 5.03594 13.4855 5.58695 13.4855H5.59095H16.5019H16.5039C17.0249 13.4855 17.4699 13.0975 17.5439 12.5825L18.4939 6.02349C18.5159 5.86749 18.4769 5.71149 18.3819 5.58549C18.2879 5.45849 18.1499 5.37649 17.9939 5.35449C17.7849 5.36249 9.11195 5.35049 3.93795 5.34749ZM5.58495 14.9855C4.26795 14.9855 3.15295 13.9575 3.04595 12.6425L2.12995 1.74849L0.622945 1.48849C0.213945 1.41649 -0.0590549 1.02949 0.0109451 0.620487C0.082945 0.211487 0.477945 -0.054513 0.877945 0.00948704L2.95795 0.369487C3.29295 0.428487 3.54795 0.706487 3.57695 1.04649L3.81194 3.84749C18.0879 3.85349 18.1339 3.86049 18.2029 3.86849C18.7599 3.94949 19.2499 4.24049 19.5839 4.68849C19.9179 5.13549 20.0579 5.68649 19.9779 6.23849L19.0289 12.7965C18.8499 14.0445 17.7659 14.9855 16.5059 14.9855H16.5009H5.59295H5.58495Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8979 9.04382H12.1259C11.7109 9.04382 11.3759 8.70782 11.3759 8.29382C11.3759 7.87982 11.7109 7.54382 12.1259 7.54382H14.8979C15.3119 7.54382 15.6479 7.87982 15.6479 8.29382C15.6479 8.70782 15.3119 9.04382 14.8979 9.04382Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15474 17.702C5.45574 17.702 5.69874 17.945 5.69874 18.246C5.69874 18.547 5.45574 18.791 5.15474 18.791C4.85274 18.791 4.60974 18.547 4.60974 18.246C4.60974 17.945 4.85274 17.702 5.15474 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15374 18.0409C5.04074 18.0409 4.94874 18.1329 4.94874 18.2459C4.94874 18.4729 5.35974 18.4729 5.35974 18.2459C5.35974 18.1329 5.26674 18.0409 5.15374 18.0409ZM5.15374 19.5409C4.43974 19.5409 3.85974 18.9599 3.85974 18.2459C3.85974 17.5319 4.43974 16.9519 5.15374 16.9519C5.86774 16.9519 6.44874 17.5319 6.44874 18.2459C6.44874 18.9599 5.86774 19.5409 5.15374 19.5409Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.435 17.702C16.736 17.702 16.98 17.945 16.98 18.246C16.98 18.547 16.736 18.791 16.435 18.791C16.133 18.791 15.89 18.547 15.89 18.246C15.89 17.945 16.133 17.702 16.435 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.434 18.0409C16.322 18.0409 16.23 18.1329 16.23 18.2459C16.231 18.4749 16.641 18.4729 16.64 18.2459C16.64 18.1329 16.547 18.0409 16.434 18.0409ZM16.434 19.5409C15.72 19.5409 15.14 18.9599 15.14 18.2459C15.14 17.5319 15.72 16.9519 16.434 16.9519C17.149 16.9519 17.73 17.5319 17.73 18.2459C17.73 18.9599 17.149 19.5409 16.434 19.5409Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add to Cart</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
-                                                    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99938 5.64111C8.66938 5.64111 7.58838 6.72311 7.58838 8.05311C7.58838 9.38211 8.66938 10.4631 9.99938 10.4631C11.3294 10.4631 12.4114 9.38211 12.4114 8.05311C12.4114 6.72311 11.3294 5.64111 9.99938 5.64111ZM9.99938 11.9631C7.84238 11.9631 6.08838 10.2091 6.08838 8.05311C6.08838 5.89611 7.84238 4.14111 9.99938 4.14111C12.1564 4.14111 13.9114 5.89611 13.9114 8.05311C13.9114 10.2091 12.1564 11.9631 9.99938 11.9631Z" fill="currentColor" />
-                                                        <g mask="url(#mask0_1211_721)">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.56975 8.05226C3.42975 12.1613 6.56275 14.6043 9.99975 14.6053C13.4368 14.6043 16.5697 12.1613 18.4298 8.05226C16.5697 3.94426 13.4368 1.50126 9.99975 1.50026C6.56375 1.50126 3.42975 3.94426 1.56975 8.05226ZM10.0017 16.1053H9.99775H9.99675C5.86075 16.1023 2.14675 13.2033 0.06075 8.34826C-0.02025 8.15926 -0.02025 7.94526 0.06075 7.75626C2.14675 2.90226 5.86175 0.00326172 9.99675 0.000261719C9.99875 -0.000738281 9.99875 -0.000738281 9.99975 0.000261719C10.0017 -0.000738281 10.0017 -0.000738281 10.0028 0.000261719C14.1388 0.00326172 17.8527 2.90226 19.9387 7.75626C20.0208 7.94526 20.0208 8.15926 19.9387 8.34826C17.8537 13.2033 14.1388 16.1023 10.0028 16.1053H10.0017Z" fill="currentColor" />
-                                                        </g>
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Quick View</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
-                                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add To Wishlist</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product content -->
-                                    <div class="tp-product-content">
-                                        <div class="tp-product-category">
-                                            <a href="shop.html">Pertronix</a>
-                                        </div>
-                                        <h3 class="tp-product-title">
-                                            <a href="product-details.html">
-                                                Flame-Thrower VW Type 1 Engine Plug.
-                                            </a>
-                                        </h3>
-                                        <div class="tp-product-rating d-flex align-items-center">
-                                            <div class="tp-product-rating-icon">
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star-half-stroke"></i></span>
-                                            </div>
-                                            <div class="tp-product-rating-text">
-                                                <span>(6 Review)</span>
-                                            </div>
-                                        </div>
-                                        <div class="tp-product-price-wrapper">
-                                            <span class="tp-product-price old-price">$135.00</span>
-                                            <span class="tp-product-price new-price">$114.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="tp-product-item p-relative transition-3 mb-25">
-                                    <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/product-16.jpg" alt="product-electronic">
-                                        </a>
-
-                                        <!-- product badge -->
-                                        <div class="tp-product-badge">
-                                            <span class="product-hot">Hot</span>
-                                        </div>
-
-                                        <!-- product action -->
-                                        <div class="tp-product-action">
-                                            <div class="tp-product-action-item d-flex flex-column">
-                                                <button type="button" class="tp-product-action-btn tp-product-add-cart-btn">
-                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.93795 5.34749L4.54095 12.5195C4.58495 13.0715 5.03594 13.4855 5.58695 13.4855H5.59095H16.5019H16.5039C17.0249 13.4855 17.4699 13.0975 17.5439 12.5825L18.4939 6.02349C18.5159 5.86749 18.4769 5.71149 18.3819 5.58549C18.2879 5.45849 18.1499 5.37649 17.9939 5.35449C17.7849 5.36249 9.11195 5.35049 3.93795 5.34749ZM5.58495 14.9855C4.26795 14.9855 3.15295 13.9575 3.04595 12.6425L2.12995 1.74849L0.622945 1.48849C0.213945 1.41649 -0.0590549 1.02949 0.0109451 0.620487C0.082945 0.211487 0.477945 -0.054513 0.877945 0.00948704L2.95795 0.369487C3.29295 0.428487 3.54795 0.706487 3.57695 1.04649L3.81194 3.84749C18.0879 3.85349 18.1339 3.86049 18.2029 3.86849C18.7599 3.94949 19.2499 4.24049 19.5839 4.68849C19.9179 5.13549 20.0579 5.68649 19.9779 6.23849L19.0289 12.7965C18.8499 14.0445 17.7659 14.9855 16.5059 14.9855H16.5009H5.59295H5.58495Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8979 9.04382H12.1259C11.7109 9.04382 11.3759 8.70782 11.3759 8.29382C11.3759 7.87982 11.7109 7.54382 12.1259 7.54382H14.8979C15.3119 7.54382 15.6479 7.87982 15.6479 8.29382C15.6479 8.70782 15.3119 9.04382 14.8979 9.04382Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15474 17.702C5.45574 17.702 5.69874 17.945 5.69874 18.246C5.69874 18.547 5.45574 18.791 5.15474 18.791C4.85274 18.791 4.60974 18.547 4.60974 18.246C4.60974 17.945 4.85274 17.702 5.15474 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15374 18.0409C5.04074 18.0409 4.94874 18.1329 4.94874 18.2459C4.94874 18.4729 5.35974 18.4729 5.35974 18.2459C5.35974 18.1329 5.26674 18.0409 5.15374 18.0409ZM5.15374 19.5409C4.43974 19.5409 3.85974 18.9599 3.85974 18.2459C3.85974 17.5319 4.43974 16.9519 5.15374 16.9519C5.86774 16.9519 6.44874 17.5319 6.44874 18.2459C6.44874 18.9599 5.86774 19.5409 5.15374 19.5409Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.435 17.702C16.736 17.702 16.98 17.945 16.98 18.246C16.98 18.547 16.736 18.791 16.435 18.791C16.133 18.791 15.89 18.547 15.89 18.246C15.89 17.945 16.133 17.702 16.435 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.434 18.0409C16.322 18.0409 16.23 18.1329 16.23 18.2459C16.231 18.4749 16.641 18.4729 16.64 18.2459C16.64 18.1329 16.547 18.0409 16.434 18.0409ZM16.434 19.5409C15.72 19.5409 15.14 18.9599 15.14 18.2459C15.14 17.5319 15.72 16.9519 16.434 16.9519C17.149 16.9519 17.73 17.5319 17.73 18.2459C17.73 18.9599 17.149 19.5409 16.434 19.5409Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add to Cart</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
-                                                    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99938 5.64111C8.66938 5.64111 7.58838 6.72311 7.58838 8.05311C7.58838 9.38211 8.66938 10.4631 9.99938 10.4631C11.3294 10.4631 12.4114 9.38211 12.4114 8.05311C12.4114 6.72311 11.3294 5.64111 9.99938 5.64111ZM9.99938 11.9631C7.84238 11.9631 6.08838 10.2091 6.08838 8.05311C6.08838 5.89611 7.84238 4.14111 9.99938 4.14111C12.1564 4.14111 13.9114 5.89611 13.9114 8.05311C13.9114 10.2091 12.1564 11.9631 9.99938 11.9631Z" fill="currentColor" />
-                                                        <g mask="url(#mask0_1211_721)">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.56975 8.05226C3.42975 12.1613 6.56275 14.6043 9.99975 14.6053C13.4368 14.6043 16.5697 12.1613 18.4298 8.05226C16.5697 3.94426 13.4368 1.50126 9.99975 1.50026C6.56375 1.50126 3.42975 3.94426 1.56975 8.05226ZM10.0017 16.1053H9.99775H9.99675C5.86075 16.1023 2.14675 13.2033 0.06075 8.34826C-0.02025 8.15926 -0.02025 7.94526 0.06075 7.75626C2.14675 2.90226 5.86175 0.00326172 9.99675 0.000261719C9.99875 -0.000738281 9.99875 -0.000738281 9.99975 0.000261719C10.0017 -0.000738281 10.0017 -0.000738281 10.0028 0.000261719C14.1388 0.00326172 17.8527 2.90226 19.9387 7.75626C20.0208 7.94526 20.0208 8.15926 19.9387 8.34826C17.8537 13.2033 14.1388 16.1023 10.0028 16.1053H10.0017Z" fill="currentColor" />
-                                                        </g>
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Quick View</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
-                                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add To Wishlist</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product content -->
-                                    <div class="tp-product-content">
-                                        <div class="tp-product-category">
-                                            <a href="shop.html">Amazon</a>
-                                        </div>
-                                        <h3 class="tp-product-title">
-                                            <a href="product-details.html">
-                                                Echo Show 5 (2nd Gen) Adjustable Stand | Charcoal
-                                            </a>
-                                        </h3>
-                                        <div class="tp-product-rating d-flex align-items-center">
-                                            <div class="tp-product-rating-icon">
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star-half-stroke"></i></span>
-                                            </div>
-                                            <div class="tp-product-rating-text">
-                                                <span>(6 Review)</span>
-                                            </div>
-                                        </div>
-                                        <div class="tp-product-price-wrapper">
-                                            <span class="tp-product-price">$40.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="tp-product-item p-relative transition-3 mb-25">
-                                    <div class="tp-product-thumb p-relative fix m-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/product-17.jpg" alt="product-electronic">
-                                        </a>
-
-                                        <!-- product action -->
-                                        <div class="tp-product-action">
-                                            <div class="tp-product-action-item d-flex flex-column">
-                                                <button type="button" class="tp-product-action-btn tp-product-add-cart-btn">
-                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.93795 5.34749L4.54095 12.5195C4.58495 13.0715 5.03594 13.4855 5.58695 13.4855H5.59095H16.5019H16.5039C17.0249 13.4855 17.4699 13.0975 17.5439 12.5825L18.4939 6.02349C18.5159 5.86749 18.4769 5.71149 18.3819 5.58549C18.2879 5.45849 18.1499 5.37649 17.9939 5.35449C17.7849 5.36249 9.11195 5.35049 3.93795 5.34749ZM5.58495 14.9855C4.26795 14.9855 3.15295 13.9575 3.04595 12.6425L2.12995 1.74849L0.622945 1.48849C0.213945 1.41649 -0.0590549 1.02949 0.0109451 0.620487C0.082945 0.211487 0.477945 -0.054513 0.877945 0.00948704L2.95795 0.369487C3.29295 0.428487 3.54795 0.706487 3.57695 1.04649L3.81194 3.84749C18.0879 3.85349 18.1339 3.86049 18.2029 3.86849C18.7599 3.94949 19.2499 4.24049 19.5839 4.68849C19.9179 5.13549 20.0579 5.68649 19.9779 6.23849L19.0289 12.7965C18.8499 14.0445 17.7659 14.9855 16.5059 14.9855H16.5009H5.59295H5.58495Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8979 9.04382H12.1259C11.7109 9.04382 11.3759 8.70782 11.3759 8.29382C11.3759 7.87982 11.7109 7.54382 12.1259 7.54382H14.8979C15.3119 7.54382 15.6479 7.87982 15.6479 8.29382C15.6479 8.70782 15.3119 9.04382 14.8979 9.04382Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15474 17.702C5.45574 17.702 5.69874 17.945 5.69874 18.246C5.69874 18.547 5.45574 18.791 5.15474 18.791C4.85274 18.791 4.60974 18.547 4.60974 18.246C4.60974 17.945 4.85274 17.702 5.15474 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15374 18.0409C5.04074 18.0409 4.94874 18.1329 4.94874 18.2459C4.94874 18.4729 5.35974 18.4729 5.35974 18.2459C5.35974 18.1329 5.26674 18.0409 5.15374 18.0409ZM5.15374 19.5409C4.43974 19.5409 3.85974 18.9599 3.85974 18.2459C3.85974 17.5319 4.43974 16.9519 5.15374 16.9519C5.86774 16.9519 6.44874 17.5319 6.44874 18.2459C6.44874 18.9599 5.86774 19.5409 5.15374 19.5409Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.435 17.702C16.736 17.702 16.98 17.945 16.98 18.246C16.98 18.547 16.736 18.791 16.435 18.791C16.133 18.791 15.89 18.547 15.89 18.246C15.89 17.945 16.133 17.702 16.435 17.702Z" fill="currentColor" />
-
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.434 18.0409C16.322 18.0409 16.23 18.1329 16.23 18.2459C16.231 18.4749 16.641 18.4729 16.64 18.2459C16.64 18.1329 16.547 18.0409 16.434 18.0409ZM16.434 19.5409C15.72 19.5409 15.14 18.9599 15.14 18.2459C15.14 17.5319 15.72 16.9519 16.434 16.9519C17.149 16.9519 17.73 17.5319 17.73 18.2459C17.73 18.9599 17.149 19.5409 16.434 19.5409Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add to Cart</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-quick-view-btn" data-bs-toggle="modal" data-bs-target="#producQuickViewModal">
-                                                    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99938 5.64111C8.66938 5.64111 7.58838 6.72311 7.58838 8.05311C7.58838 9.38211 8.66938 10.4631 9.99938 10.4631C11.3294 10.4631 12.4114 9.38211 12.4114 8.05311C12.4114 6.72311 11.3294 5.64111 9.99938 5.64111ZM9.99938 11.9631C7.84238 11.9631 6.08838 10.2091 6.08838 8.05311C6.08838 5.89611 7.84238 4.14111 9.99938 4.14111C12.1564 4.14111 13.9114 5.89611 13.9114 8.05311C13.9114 10.2091 12.1564 11.9631 9.99938 11.9631Z" fill="currentColor" />
-                                                        <g mask="url(#mask0_1211_721)">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.56975 8.05226C3.42975 12.1613 6.56275 14.6043 9.99975 14.6053C13.4368 14.6043 16.5697 12.1613 18.4298 8.05226C16.5697 3.94426 13.4368 1.50126 9.99975 1.50026C6.56375 1.50126 3.42975 3.94426 1.56975 8.05226ZM10.0017 16.1053H9.99775H9.99675C5.86075 16.1023 2.14675 13.2033 0.06075 8.34826C-0.02025 8.15926 -0.02025 7.94526 0.06075 7.75626C2.14675 2.90226 5.86175 0.00326172 9.99675 0.000261719C9.99875 -0.000738281 9.99875 -0.000738281 9.99975 0.000261719C10.0017 -0.000738281 10.0017 -0.000738281 10.0028 0.000261719C14.1388 0.00326172 17.8527 2.90226 19.9387 7.75626C20.0208 7.94526 20.0208 8.15926 19.9387 8.34826C17.8537 13.2033 14.1388 16.1023 10.0028 16.1053H10.0017Z" fill="currentColor" />
-                                                        </g>
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Quick View</span>
-                                                </button>
-                                                <button type="button" class="tp-product-action-btn tp-product-add-to-wishlist-btn">
-                                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.78158 8.88867C3.15121 13.1386 8.5623 16.5749 10.0003 17.4255C11.4432 16.5662 16.8934 13.0918 18.219 8.89257C19.0894 6.17816 18.2815 2.73984 15.0714 1.70806C13.5162 1.21019 11.7021 1.5132 10.4497 2.4797C10.1879 2.68041 9.82446 2.68431 9.56069 2.48555C8.23405 1.49079 6.50102 1.19947 4.92136 1.70806C1.71613 2.73887 0.911158 6.17718 1.78158 8.88867ZM10.0013 19C9.88015 19 9.75999 18.9708 9.65058 18.9113C9.34481 18.7447 2.14207 14.7852 0.386569 9.33491C0.385592 9.33491 0.385592 9.33394 0.385592 9.33394C-0.71636 5.90244 0.510636 1.59018 4.47199 0.316764C6.33203 -0.283407 8.35911 -0.019371 9.99836 1.01242C11.5868 0.0108324 13.6969 -0.26587 15.5198 0.316764C19.4851 1.59213 20.716 5.90342 19.615 9.33394C17.9162 14.7218 10.6607 18.7408 10.353 18.9094C10.2436 18.9698 10.1224 19 10.0013 19Z" fill="currentColor" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7806 7.42904C15.4025 7.42904 15.0821 7.13968 15.0508 6.75775C14.9864 5.95687 14.4491 5.2807 13.6841 5.03421C13.2983 4.9095 13.0873 4.49737 13.2113 4.11446C13.3373 3.73059 13.7467 3.52209 14.1335 3.6429C15.4651 4.07257 16.398 5.24855 16.5123 6.63888C16.5445 7.04127 16.2446 7.39397 15.8412 7.42612C15.8206 7.42807 15.8011 7.42904 15.7806 7.42904Z" fill="currentColor" />
-                                                    </svg>
-
-                                                    <span class="tp-product-tooltip">Add To Wishlist</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product content -->
-                                    <div class="tp-product-content">
-                                        <div class="tp-product-category">
-                                            <a href="shop.html">Medical</a>
-                                        </div>
-                                        <h3 class="tp-product-title">
-                                            <a href="product-details.html">
-                                                Smart Watch Heart Rate Blood Pressure.
-                                            </a>
-                                        </h3>
-                                        <div class="tp-product-rating d-flex align-items-center">
-                                            <div class="tp-product-rating-icon">
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                                <span><i class="fa-solid fa-star"></i></span>
-                                            </div>
-                                            <div class="tp-product-rating-text">
-                                                <span>(75 Review)</span>
-                                            </div>
-                                        </div>
-                                        <div class="tp-product-price-wrapper">
-                                            <span class="tp-product-price">$133.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- product banner area start -->
-    <div class="tp-product-banner-area pb-90">
-        <div class="container">
-            <div class="tp-product-banner-slider fix">
-                <div class="tp-product-banner-slider-active swiper-container">
-                    <div class="swiper-wrapper">
-                        <div class="tp-product-banner-inner theme-bg p-relative z-index-1 fix swiper-slide">
-                            <h4 class="tp-product-banner-bg-text">tablet</h4>
-                            <div class="row align-items-center">
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="tp-product-banner-content p-relative z-index-1">
-                                        <span class="tp-product-banner-subtitle">Tablet Collection 2023</span>
-                                        <h3 class="tp-product-banner-title">Samsung Galaxy Tab S6, Wifi Tablet</h3>
-                                        <div class="tp-product-banner-price mb-40">
-                                            <span class="old-price">$1240.00</span>
-                                            <p class="new-price">$975.00</p>
-                                        </div>
-                                        <div class="tp-product-banner-btn">
-                                            <a href="shop.html" class="tp-btn tp-btn-2">Shop now</a>
+    <?php if (isset($homepageAds2)) : ?>
+        <a href="<?php echo $homepageAds2['link'] ?>">
+            <div class="tp-product-banner-area pb-90 mt-100">
+                <div class="container">
+                    <div class="tp-product-banner-slider fix">
+                        <div class="tp-product-banner-slider-active swiper-container">
+
+                            <div class="tp-product-banner-inner theme-bg p-relative z-index-1 fix swiper-slide">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="tp-product-banner-content p-relative z-index-1">
+                                            <h3 class="tp-product-banner-title"><?php echo $homepageAds2['ads_content'] ?></h3>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="tp-product-banner-thumb-wrapper p-relative">
-                                        <div class="tp-product-banner-thumb-shape">
-                                            <span class="tp-product-banner-thumb-gradient"></span>
-                                            <img class="tp-offer-shape" src="assets/img/banner/banner-slider-offer.png" alt="">
-                                        </div>
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="tp-product-banner-thumb-wrapper p-relative">
+                                            <div class="tp-product-banner-thumb-shape">
+                                                <span class="tp-product-banner-thumb-gradient"></span>
+                                                <img class="tp-offer-shape" src="admin/img/<?php echo $homepageAds2['ads_img'] ?>" alt="">
+                                            </div>
 
-                                        <div class="tp-product-banner-thumb text-end p-relative z-index-1">
-                                            <img src="assets/img/banner/banner-slider-1.png" alt="">
+                                            <div class="tp-product-banner-thumb text-end p-relative z-index-1">
+                                                <img src="assets/img/banner/banner-slider-2.png" alt="">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tp-product-banner-inner theme-bg p-relative z-index-1 fix swiper-slide">
-                            <h4 class="tp-product-banner-bg-text">tablet</h4>
-                            <div class="row align-items-center">
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="tp-product-banner-content p-relative z-index-1">
-                                        <span class="tp-product-banner-subtitle">Latest Technology Added</span>
-                                        <h3 class="tp-product-banner-title">Apple iPad 10.2 9th Gen - 2021</h3>
-                                        <div class="tp-product-banner-price mb-40">
-                                            <span class="old-price">$1450.00</span>
-                                            <p class="new-price">$1199.00</p>
-                                        </div>
-                                        <div class="tp-product-banner-btn">
-                                            <a href="shop.html" class="tp-btn tp-btn-2">Shop now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="tp-product-banner-thumb-wrapper p-relative">
-                                        <div class="tp-product-banner-thumb-shape">
-                                            <span class="tp-product-banner-thumb-gradient"></span>
-                                            <img class="tp-offer-shape" src="assets/img/banner/banner-slider-offer.png" alt="">
-                                        </div>
 
-                                        <div class="tp-product-banner-thumb text-end p-relative z-index-1">
-                                            <img src="assets/img/banner/banner-slider-2.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <div class="tp-product-banner-inner theme-bg p-relative z-index-1 fix swiper-slide">
-                            <h4 class="tp-product-banner-bg-text">tablet</h4>
-                            <div class="row align-items-center">
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="tp-product-banner-content p-relative z-index-1">
-                                        <span class="tp-product-banner-subtitle">Tablet Collection 2023</span>
-                                        <h3 class="tp-product-banner-title">Microsoft Surface Pro 8, Wifi Included</h3>
-                                        <div class="tp-product-banner-price mb-40">
-                                            <span class="old-price">$1249.00</span>
-                                            <p class="new-price">$1300.00</p>
-                                        </div>
-                                        <div class="tp-product-banner-btn">
-                                            <a href="shop.html" class="tp-btn tp-btn-2">Shop now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="tp-product-banner-thumb-wrapper p-relative">
-                                        <div class="tp-product-banner-thumb-shape">
-                                            <span class="tp-product-banner-thumb-gradient"></span>
-                                            <img class="tp-offer-shape" src="assets/img/banner/banner-slider-offer.png" alt="">
-                                        </div>
-
-                                        <div class="tp-product-banner-thumb text-end p-relative z-index-1">
-                                            <img src="assets/img/banner/banner-slider-3.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="tp-product-banner-slider-dot tp-swiper-dot"></div>
                     </div>
-                    <div class="tp-product-banner-slider-dot tp-swiper-dot"></div>
                 </div>
             </div>
-        </div>
+        </a>
+    <?php endif; ?>
     </div>
     <!-- product banner area end -->
 
@@ -1996,152 +1370,6 @@ get_header();
     </section>
     <!-- product sm area end -->
 
-    <!-- blog area start -->
-    <section class="tp-blog-area pt-50 pb-75">
-        <div class="container">
-            <div class="row align-items-end">
-                <div class="col-xl-4 col-md-6">
-                    <div class="tp-section-title-wrapper mb-50">
-                        <h3 class="tp-section-title">Latest news & articles
-
-                            <svg width="114" height="35" viewBox="0 0 114 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M112 23.275C1.84952 -10.6834 -7.36586 1.48086 7.50443 32.9053" stroke="currentColor" stroke-width="4" stroke-miterlimit="3.8637" stroke-linecap="round" />
-                            </svg>
-                        </h3>
-                    </div>
-                </div>
-                <div class="col-xl-8 col-md-6">
-                    <div class="tp-blog-more-wrapper d-flex justify-content-md-end">
-                        <div class="tp-blog-more mb-50 text-md-end">
-                            <a href="blog-grid.html" class="tp-btn tp-btn-2 tp-btn-blue">View All Blog
-                                <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M16 6.99976L1 6.99976" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M9.9502 0.975414L16.0002 6.99941L9.9502 13.0244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                            <span class="tp-blog-more-border"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="tp-blog-main-slider">
-                        <div class="tp-blog-main-slider-active swiper-container">
-                            <div class="swiper-wrapper">
-                                <div class="tp-blog-item mb-30 swiper-slide">
-                                    <div class="tp-blog-thumb p-relative fix">
-                                        <a href="blog-details.html">
-                                            <img src="assets/img/blog/blog-1.jpg" alt="">
-                                        </a>
-                                        <div class="tp-blog-meta tp-blog-meta-date">
-                                            <span>14 July, 2022</span>
-                                        </div>
-                                    </div>
-                                    <div class="tp-blog-content">
-                                        <h3 class="tp-blog-title">
-                                            <a href="blog-details.html">The Modern Art Clay Ceramics.</a>
-                                        </h3>
-
-                                        <div class="tp-blog-tag">
-                                            <span><i class="fa-light fa-tag"></i></span>
-                                            <a href="#">Tablet,</a>
-                                            <a href="#">News</a>
-                                        </div>
-
-                                        <p>The world is an amazing place providing an incredible assortment of interesting locations across.</p>
-
-                                        <div class="tp-blog-btn">
-                                            <a href="blog-details.html" class="tp-btn-2 tp-btn-border-2">
-                                                Read More
-                                                <span>
-                                                    <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M16 7.5L1 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M9.9502 1.47541L16.0002 7.49941L9.9502 13.5244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tp-blog-item mb-30 swiper-slide">
-                                    <div class="tp-blog-thumb p-relative fix">
-                                        <a href="blog-details.html">
-                                            <img src="assets/img/blog/blog-2.jpg" alt="">
-                                        </a>
-                                        <div class="tp-blog-meta tp-blog-meta-date">
-                                            <span>10 Nov, 2022</span>
-                                        </div>
-                                    </div>
-                                    <div class="tp-blog-content">
-                                        <h3 class="tp-blog-title">
-                                            <a href="blog-details.html">How clothes are linked to climate</a>
-                                        </h3>
-
-                                        <div class="tp-blog-tag">
-                                            <span><i class="fa-light fa-tag"></i></span>
-                                            <a href="#">Monitor,</a>
-                                            <a href="#">Technology</a>
-                                        </div>
-
-                                        <p>The world is an amazing place providing an incredible assortment of interesting locations across.</p>
-
-                                        <div class="tp-blog-btn">
-                                            <a href="blog-details.html" class="tp-btn-2 tp-btn-border-2">
-                                                Read More
-                                                <span>
-                                                    <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M16 7.5L1 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M9.9502 1.47541L16.0002 7.49941L9.9502 13.5244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tp-blog-item mb-30 swiper-slide">
-                                    <div class="tp-blog-thumb p-relative fix">
-                                        <a href="blog-details.html">
-                                            <img src="assets/img/blog/blog-3.jpg" alt="">
-                                        </a>
-                                        <div class="tp-blog-meta tp-blog-meta-date">
-                                            <span>20 June, 2023</span>
-                                        </div>
-                                    </div>
-                                    <div class="tp-blog-content">
-                                        <h3 class="tp-blog-title">
-                                            <a href="blog-details.html">The Sound Of Fashion: Malcolm</a>
-                                        </h3>
-
-                                        <div class="tp-blog-tag">
-                                            <span><i class="fa-light fa-tag"></i></span>
-                                            <a href="#">Microphone,</a>
-                                            <a href="#">Computer</a>
-                                        </div>
-
-                                        <p>The world is an amazing place providing an incredible assortment of interesting locations across.</p>
-
-                                        <div class="tp-blog-btn">
-                                            <a href="blog-details.html" class="tp-btn-2 tp-btn-border-2">
-                                                Read More
-                                                <span>
-                                                    <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M16 7.5L1 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M9.9502 1.47541L16.0002 7.49941L9.9502 13.5244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- blog area end -->
 
     <!-- instagram area start -->
     <div class="tp-instagram-area pb-70">
@@ -2241,7 +1469,7 @@ get_header();
                     <div class="tp-product-details-thumb-wrapper tp-tab d-sm-flex">
                         <div class="tab-content m-img" id="productDetailsNavContent w-100">
                             <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
-                                <div class="tp-product-details-nav-main-thumb" id="product_img">
+                                <div class="tp-product-details-nav-main-thumb" style="width: 600px; height: 600px;" id="product_img">
                                     <img src="assets/img/product/details/main/product-details-main-1.jpg" alt="">
                                 </div>
                             </div>
@@ -2292,7 +1520,8 @@ get_header();
                                         <button type="submit" onclick="add_cart(event)" class="tp-product-details-add-to-cart-btn w-100">Thêm vào giỏ hàng</button>
                                     </div>
                                 </div>
-                                <button type="submit" onclick="by_now(this)" class="tp-product-details-buy-now-btn w-100">Mua ngay</button>
+                                <!-- <button type="submit" onclick="by_now(this)" class="tp-product-details-buy-now-btn w-100">Mua ngay</button> -->
+                                <a type="submit" href="?mod=cart&action=checkout" class="tp-product-details-buy-now-btn w-100">Mua ngay</a>
                             </div>
                         </div>
                     </div>
@@ -2301,26 +1530,6 @@ get_header();
         </div>
     </div>
 </main>
-<script>
-    function by_now(_this) {
-        // Lấy giá trị của biến thể màu sắc (thay thế 'colorVariant' bằng id hoặc class của phần tử chứa giá trị màu sắc)
-        var id_color = $("input[name='color']:checked").val();
-        var quantity = $("#num-order").val();
-        if (id_color == null) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Chú ý',
-                text: 'Vui lòng chọn đầy đủ thông tin của sản phẩm trước khi đặt mua!',
-                showConfirmButton: false,
-                timer: 2000
-            });
-            return false;
-        } else {
-            // Nếu có biến thể màu sắc được chọn, bạn có thể chuyển hướng đến trang thanh toán hoặc thực hiện các xử lý khác ở đây
-            window.location.href = "?mod=cart&action=checkout&buy_now=" + id_color + "&quantity=" + quantity;
-        }
-    }
-</script>
 <?php
 get_footer();
 ?>

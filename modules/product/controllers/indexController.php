@@ -61,6 +61,7 @@ function detail_color_ajaxAction()
         'product_name' => $color['product_name'] . " {$color['ram_name']} {$color['color_name']}",
         'price' => currency_format($price),
         'quantity' => $color['quantity'],
+        'image_product' => $color['image']
     ];
     echo json_encode($result);
 }

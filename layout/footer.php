@@ -1,7 +1,7 @@
-<!-- footer area start -->
 <?php
 $settings = db_fetch_row("SELECT * FROM `tb_settings`");
 ?>
+<!-- footer area start -->
 <footer>
     <div class="tp-footer-area" data-bg-color="footer-bg-grey">
         <div class="tp-footer-top pt-95 pb-40">

@@ -18,7 +18,7 @@ get_sidebar();
                         <div class="d-flex">
                             <input type="file" name="file" number="1" id="upload-thumb" onchange="uploadImage(event)" class="form-control-file">
                             <div id="img-thumb-1">
-                                <img id="size-img-thumb" src="public/img/<?php echo $website['logo'] ?>" alt="">
+                                <img id="size-img-thumb" src="img/<?php echo $website['logo'] ?>" alt="">
                             </div>
                         </div>
                     </div><br>

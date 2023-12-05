@@ -89,7 +89,7 @@ function delete_product($id) //Xóa sản phẩm theo id
 function delete_related($id) //Xóa các thuộc tính liên quan đến sản phẩm theo id
 {
     db_delete("tb_color_variants", "`product_id` = '$id'"); //Xóa biến thể màu sắc
-    db_delete("tb_memory_variants", "`product_id` = '$id'"); //Xóa biến thể dung lượng
+    db_delete("tb_ram_variants", "`product_id` = '$id'"); //Xóa biến thể dung lượng
     db_delete("tb_image_details", "`product_id` = '$id'"); //Xóa ảnh chi tiết
 }
 

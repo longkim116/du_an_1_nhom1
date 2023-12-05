@@ -47,8 +47,8 @@ get_sidebar();
                                         </a>
                                         <!-- <a onclick="return confirm('Bạn chắc muốn xóa bài viết này không?')" class="btn btn-danger btn-sm" href="?mod=page&action=delete_page&id=<?php echo $item['page_id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
                                             Xóa
-                                        </a>
-                                    </td> -->
+                                        </a> -->
+                                    </td>
                                 </tr>
                         <?php endforeach;
                         endif; ?>
