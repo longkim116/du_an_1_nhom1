@@ -90,9 +90,9 @@ get_header();
                                         <h4>Tổng</h4>
                                     </li>
                                     <?php
-                                    if (!empty($list_order)) :
+                                    if (!empty($_SESSION['cart']['buy'])) :
                                         $count = 0;
-                                        foreach ($list_order as $item) :
+                                        foreach ($_SESSION['cart']['buy'] as $item) :
                                             $count += $item['sub_total'];
                                     ?>
                                             <li class="tp-order-info-list-desc">
@@ -162,7 +162,7 @@ get_header();
                                     <input onchange="payOnline(this)" value="3" type="radio" id="payVnpay" name="payment">
                                     <label for="payVnpay">Thanh toán VnPay <img height="40px" width="40px" src="img/19222904_308450352935921_8689351082334351995_o.jpg" alt=""></label>
                                     <div class="tp-checkout-payment-desc direct-bank-transfer">
-                                        <p>Thanh toán qua ví điện tử VnPay</p>
+                                        <p>Thanh toán qua ví điện tử VnPay(Hiện tại đang bảo trì hệ thống)</p>
                                     </div>
                                 </div>
                                 <?php echo form_error("payment") ?>

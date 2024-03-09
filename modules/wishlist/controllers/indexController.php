@@ -23,10 +23,24 @@ function add_wishlist_ajaxAction() //Thêm sản phẩm yêu thích
         'product_name' => $product['product_name'],
         'cat_id' => $product['cat_id'],
     ];
-    echo json_encode($_SESSION);
+    $count = count($_SESSION['wishlist']);
+    $result = [
+        'count' => $count,
+    ];
+    echo json_encode($result);
 }
 
-function delete_wishlist_ajaxAction() //Xóa sản phẩm yêu thích
+function delete_favouriteAction() //Xóa sản phẩm yêu thích ở các trang
+{
+    $product_id = $_POST['product_id'];
+    unset($_SESSION['wishlist'][$product_id]);
+    $count = count($_SESSION['wishlist']);
+    $result = [
+        'count' => $count,
+    ];
+    echo json_encode($result);
+}
+function delete_wishlist_ajaxAction() //Xóa sản phẩm yêu thích trong trang yêu thích
 {
     $product_id = $_POST['product_id'];
     unset($_SESSION['wishlist'][$product_id]);

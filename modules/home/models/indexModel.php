@@ -82,8 +82,17 @@ function mun_product($id) //Lấy tổng sản phẩm theo danh mục
     return $sql['count'];
 }
 
-function list_posts() //Danh sách tin tức
+
+function get_list_watch() //Lấy danh sách đồng hồ
 {
-    $sql = db_fetch_array("SELECT * FROM `tb_posts` ");
+    $sql = db_fetch_array("SELECT * FROM `tb_products` INNER JOIN `tb_category` 
+  ON tb_products.cat_id = tb_category.id 
+  WHERE tb_category.title = 'Đồng hồ' ORDER BY tb_products.sales DESC LIMIT 0,10");
+    return $sql;
+}
+
+function get_voucher()
+{
+    $sql = db_fetch_row("SELECT * FROM `tb_voucher` WHERE `quantity` > 0");
     return $sql;
 }

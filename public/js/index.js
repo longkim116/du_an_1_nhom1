@@ -74,10 +74,23 @@ function selectColorVar(_this) {//Load thông tin ra và số lượng
             $("#quantity_product").html(`<span>Còn ` + data.quantity + ` sản phẩm</span>`);
             $("#product_price").html(data.price);
             $("#status").html(
-                `<input type="number" name="num-order" id="num-order" min="1" max="` + data.quantity + `" value="1" id="num-order">`);
+                `<input type="number" name="num-order" min="1" max="` + data.quantity + `" value="1" id="num-order">`);
+            var input = document.getElementById('num-order');
+            // Ngăn chặn việc nhập giá trị trực tiếp
+            input.addEventListener('keydown', function (e) {
+                e.preventDefault();
+            });
         }
+
     })
 }
+var input = document.getElementById('num-order');
+
+// Ngăn chặn việc nhập giá trị trực tiếp
+input.addEventListener('keydown', function (e) {
+    e.preventDefault();
+});
+
 
 function selectVar() {//Load màu ra
     var product_id = $("#ram").attr("product_id");
@@ -186,6 +199,133 @@ function apply_voucher() { //Áp dụng voucher
     });
 }
 
+function tablist(_this) {//Thay đổi tiêu đề sản phẩm trang home
+    var value = $(_this).attr("id");
+    console.log(value);
+    $("#product_title").html(value);
+}
+
+// Phần sản phẩm yêu thích
+
+function favourite(_this) {//Thêm vào danh sách yêu thích
+    var product_id = $(_this).val();
+    var data = {
+        product_id: product_id
+    };
+    $.ajax({
+        url: '?mod=wishlist&action=add_wishlist_ajax',
+        method: 'POST',
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            $(".count_wishlist").html(data.count);
+            $(_this).css("background-color", "palevioletred");
+            $(_this).off("click"); // Tắt sự kiện click hiện tại
+            $(_this).attr("onclick", "delete_favourite(this)");
+        }
+    });
+}
+
+function delete_favourite(_this) {//xÓA KHỎI DANH SÁCH YÊU THÍCH
+    var product_id = $(_this).val();
+    var data = {
+        product_id: product_id
+    };
+    $.ajax({
+        url: '?mod=wishlist&action=delete_favourite',
+        method: 'POST',
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            $(".count_wishlist").html(data.count);
+            $(_this).css("background-color", "");
+            $(_this).on("click"); // Bật sự kiện click hiện tại
+            $(_this).attr("onclick", "favourite(this)");
+        }
+    });
+}
+
+
+
+function delete_wishlist(_this) {
+    var product_id = $(_this).attr('product_id');
+    var data = {
+        product_id: product_id
+    }
+    $.ajax({
+        url: '?mod=wishlist&action=delete_wishlist_ajax',
+        method: 'POST',
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            $(".count_wishlist").html(data.count_wishlist);
+            $("#list_wishlist").html(data.list_wishlist);
+        }
+    });
+}
+// End phần sản phẩm yêu thích
+
+//Phần so sánh sản phâm
+function add_compare(_this) { //Thêm vào sản phẩm so sánh
+    var color_id = $("input[name='color']:checked").val();
+    if (color_id == undefined) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Vui lòng chọn đầy đủ thông tin sản phẩm!',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        return false
+    }
+    var data = {
+        color_id: color_id,
+    }
+    $.ajax({
+        url: '?mod=compare&action=add_compare_ajax',
+        method: 'POST',
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            if (data.status == 'success') { //Thành công
+                $(".count_compare").html(data.count);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không thể thêm!',
+                    text: "Sản phẩm so sanh chỉ tối đa 4 sản phẩm",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        }
+    });
+}
+
+
+function delete_compare(_this) {//Xóa so sánh sản phẩm
+    var color_id = $(_this).attr('color_id');
+    var data = {
+        color_id: color_id
+    }
+    $.ajax({
+        url: '?mod=compare&action=delete_compare_ajax',
+        method: 'POST',
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            $("#list_compare").html(data.list_compare);
+            $(".count_compare").html(data.count_compare);
+        }
+    });
+}
+//End so sánh sản phẩm
+
+
 function by_now(_this) {//Mua ngay
     // Lấy giá trị của biến thể màu sắc (thay thế 'colorVariant' bằng id hoặc class của phần tử chứa giá trị màu sắc)
     var id_color = $("input[name='color']:checked").val();
@@ -201,12 +341,7 @@ function by_now(_this) {//Mua ngay
         return false;
     } else {
         // Nếu có biến thể màu sắc được chọn, bạn có thể chuyển hướng đến trang thanh toán hoặc thực hiện các xử lý khác ở đây
-        window.location.href = "?mod=cart&action=buy_now&color_id=" + id_color + "&quantity=" + quantity;
+        window.location.href = "?mod=cart&controller=buy_now&action=buy_now&color_id=" + id_color + "&quantity=" + quantity;
     }
 }
 
-function tablist(_this) {//Thay đổi tiêu đề sản phẩm trang home
-    var value = $(_this).attr("id");
-    console.log(value);
-    $("#product_title").html(value);
-}

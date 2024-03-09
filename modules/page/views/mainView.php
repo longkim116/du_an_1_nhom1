@@ -27,7 +27,7 @@ get_header();
                     <div class="tp-blog-grid-wrapper">
                         <div class="tp-blog-grid-top d-flex justify-content-between mb-40">
                             <div class="tp-blog-grid-result">
-                                <p>Showing 1–14 of 26 results</p>
+                                <p>Hiển thị <?php echo count($list_posts) ?>– trên <?php echo count($mun_posts) ?> bài viết</p>
                             </div>
                             <div class="tp-blog-grid-tab tp-tab">
                                 <nav>

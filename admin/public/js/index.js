@@ -204,7 +204,7 @@ function get_list_order(_this) { //Lấy danh sách đơn hàng theo trang thái
 function add_role(event) {//ADD thêm phân quyền
     event.preventDefault();
     var role_name = $("#role_name").val();
-    if (role_name == "") {
+    if (role_name === "") {
         Swal.fire({
             icon: 'error',
             title: 'Thêm không thành công!',
@@ -212,10 +212,12 @@ function add_role(event) {//ADD thêm phân quyền
             showConfirmButton: false,
             timer: 2000
         });
+        return false;
     }
     var data = {
         role_name: role_name
     };
+    console.log(data)
     $.ajax({
         url: '?mod=users&action=add_role_ajax',
         method: 'POST',

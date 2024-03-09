@@ -1,6 +1,6 @@
 <?php
 get_header();
-// get_sidebar();
+get_sidebar();
 ?>
 <div class="content-wrapper">
     <section class="content">
@@ -9,25 +9,8 @@ get_header();
         </div>
         <div class="col-md-12">
             <div class="card direct-chat direct-chat-primary" style="position: relative; left: 0px; top: 0px;">
-                <div class="card-header ui-sortable-handle" style="cursor: move;">
-                    <h3 class="card-title">Direct Chat</h3>
-                    <div class="card-tools">
-                        <span title="3 New Messages" class="badge badge-primary">3</span>
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
-                            <i class="fas fa-comments"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-
                 <div class="card-body">
-
-                    <div class="direct-chat-messages">
+                    <div class="direct-chat-messages" style="height: 700px;">
                         <?php if (!empty($list_chat)) :
                             foreach ($list_chat as $item) :
                         ?>
@@ -56,7 +39,7 @@ get_header();
                                             <span class="direct-chat-timestamp float-left"><?php echo $item['time'] ?></span>
                                         </div>
 
-                                        <img class="direct-chat-img" src="public/img/Group 43.png" alt="message user image">
+                                        <img class="direct-chat-img" src="img/logo-autosmart.png" alt="message user image">
 
                                         <div class="direct-chat-text">
                                             <?php echo $item['message'] ?>
@@ -126,7 +109,7 @@ get_header();
                 scrollChatToBottom()
             }
         })
-        
+
     }
     setInterval(reaload, 1000);
 </script>

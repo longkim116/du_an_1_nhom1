@@ -67,7 +67,7 @@ function chatAjaxAction()
                 "<span class='direct-chat-name float-right'>Quản trị viên</span>" .
                 "<span class='direct-chat-timestamp float-left'>" . $item['time'] . "</span>" .
                 "</div>" .
-                "<img class='direct-chat-img' src='public/img/Group 43.png' alt='message user image'>" .
+                "<img class='direct-chat-img' src='img/logo-autosmart.png' alt='message user image'>" .
                 "<div class='direct-chat-text'>" . $item['message'] . "</div>" .
                 "</div>";
         }

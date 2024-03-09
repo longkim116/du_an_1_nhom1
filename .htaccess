@@ -6,7 +6,10 @@ RewriteRule ^bai-viet.html$ ?mod=page
 RewriteRule ^gio-hang.html$ ?mod=cart 
 RewriteRule ^thanh-toan.html$ ?mod=cart&action=checkout 
 RewriteRule ^dang-nhap.html$ ?mod=log&controller=index&action=login 
-RewriteRule ^xac-nhan-don-hang-thanh-cong.html$ ?mod=cart&action=success 
+RewriteRule ^xac-nhan-don-hang-thanh-cong.html$ ?mod=cart&action=success
+RewriteRule ^xac-nhan-don-hang-thanh-cong-don-hang-([0-9]+).html$ ?mod=cart&action=success&order_id=$1
+RewriteRule ^xac-nhan-don-hang-mua-ngay-thanh-cong-don-hang-([0-9]+).html$ ?mod=cart&controller=buy_now&action=success_buy_now&order_id=$1
+
 RewriteRule ^ket-qua-tim-kiem-([a-zA-Z0-9_-]+).html$ ?mod=product&action=seach_product&seach=$1
 RewriteRule ^([a-zA-Z0-9_-]+)-([0-9]+).html$ ?mod=post&action=main&id=$2 
 RewriteRule ^san-pham/([a-zA-Z0-9_-]+)-([0-9]+).html$ ?mod=product&action=product&cat_id=$2

@@ -13,7 +13,7 @@ function update_user($username, $data_update) //Cập nhật thông tin user
 function list_order() //Lấy danh sachs đặt hàng
 {
     $id = info_login("id");
-    $sql = db_fetch_array("SELECT * FROM `tb_orders` WHERE `customer_id` = '$id'");
+    $sql = db_fetch_array("SELECT * FROM `tb_orders` WHERE `customer_id` = '$id' ORDER BY `time` DESC ");
     return $sql;
 }
 
@@ -54,7 +54,7 @@ function get_list_order($status, $customer_id) //Lấy danh sách
     } else {
         $where = "AND `status` = '{$status}'";
     }
-    $sql = db_fetch_array("SELECT * FROM `tb_orders` WHERE `customer_id` = {$customer_id} {$where}");
+    $sql = db_fetch_array("SELECT * FROM `tb_orders` WHERE `customer_id` = {$customer_id} {$where} ORDER BY `time` DESC ");
     return $sql;
 }
 

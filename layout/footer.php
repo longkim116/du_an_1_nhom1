@@ -17,37 +17,34 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                                 </div>
                                 <p class="tp-footer-desc"><?php echo $settings['introduce'] ?></p>
                                 <div class="tp-footer-social">
-                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                    <a href="https://www.facebook.com/groups/6699202613534867/"><i class="fa-brands fa-facebook-f"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                         <div class="tp-footer-widget footer-col-2 mb-50">
-                            <h4 class="tp-footer-widget-title">My Account</h4>
+                            <h4 class="tp-footer-widget-title">Tài khoản của tôi</h4>
                             <div class="tp-footer-widget-content">
                                 <ul>
-                                    <li><a href="#">Track Orders</a></li>
-                                    <li><a href="#">Shipping</a></li>
-                                    <li><a href="#">Wishlist</a></li>
-                                    <li><a href="#">My Account</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="?mod=users&action=index">Danh sách đơn hàng</a></li>
+                                    <li><a href="gio-hang.html">Giỏ hàng</a></li>
+                                    <li><a href="?mod=wishlist&action=main">Yêu thích</a></li>
+                                    <li><a href="?mod=users&action=index">Tài khoản</a></li>
+                                    <li><a href="?mod=users&action=index">Lịch sử</a></li>
+                                    <li><a href="?mod=users&action=index">Đổi mật khẩu</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <div class="tp-footer-widget footer-col-3 mb-50">
-                            <h4 class="tp-footer-widget-title">Infomation</h4>
+                            <h4 class="tp-footer-widget-title">Thông tin</h4>
                             <div class="tp-footer-widget-content">
                                 <ul>
-                                    <li><a href="#">Our Story</a></li>
-                                    <li><a href="#">Careers</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Latest News</a></li>
-                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Giới thiệu</a></li>
+                                    <li><a href="gioi-thieu-1.html">Liên hệ</a></li>
+                                    <li><a href="lien-he-2.html">Thông tin khuyễn mãi</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -86,7 +83,7 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                                             </span>
                                         </div>
                                         <div class="tp-footer-contact-content">
-                                            <p><a href="https://www.google.com/maps/place/Sleepy+Hollow+Rd,+Gouverneur,+NY+13642,+USA/@44.3304966,-75.4552367,17z/data=!3m1!4b1!4m6!3m5!1s0x4cccddac8972c5eb:0x56286024afff537a!8m2!3d44.3304928!4d-75.453048!16s%2Fg%2F1tdsjdj4" target="_blank"><?php echo $settings['address'] ?></a></p>
+                                            <p><a href="https://maps.app.goo.gl/ZmY7SmDe3Ln42nZHA" target="_blank"><?php echo $settings['address'] ?></a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -102,16 +99,16 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="tp-footer-copyright">
-                                <p>© 2023 All Rights Reserved | HTML Template by <a href="index.html">Themepure</a>.</p>
+                                <p>CTTNHT phân phối đồ diện tử trên cả nước <a href="trang-chu.html">Autosmart </a>.</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <div class="tp-footer-payment text-md-end">
                                 <p>
                                     <img src="assets/img/footer/footer-pay.png" alt="">
                                 </p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

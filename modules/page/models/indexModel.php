@@ -5,6 +5,11 @@ function list_posts($starts, $num_rows)
     return $sql;
 }
 
+function mun_list_posts()
+{
+    $sql = db_fetch_array("SELECT * FROM `tb_posts` WHERE `status` = 'Đã đăng'");
+    return $sql;
+}
 function total_list_posts()
 {
     $sql = db_num_rows("SELECT * FROM `tb_posts` WHERE `status` = 'Đã đăng'");

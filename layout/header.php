@@ -222,12 +222,12 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                         <?php foreach ($_SESSION['cart']['buy'] as $item) : ?>
                             <div class="cartmini__widget-item">
                                 <div class="cartmini__thumb">
-                                    <a href="product-details.html">
+                                    <a href="<?php echo "san-pham/chi-tiet/" . create_slug($item['product_name']) . "/" . $item['product_id'] . ".html"; ?>">
                                         <img src="admin/img/<?php echo $item['product_thumb'] ?>" alt="">
                                     </a>
                                 </div>
                                 <div class="cartmini__content">
-                                    <h5 class="cartmini__title"><a href="product-details.html"><?php echo $item['product_name'] ?></a></h5>
+                                    <h5 class="cartmini__title"><a href="<?php echo "san-pham/chi-tiet/" . create_slug($item['product_name']) . "/" . $item['product_id'] . ".html"; ?>"><?php echo $item['product_name'] ?></a></h5>
                                     <div class="cartmini__price-wrapper">
                                         <span class="cartmini__price"><?php echo currency_format($item['price']) ?></span>
                                         <span class="cartmini__quantity">x<?php echo $item['qty']; ?></span>
@@ -289,7 +289,7 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                                         <ul>
                                             <?php if (is_login()) : ?>
                                                 <li>
-                                                    <a href="profile.html">Hồ sơ của tôi</a>
+                                                    <a href="?mod=users&action=index">Hồ sơ của tôi</a>
                                                 </li>
                                             <?php endif; ?>
                                             <?php if (is_login()) : ?>
@@ -363,13 +363,14 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                                 <?php endif; ?>
                                 <div class="tp-header-action d-flex align-items-center ml-50">
                                     <div class="tp-header-action-item d-none d-lg-block">
-                                        <a href="compare.html" class="tp-header-action-btn">
+                                        <a href="?mod=compare&action=main" class="tp-header-action-btn">
                                             <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M14.8396 17.3319V3.71411" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M19.1556 13L15.0778 17.0967L11 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M4.91115 1.00056V14.6183" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M0.833496 5.09667L4.91127 1L8.98905 5.09667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
+                                            <span class="tp-header-action-badge count_compare"><?php echo (isset($_SESSION['compare'])) ? count($_SESSION['compare']) : "0" ?></span>
                                         </a>
                                     </div>
                                     <div class="tp-header-action-item d-none d-lg-block">
@@ -422,7 +423,7 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1C0 0.447715 0.447715 0 1 0H15C15.5523 0 16 0.447715 16 1C16 1.55228 15.5523 2 15 2H1C0.447715 2 0 1.55228 0 1ZM0 7C0 6.44772 0.447715 6 1 6H17C17.5523 6 18 6.44772 18 7C18 7.55228 17.5523 8 17 8H1C0.447715 8 0 7.55228 0 7ZM1 12C0.447715 12 0 12.4477 0 13C0 13.5523 0.447715 14 1 14H11C11.5523 14 12 13.5523 12 13C12 12.4477 11.5523 12 11 12H1Z" fill="currentColor" />
                                             </svg>
                                         </span>
-                                        SẢN PHẨM
+                                        MENU
                                     </button>
                                     <nav class="tp-category-menu-content">
                                         <?php echo get_sidebar(); ?>
@@ -496,13 +497,14 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                     <div class="col-xl-3 col-lg-3 col-md-3 col-6">
                         <div class="tp-header-action d-flex align-items-center justify-content-end ml-50">
                             <div class="tp-header-action-item d-none d-lg-block">
-                                <a href="compare.html" class="tp-header-action-btn">
+                                <a href="?mod=compare&action=main" class="tp-header-action-btn">
                                     <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M14.8396 17.3319V3.71411" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M19.1556 13L15.0778 17.0967L11 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M4.91115 1.00056V14.6183" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M0.833496 5.09667L4.91127 1L8.98905 5.09667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
+                                    <span class="tp-header-action-badge count_compare"><?php echo (isset($_SESSION['compare'])) ? count($_SESSION['compare']) : "0" ?></span>
                                 </a>
                             </div>
                             <div class="tp-header-action-item d-none d-lg-block">

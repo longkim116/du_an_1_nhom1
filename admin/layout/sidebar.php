@@ -4,7 +4,7 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="?mod=home&action=index" class="brand-link">
-        <img class="animation__shake pl-5" src="img/<?php echo $settings['logo'] ?>" alt="AdminLTELogo" height="60" width="">
+        <img class="animation__shake" src="img/<?php echo $settings['logo'] ?>" alt="AdminLTELogo" height="30" width="">
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -280,7 +280,6 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                             <i class="nav-icon far fa-calendar-alt"></i>
                             <p>
                                 Quản lý đơn hàng
-                                <span class="badge badge-info right">2</span>
                             </p>
                         </a>
                     </li>
@@ -289,7 +288,6 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                             <i class="nav-icon far fa-calendar-alt"></i>
                             <p>
                                 Danh sách khách hàng
-                                <span class="badge badge-info right">2</span>
                             </p>
                         </a>
                     </li>
@@ -300,26 +298,19 @@ $settings = db_fetch_row("SELECT * FROM `tb_settings`");
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Thống kê
-                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/examples/invoice.html" class="nav-link">
+                            <a href="?mod=statistics&action=index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Thống kê về khách hàng</p>
+                                <p>Thống kế sách danh mục</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/examples/profile.html" class="nav-link">
+                            <a href="?mod=statistics&action=order_price" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Thống kê về sản phẩm</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/examples/e-commerce.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thông kê về doanh thu</p>
+                                <p>Thống kê doanh thu</p>
                             </a>
                         </li>
                     </ul>

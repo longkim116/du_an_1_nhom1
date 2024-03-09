@@ -14,12 +14,28 @@ get_sidebar();
                             <p class="mb-0"><?php echo $detail_order['order_code'] ?></p>
                         </div>
                         <div class="list-group-item">
-                            <h6 class="mb-1"><img src="public/img/gps.png" alt=""> Địa chỉ nhận hàng</h6>
-                            <p class="mb-0"><?php echo $detail_order['address'] ?> / <?php echo $detail_order['phone'] ?></p>
+                            <h6 class="mb-1"><img src="public/img/khachhang.png" alt=""> Họ và tên</h6>
+                            <p class="mb-0"><?php echo $detail_order['fullname'] ?></p>
                         </div>
                         <div class="list-group-item">
-                            <h6 class="mb-1"><img src="public/img/credit-card.png" alt=""> Thanh toán</h6>
-                            <p class="mb-0"><?php echo $detail_order['pay'] ?></p>
+                            <h6 class="mb-1"><img src="public/img/schedule.png" alt=""> Ngày đặt</h6>
+                            <p class="mb-0"><?php echo $detail_order['time'] ?></p>
+                        </div>
+                        <div class="list-group-item">
+                            <h6 class="mb-1"><img src="public/img/credit-card.png" alt=""> Hình thức thanh toán</h6>
+                            <p class="mb-0"><?php echo $detail_order['payment_methods'] ?></p>
+                        </div>
+                        <div class="list-group-item">
+                            <h6 class="mb-1"><img src="public/img/gmail.png" alt=""> Email</h6>
+                            <p class="mb-0"><?php echo $detail_order['phone'] ?></p>
+                        </div>
+                        <div class="list-group-item">
+                            <h6 class="mb-1"><img src="public/img/call-diversion.png" alt=""> Số điện thoại</h6>
+                            <p class="mb-0"><?php echo $detail_order['phone'] ?></p>
+                        </div>
+                        <div class="list-group-item">
+                            <h6 class="mb-1"><img src="public/img/gps.png" alt=""> Địa chỉ nhận hàng</h6>
+                            <p class="mb-0"><?php echo $detail_order['address'] ?></p>
                         </div>
                         <div class="list-group-item">
                             <h6 class="mb-1"><img src="public/img/post-it.png" alt=""> Ghi chú</h6>
@@ -72,7 +88,9 @@ get_sidebar();
                         <tbody>
                             <?php if (!empty($list_product)) :
                                 $count = 0;
+                                $total = 0;
                                 foreach ($list_product as $product) :
+                                    $total += $product['sub_total'];
                             ?>
                                     <tr>
                                         <td><?php echo ++$count; ?></td>
@@ -91,15 +109,23 @@ get_sidebar();
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <p class="font-weight-bold">Tổng số lượng: <?php echo $detail_order['quantity'] ?> sản phẩm</p>
-                    <p class="font-weight-bold">Phí vận chuyển: <?php echo currency_format($detail_order['shipping_cost']) ?></p>
+                    <p class="font-weight-bold">Tổng tiền hàng: <?php echo currency_format($total); ?></p>
+                    <p class="font-weight-bold">Phí vận chuyển: <?php echo currency_format($detail_order['shipping_cost']); ?></p>
+                    <p class="font-weight-bold">Giảm giá: -<?php echo currency_format($detail_order['discount']) ?></p>
                 </div>
-                <div class="col-md-6 text-center">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <h3 class="text-danger font-weight-bold">Tổng thanh toán: <?php echo currency_format($detail_order['total_price']) ?></h3>
                 </div>
             </div>
-
+            <?php if ($detail_order['pay'] == "Đã thanh toán") : ?>
+                <h6 class="mb-1"><img src="public/img/credit-card.png" alt=""> Thanh toán: <span class="mb-0 text-success"><?php echo $detail_order['pay'] ?></span></h6>
+            <?php else : ?>
+                <h6 class="mb-1"><img src="public/img/credit-card.png" alt=""> Thanh toán: <span class="mb-0 text-danger"><?php echo $detail_order['pay'] ?></span></h6>
+            <?php endif; ?>
         </div>
     </div>
 </div>

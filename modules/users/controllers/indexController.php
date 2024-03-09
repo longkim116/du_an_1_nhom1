@@ -4,19 +4,6 @@ function construct()
     load_module("index");
 }
 
-function chatAjaxAction()
-{
-    $message = $_POST['message'];
-    $id = info_login("id");
-    $data = [
-        'message' => $message,
-        'customer_id' => $id,
-        'status' => 0,
-    ];
-    add_chat($data);
-    $result = get_list_chat_by_id($id);
-    echo json_encode($result);
-}
 
 function update_info_ajaxAction() //Xử lý cập nhật thông tin
 {
@@ -226,9 +213,11 @@ function update_img_ajaxAction() //Cập nhật ảnh đại diện người dù
 }
 function indexAction()
 {
+    $id = info_login("id");
     $username = $_SESSION['user_login'];
     $data['list_order'] = list_order();
     $data['users'] = get_user_by_id($username);
+    $data['list_chat'] = get_list_chat_by_id($id);
     load_view("main", $data);
 }
 
@@ -256,9 +245,40 @@ function ajaxAction()
     }
 }
 
-function chatAction()
+function chatAjaxAction()
 {
+    $message = $_POST['message'];
     $id = info_login("id");
-    $data['list_chat'] = get_list_chat_by_id($id);
-    load_view('chat', $data);
+    $data = [
+        'message' => $message,
+        'customer_id' => $id,
+        'status' => 0,
+    ];
+    add_chat($data);
+    $result = get_list_chat_by_id($id);
+    echo json_encode($result);
+}
+
+
+function loadChatAjaxAction()
+{
+    $customer_id = info_login("id");
+    $string = "";
+    $result = get_list_chat_by_id($customer_id);
+    foreach ($result as $item) {
+        if ($item['status'] == 0) {
+            $string .= "<div class='float-right chat-content-item-right'>" .
+                "<p>" . $item['message'] . "</p>" .
+                "<span class='text-muted small'>" . $item['created_at'] . "</span>" .
+                "</div>";
+        }
+        ///
+        if ($item['status'] == 1) {
+            $string .= " <div class='float-left chat-content-item-left'>" .
+                "<p>" . $item['message'] . "</p>" .
+                "<span class='text-muted small'>" . $item['created_at'] . "</span>" .
+                "</div>";
+        }
+    }
+    echo $string;
 }

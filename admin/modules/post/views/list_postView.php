@@ -28,7 +28,6 @@ get_sidebar();
                             <th><input type="checkbox" name="checkAll" id="checkAll"></th>
                             <th>STT</th>
                             <th>Tiêu đề</th>
-                            <th>Danh mục</th>
                             <th>Trạng thái</th>
                             <th>Người tạo</th>
                             <th>Thời gian</th>
@@ -44,7 +43,6 @@ get_sidebar();
                                     <td><input type="checkbox" name="checkitem[<?php echo $item['post_id'] ?>]" id="checkbox" value="<?php echo $item['post_id'] ?>" class="checkItem"></td>
                                     <td><?php echo ++$count; ?></td>
                                     <td><?php echo $item['post_title'] ?></td>
-                                    <td><?php echo $item['categoty'] ?></td>
                                     <td><?php echo $item['status'] ?></td>
                                     <td><?php echo $item['creator'] ?></td>
                                     <td><?php echo $item['created_date'] ?></td>

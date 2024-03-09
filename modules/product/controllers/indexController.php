@@ -21,7 +21,59 @@ function ajaxAction() //Thêm bình luận
         'star' => $star,
     ];
     add_comments($data);
-    $result = get_list_comments($id_product);
+    $comments = get_list_comments($id_product); //Danh sách bình luận
+    $avg_star = product_star_by_id($id_product); //Lấy tb đánh giá sao
+    $string = "";
+    foreach ($comments as $item) {
+        if (empty($item['img'])) {
+            $img_user = "img/user.png";
+        } else {
+            $img_user = "admin/img/{$item['img']}";
+        }
+        $string .= "<div class='tp-product-details-review-avater d-flex align-items-start'>" .
+            "<div class='tp-product-details-review-avater-thumb'>" .
+            "<a href='#'>" .
+            "<img src='" . $img_user . "' alt=''>" .
+            "</a>" .
+            "</div>" .
+            "<div class='tp-product-details-review-avater-content'>" .
+            "<div class='tp-product-details-review-avater-rating d-flex align-items-center'>" .
+            " " . str_repeat("<span><i class='fa-solid fa-star'></i></span>", $item['star']) . " " .
+            "</div>" .
+            "<h3 class='tp-product-details-review-avater-title'>" . $item['fullname'] . "</h3>" .
+            "<span class='tp-product-details-review-avater-meta'>" . $item['time'] . "</span>" .
+
+            "<div class='tp-product-details-review-avater-comment'>" .
+            "<p>" . $item['comment_content'] . "</p>" .
+            "</div>" .
+            "</div>" .
+            "</div>";
+    }
+    $count_evaluate = total_comments($id_product); //Lấy tông số bình luận và đánh giá sp
+    $string_avg = "<div class='tp-product-details-review-summery-value'>" .
+        "<span>" . round($avg_star['star'], 1) . "</span>" .
+        "</div>" .
+        "<div class='tp-product-details-review-summery-rating d-flex align-items-center'>" .
+        "" . str_repeat("<span><i class='fa-solid fa-star'></i></span>", round($avg_star['star'])) . "" .
+        "<p>(" . $count_evaluate . " Bình luận và đánh giá)</p>" .
+        "</div>";
+    //Tổng số lượng đánh giá sao theo thư hạng
+    $star_5 = num_product_star_5($id_product);
+    $star_4 = num_product_star_4($id_product);
+    $star_3 = num_product_star_3($id_product);
+    $star_2 = num_product_star_2($id_product);
+    $star_1 = num_product_star_1($id_product);
+    $result = [
+        'list_comment' => $string,
+        'avg_star' => $string_avg,
+        'total_comment' =>  $count_evaluate,
+        'fa_star' => str_repeat("<span><i class='fa-solid fa-star'></i></span>", round($avg_star['star'])),
+        'star_5' => $star_5,
+        'star_4' => $star_4,
+        'star_3' => $star_3,
+        'star_2' => $star_2,
+        'star_1' => $star_1,
+    ];
     echo json_encode($result);
 }
 
@@ -170,7 +222,7 @@ function quickView_ajaxAction() //Phần xem sản phẩm
     $product = get_product_by_id($id); //Lấy chi tiết sản phẩm
     $star = product_star_by_id($id); //Lấy tb đánh giá sao
     $count_evaluate = total_comments($id); //Lấy tông số bình luận và đánh giá sp
-    $string_variant_ram = "<label for='ram' class='ram'>Dung lượng:</label>" .
+    $string_variant_ram = "<label for='ram' class='ram'>Dung lượng/Kích thước:</label>" .
         "<select class='form-control' name='ram' id='ram' onchange='selectVar()' product_id='" . $id . "'>";
     foreach ($variant_ram as $item) {
         $string_variant_ram .= "<option  value='" . $item['id'] . "'>" . $item['ram_name'] . "</option>";

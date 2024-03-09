@@ -36,48 +36,52 @@ get_sidebar();
                     <option value="4">Đang giao hàng</option>
                     <option value="5">Thành công</option> -->
                 </select>
-            <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" name="checkAll" id="checkAll"></th>
-                        <th>STT</th>
-                        <th>Mã đơn hàng</th>
-                        <th>Họ và tên</th>
-                        <th>Số sản phẩm</th>
-                        <th>Tổng giá</th>
-                        <th>Trạng thái</th>
-                        <th>Thời gian đặt hàng</th>
-                        <th style="width: 15%;">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (!empty($list_order)) :
-                        $count = $start;
-                        foreach ($list_order as $item) :
-                    ?>
-                            <tr>
-                                <td><input type="checkbox" name="checkitem[<?php echo $item['id'] ?>]" id="checkbox" value="<?php echo $item['id'] ?>" class="checkItem"></td>
-                                <td><?php echo ++$count; ?></td>
-                                <td><?php echo $item['order_code'] ?></td>
-                                <td><?php echo $item['fullname'] ?></a></td>
-                                <td><?php echo $item['quantity'] ?></td>
-                                <td><?php echo currency_format($item['total_price']) ?></td>
-                                <td><?php echo $item['status'] ?></td>
-                                <td><?php echo $item['time'] ?></td>
-                                <td class="justify-content-between">
-                                    <a class="btn btn-info btn-sm" href="?mod=sales&action=detail_order&id=<?php echo $item['id'] ?>" title="Chi tiết"><i class="fas fa-folder"></i>
-                                        Chi tiết
-                                    </a>
-                                    <a onclick="return confirm('Bạn chắc muốn xóa đơn hàng không?')" class="btn btn-danger btn-sm" href="?mod=sales&action=delete_order&id=<?php echo $item['id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
-                                        Xóa
-                                    </a>
-                                </td>
-                            </tr>
-                    <?php endforeach;
-                    endif; ?>
-                </tbody>
-            </table>
+                <button class="btn btn-sm btn-success" type="submit" name="btn_apply">Áp dụng</button>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" name="checkAll" id="checkAll"></th>
+                            <th>STT</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Họ và tên</th>
+                            <th>Số sản phẩm</th>
+                            <th>Tổng giá</th>
+                            <th>Trạng thái</th>
+                            <th>Thời gian đặt hàng</th>
+                            <th style="width: 15%;">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($list_order)) :
+                            $count = $start;
+                            foreach ($list_order as $item) :
+                        ?>
+                                <tr>
+                                    <?php if ($item['status'] == "Chờ xác nhận") : ?>
+                                        <td><input type="checkbox" name="checkitem[<?php echo $item['id'] ?>]" id="checkbox" value="<?php echo $item['id'] ?>" class="checkItem"></td>
+                                    <?php else : ?>
+                                        <td><input disabled type="checkbox" id="checkbox"></td>
+                                    <?php endif; ?>
+                                    <td><?php echo ++$count; ?></td>
+                                    <td><?php echo $item['order_code'] ?></td>
+                                    <td><?php echo $item['fullname'] ?></a></td>
+                                    <td><?php echo $item['quantity'] ?></td>
+                                    <td><?php echo currency_format($item['total_price']) ?></td>
+                                    <td><?php echo $item['status'] ?></td>
+                                    <td><?php echo $item['time'] ?></td>
+                                    <td class="justify-content-between">
+                                        <a class="btn btn-info btn-sm" href="?mod=sales&action=detail_order&id=<?php echo $item['id'] ?>" title="Chi tiết"><i class="fas fa-folder"></i>
+                                            Chi tiết
+                                        </a>
+                                        <a onclick="return confirm('Bạn chắc muốn xóa đơn hàng không?')" class="btn btn-danger btn-sm" href="?mod=sales&action=delete_order&id=<?php echo $item['id'] ?>" title="Xóa"><i class="fas fa-trash"></i>
+                                            Xóa
+                                        </a>
+                                    </td>
+                                </tr>
+                        <?php endforeach;
+                        endif; ?>
+                    </tbody>
+                </table>
             </form>
         </div>
         <div class="card-footer clearfix">

@@ -34,12 +34,14 @@ function get_cat_by_id($id)
 function delete_cat($id)
 {
     db_delete("tb_category", "`id`= {$id}");
+    db_delete("tb_products", "`cat_id`= {$id}");
 }
 
 function update_action_cat($action, $item) //Cập nhật tác vụ danh mục SP
 {
     if ($action == 1) { //Xóa
         db_delete("tb_category", "`id` = '{$item}'");
+        db_delete("tb_products", "`cat_id`= {$item}");
         return true;
     }
     return false;

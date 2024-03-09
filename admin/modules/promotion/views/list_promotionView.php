@@ -42,7 +42,11 @@ get_sidebar();
                             foreach ($list_promotion as $item) :
                         ?>
                                 <tr>
-                                    <td><input type="checkbox" name="checkitem[<?php echo $item['id'] ?>]" id="checkbox" value="<?php echo $item['id'] ?>" class="checkItem"></td>
+                                    <?php if ($item['status'] != "Đang diễn ra") : ?>
+                                        <td><input type="checkbox" name="checkitem[<?php echo $item['id'] ?>]" id="checkbox" value="<?php echo $item['id'] ?>" class="checkItem"></td>
+                                    <?php else: ?>
+                                        <td><input type="checkbox" disabled></td>
+                                    <?php endif; ?>
                                     <td><?php echo ++$count; ?></td>
                                     <td><?php echo $item['title'] ?></td>
                                     <td><?php echo $item['description'] ?></td>

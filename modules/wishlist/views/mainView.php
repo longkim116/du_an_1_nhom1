@@ -67,25 +67,6 @@ get_header();
                                     </td>
                                 <?php endif; ?>
                             </tbody>
-                            <script>
-                                function delete_wishlist(_this) {
-                                    var product_id = $(_this).attr('product_id');
-                                    var data = {
-                                        product_id: product_id
-                                    }
-                                    $.ajax({
-                                        url: '?mod=wishlist&action=delete_wishlist_ajax',
-                                        method: 'POST',
-                                        data: data,
-                                        dataType: 'json',
-                                        success: function(data) {
-                                            console.log(data);
-                                            $(".count_wishlist").html(data.count_wishlist);
-                                            $("#list_wishlist").html(data.list_wishlist);
-                                        }
-                                    });
-                                }
-                            </script>
                         </table>
                     </div>
                     <div class="tp-cart-bottom">

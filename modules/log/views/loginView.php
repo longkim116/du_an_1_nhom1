@@ -5,28 +5,27 @@
     <title>Trang đăng nhập</title>
     <link rel="stylesheet" href="public/css/login.css">
     <base href="<?php echo base_url() ?>">
-
 </head>
 
 <body>
     <div class="signup">
         <h1 class="signup-heading">Đăng nhập</h1>
-        <button class="signup-social">
+        <!-- <button class="signup-social">
             <i class="fa fa-google signup-social-icon"><img src="img/search.png" alt=""></i>
             <span class="signup-social-text">Sign up with Google</span>
-        </button>
-        <div class="signup-or"><span>or</span></div>
+        </button> -->
+        <!-- <div class="signup-or"><span>or</span></div> -->
         <form action="" method="post">
             <label for="username" class="signup-label">Tên đăng nhập</label>
             <input type="text" class="signup-input" name="username" id="username" placeholder="Eg: NguyenVanA123" value="<?php if (isset($_COOKIE['me'])) {
-                                                                                                                echo $_COOKIE['me'];
-                                                                                                            } else {
-                                                                                                                if (!empty($_POST['username'])) {
-                                                                                                                    echo $_POST['username'];
-                                                                                                                } else {
-                                                                                                                    echo "";
-                                                                                                                }
-                                                                                                            } ?>">
+                                                                                                                                echo $_COOKIE['me'];
+                                                                                                                            } else {
+                                                                                                                                if (!empty($_POST['username'])) {
+                                                                                                                                    echo $_POST['username'];
+                                                                                                                                } else {
+                                                                                                                                    echo "";
+                                                                                                                                }
+                                                                                                                            } ?>">
             <span class="form-error"><?php echo (!empty($error['username'])) ? $error['username'] : false ?></span><br>
             <label for="password" class="signup-label">Mật khẩu</label>
             <input type="password" class="signup-input" name="password" id="password" placeholder="Eg: nguyenvana@gmail.com">

@@ -4,7 +4,7 @@ function add_menu_data($data_menu)
     db_insert("tb_menu", $data_menu);
 }
 
-function list_parent()//Danh sách những thằng menu cha
+function list_parent() //Danh sách những thằng menu cha
 {
     $sql = db_fetch_array("SELECT * FROM `tb_menu` ORDER BY `number_order`");
     if ($sql > 0) {
@@ -53,3 +53,6 @@ function data_tree($array, $parent = 0, $level = 0)
     }
     return $result;
 }
+
+
+

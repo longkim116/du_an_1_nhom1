@@ -26,7 +26,6 @@ function list_pageAction()
     //
     $num_rows = 5;
     $page = (!empty($_GET['page'])) ? $_GET['page'] : 1;
-    $num_rows = 10;
     $start = ($page - 1) * $num_rows;
     $data['num_rows'] = $num_rows;
     $data['start'] = $start;

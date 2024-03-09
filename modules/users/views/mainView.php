@@ -24,6 +24,7 @@ get_header();
                                     <button class="nav-link" id="nav-information-tab" data-bs-toggle="tab" data-bs-target="#nav-information" type="button" role="tab" aria-controls="nav-information" aria-selected="false"><span><i class="fa-regular fa-circle-info"></i></span> Thông tin </button>
                                     <button class="nav-link" id="nav-order-tab" data-bs-toggle="tab" data-bs-target="#nav-order" type="button" role="tab" aria-controls="nav-order" aria-selected="false"><span><i class="fa-light fa-clipboard-list-check"></i></span> Đơn hàng của tôi </button>
                                     <button class="nav-link" id="nav-password-tab" data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab" aria-controls="nav-password" aria-selected="false"><span><i class="fa-regular fa-lock"></i></span> Đổi mật khẩu </button>
+                                    <button class="nav-link" id="nav-chat-tab" data-bs-toggle="tab" data-bs-target="#chat" type="button" role="tab" aria-controls="chat" aria-selected="false"><span><i class="fa-regular fa-comments"></i></span> Trò chuyện với Autosmart </button>
                                     <span id="marker-vertical" class="tp-tab-line d-none d-sm-inline-block"></span>
                                 </div>
                             </nav>
@@ -212,6 +213,70 @@ get_header();
                                         </table>
                                     </div>
                                 </div>
+                                <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="nav-chat-tab">
+                                    <div id="content" class="my-3">
+                                        <div class="container">
+                                            <div class="row m-auto">
+                                                <div class="col-md-12 d-flex justify-content-center align-items-center">
+                                                    <div id="chat-box">
+                                                        <div id="chat-header">
+                                                            <div class="float-left">
+                                                                <img width="30px" class="img-fluid rounded-circle" src="img/admin.png" alt="">
+                                                                <span class="font-weight-bold">Nhân viên cửa hàng</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="chat-content">
+                                                            <?php if (!empty($list_chat)) :
+                                                                foreach ($list_chat as $item) :
+                                                            ?>
+                                                                    <?php if ($item['status'] == 0) : ?>
+                                                                        <div class="float-right chat-content-item-right">
+                                                                            <p><?php echo $item['message'] ?></p>
+                                                                            <span class="text-muted small"><?php echo $item['created_at'] ?></span>
+                                                                        </div>
+                                                                    <?php endif; ?>
+
+                                                                    <?php if ($item['status'] == 1) : ?>
+                                                                        <div class="float-left chat-content-item-left">
+                                                                            <p><?php echo $item['message'] ?></p>
+                                                                            <span class="text-muted small"><?php echo $item['created_at'] ?></span>
+                                                                        </div>
+                                                                    <?php endif; ?>
+
+                                                            <?php
+                                                                endforeach;
+                                                            endif; ?>
+                                                        </div>
+                                                        <form action="#" class="typing-area">
+                                                            <input type="text" name="message" id="message" class="form-control" placeholder="Nhập nội dung ở đây..." autocomplete="off">
+                                                            <button id="btn-chat" class="btn btn-info border-0"><img src="img/send.png" alt=""></button>
+                                                        </form>
+                                                        <script>
+                                                            function scrollChatToBottom() { //Cho thanh croll luôn ở dưới cùng
+                                                                var chatBox = document.querySelector('.chat-content');
+                                                                chatBox.scrollTop = chatBox.scrollHeight;
+                                                            }
+                                                            scrollChatToBottom()
+
+                                                            function reaload() {
+                                                                $.ajax({
+                                                                    url: '?mod=users&action=loadChatAjax',
+                                                                    method: 'POST',
+                                                                    dataType: 'html',
+                                                                    success: function(data) {
+                                                                        $(".chat-content").html(data);
+                                                                        scrollChatToBottom()
+                                                                    }
+                                                                })
+                                                            }
+                                                            setInterval(reaload, 1000);
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -219,56 +284,6 @@ get_header();
             </div>
         </div>
     </section>
-    <script>
-        function order_review(_this) { //Đánh giá đơn hàng
-            var order_id = $(_this).attr("order_id");
-            var star = $("input[name='star']").filter(":checked").val();
-            if (star == null) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Bạn hãy để lại đánh giá về đơn hàng',
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-                return false;
-            }
-            var data = {
-                order_id: order_id,
-                star: star,
-            }
-            $.ajax({
-                url: '?mod=users&action=order_review_ajax',
-                method: 'POST',
-                data: data,
-                dataType: 'html',
-                success: function(data) {
-                    if (data == 1 || data == 2 || data == 3) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Cảm ơn bạn đã mua hàng tại Autosamrt',
-                            text: "Chúng tôi rất xin lỗi nếu bạn không hài lòng về sản phẩm",
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-                        setInterval(function() {
-                            location.reload()
-                        }, 3000);
-                    } else {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Cảm ơn bạn đã mua hàng tại Autosamrt',
-                            text: "Chúng tôi rất vui khi bạn đã hài lòng về sản phẩm",
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-                        setInterval(function() {
-                            location.reload()
-                        }, 3000);
-                    }
-                }
-            });
-        }
-    </script>
     <!-- profile area end -->
     <div class="modal fade tp-product-modal" id="producQuickViewModal" tabindex="-1" aria-labelledby="producQuickViewModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

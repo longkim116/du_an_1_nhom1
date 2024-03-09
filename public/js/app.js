@@ -15,15 +15,25 @@ function update_cart(event) {//Cập nhật giỏ hàng
         data: data,
         dataType: 'json',
         success: function (data) {
-            console.log(data);
             $("#list_cart").html(data.list_cart);
             $("#total_price").html(data.total_price);
+            // Ngăn chặn việc nhập giá trị trực tiếp
+            $(document).ready(function () {
+                $('.num_order').on('keydown', function (e) {
+                    e.preventDefault();
+                });
+            });
         }
     });
 }
+$(document).ready(function () {
+    $('.num_order').on('keydown', function (e) {
+        e.preventDefault();
+    });
+});
 
 
-function add_comment(event) {//Thêm bình luận
+function add_comment(event) { //Thêm bình luận
     event.preventDefault();
     var comment = $('#comment').val();
     if (comment == "") {
@@ -31,7 +41,11 @@ function add_comment(event) {//Thêm bình luận
     }
     var id_product = $('#comment').attr('id_product');
     var star = $("input[name='star']").filter(":checked").val()
-    var formData = { comment: comment, id_product: id_product, star: star }
+    var formData = {
+        comment: comment,
+        id_product: id_product,
+        star: star
+    }
     $.ajax({
         url: '?mod=product&action=ajax',
         method: 'POST',
@@ -39,43 +53,21 @@ function add_comment(event) {//Thêm bình luận
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            var result = "";
-            data.forEach(element => {
-                if (element.img == "") {
-                    img_user = "img/user.png";
-                } else {
-                    img_user = "admin/img/" + element.img;
-                }
-                var img = "";
-                for (let i = 1; i <= element.star; i++) {
-                    img += "<span><i class='fa-solid fa-star'></i></span>";
-                }
-                string = "<div class='tp-product-details-review-avater d-flex align-items-start'>" +
-                    "<div class='tp-product-details-review-avater-thumb'>" +
-                    "<a href='#'>" +
-                    "<img src='" + img_user + "' alt=''>" +
-                    "</a>" +
-                    "</div>" +
-                    "<div class='tp-product-details-review-avater-content'>" +
-                    "<div class='tp-product-details-review-avater-rating d-flex align-items-center'>" +
-                    " " + img + " " +
-                    "</div>" +
-                    "<h3 class='tp-product-details-review-avater-title'>" + element.fullname + "</h3>" +
-                    "<span class='tp-product-details-review-avater-meta'>" + element.time + "</span>" +
-
-                    "<div class='tp-product-details-review-avater-comment'>" +
-                    "<p>" + element.comment_content + "</p>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>";
-                result += string
-            });
-            $('#list_comment').html(result);
+            $("#star_5").html(data.star_5);
+            $("#star_4").html(data.star_4);
+            $("#star_3").html(data.star_3);
+            $("#star_2").html(data.star_2);
+            $("#star_1").html(data.star_1);
+            $("#avg_star").html(data.avg_star);
+            $("#fa_star").html(data.fa_star);
+            $(".total_comment").html(data.total_comment);
+            $("#list_comment").html(data.list_comment);
             $("#comment").val("");
             $("input[name='star']").prop("checked", false)
         }
     })
 }
+
 
 
 function uploadImage(event) {
@@ -315,6 +307,54 @@ function cancel_order(_this) { //Hủy đơn hàng
     });
 }
 
+function order_review(_this) { //Đánh giá đơn hàng
+    var order_id = $(_this).attr("order_id");
+    var star = $("input[name='star']").filter(":checked").val();
+    if (star == null) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Bạn hãy để lại đánh giá về đơn hàng',
+            showConfirmButton: false,
+            timer: 2000
+        });
+        return false;
+    }
+    var data = {
+        order_id: order_id,
+        star: star,
+    }
+    $.ajax({
+        url: '?mod=users&action=order_review_ajax',
+        method: 'POST',
+        data: data,
+        dataType: 'html',
+        success: function (data) {
+            if (data == 1 || data == 2 || data == 3) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cảm ơn bạn đã mua hàng tại Autosamrt',
+                    text: "Chúng tôi rất xin lỗi nếu bạn không hài lòng về sản phẩm",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                setInterval(function () {
+                    location.reload()
+                }, 3000);
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cảm ơn bạn đã mua hàng tại Autosamrt',
+                    text: "Chúng tôi rất vui khi bạn đã hài lòng về sản phẩm",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                setInterval(function () {
+                    location.reload()
+                }, 3000);
+            }
+        }
+    });
+}
 function order_success(_this) { //Đã nhận hàng
     var order_id = $(_this).attr("order_id");
     var data = {
@@ -386,3 +426,36 @@ input.addEventListener('input', function () {
         input.value = max;
     }
 });
+
+function send_mail() {
+    var email = $("#email").val();
+    var data = {
+        email: email
+    };
+    $.ajax({
+        url: '?mod=home&action=send_mail_ajax',
+        method: 'POST',
+        data: data,
+        dataType: 'html',
+        success: function (data) {
+            if (data == 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đăng ký thông tin thành công',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                $("#email").val("");
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Email không đúng!',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                $("#email").val("");
+            }
+        }
+    });
+}
+

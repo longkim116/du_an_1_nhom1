@@ -44,7 +44,7 @@ function list_order($start, $num_rows, $status) //Danh sách những khách hàn
     if (!empty($status)) {
         $status = "WHERE `status` = '{$status}'";
     }
-    $sql = db_fetch_array("SELECT * FROM `tb_orders` {$status} LIMIT $start, $num_rows");
+    $sql = db_fetch_array("SELECT * FROM `tb_orders` {$status} ORDER BY `time` DESC LIMIT $start, $num_rows  ");
     return $sql;
 }
 
@@ -86,7 +86,7 @@ function delete_order($id)
 
 function total_order() //Danh sách đơn đặt hàng
 {
-    $sql = db_fetch_row("SELECT SUM(`sales`)as 'total' FROM `tb_products`");
+    $sql = db_fetch_row("SELECT SUM(`quantity`) AS `total` FROM `tb_orders` ");
     return $sql;
 }
 

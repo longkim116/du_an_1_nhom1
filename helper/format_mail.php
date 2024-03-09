@@ -530,8 +530,8 @@
 // </div>`;
 //     echo $string;
 // }
-// $sql = db_fetch_row("SELECT * FROM `tb_orders` WHERE `id` = 122");
-// show_array($sql);
+// $sql222 = db_fetch_row("SELECT * FROM `tb_orders` WHERE `id` = 136");
+// show_array($sql222);
 // $fullname = $sql['fullname'];
 // $time = $sql['time'];
 // $order_code = $sql['order_code'];

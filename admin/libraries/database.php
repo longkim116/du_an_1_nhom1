@@ -29,7 +29,7 @@ function db_query($query_string)
 function db_fetch_row($query_string)
 {
     global $conn;
-    $result = array();
+    $result = [];
     $mysqli_result = db_query($query_string);
     $result = mysqli_fetch_assoc($mysqli_result);
     mysqli_free_result($mysqli_result);
@@ -40,7 +40,7 @@ function db_fetch_row($query_string)
 function db_fetch_array($query_string)
 {
     global $conn;
-    $result = array();
+    $result = [];
     $mysqli_result = db_query($query_string);
     while ($row = mysqli_fetch_assoc($mysqli_result)) {
         $result[] = $row;

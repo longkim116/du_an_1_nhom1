@@ -371,7 +371,7 @@ function update_productAction() //Sửa sản phẩm
                     }
                 }
             }
-        }else{
+        } else {
             $error['variants'] = "Không được để trống";
         }
         //Kiểm tra biến thể mới được thêm
@@ -458,6 +458,10 @@ function update_productAction() //Sửa sản phẩm
             $string_id = "";
             if (isset($_POST['update_ram_variants'])) {
                 foreach ($_POST['update_ram_variants'] as $key => $item) {
+                    $data_available_ram = [
+                        'ram_name' => $item['name'],
+                    ];
+                    update_variants_ram($data_available_ram, $key); //Update ram sản sản phẩm
                     $string_id_color = "";
                     $string_id .= "{$key},";
                     if (isset($item['colors'])) {
